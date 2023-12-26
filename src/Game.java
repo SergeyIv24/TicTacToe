@@ -6,12 +6,14 @@ public class Game {
     private static final char[] winX = new char[3];
     private static final char[] win0 = new char[3];
     static Gamer[] arrayOfGamers;
+    private static Random rdn;
     Scanner scan;
 
     public Game(){
         gameBoard[0] = new char[]{' ', '|', '1', '|', '2', '|', '3'};
         arrayOfGamers = new Gamer[2];
         scan = new Scanner(System.in);
+        rdn = new Random();
     }
 
     public static char[][] getGameBoard() {
@@ -95,10 +97,10 @@ public class Game {
     }
 
 
-    public static void defineWhoFirst() {
-        Random rdn = new Random(2); //TODO возможен выход за диапазон
-        int indexOfGamer = rdn.nextInt();
+    public static Gamer defineWhoFirst() {
+        int indexOfGamer = rdn.nextInt(2);
         System.out.println("Игрок: " + arrayOfGamers[indexOfGamer].getName() + ". Ходит первым!");
+        return arrayOfGamers[indexOfGamer];
     }
 
     public static boolean checkAmountOfSymb() {
@@ -224,7 +226,44 @@ public class Game {
         SeckondGamer second = createSecondGamer();
         createPrimaryGameBoard();
         printGameBoard();
+
+        Gamer whoFirst = defineWhoFirst();
+
         while (true) {
+            if (whoFirst.equals(first)) {
+                System.out.println("Игрок 1: ");
+                first.addSymbol(scan);
+                printGameBoard();
+                if (isThereWinner()) {
+                    System.out.println("Победил игрок: " + first.name + "!");
+                    break;
+                }
+                System.out.println("Игрок 2: ");
+                second.addSymbol(scan);
+                printGameBoard();
+                if (isThereWinner()) {
+                    System.out.println("Победил игрок: " + second.name + "!");
+                    break;
+                }
+            } else {
+                System.out.println("Игрок 2: ");
+                second.addSymbol(scan);
+                printGameBoard();
+                if (isThereWinner()) {
+                    System.out.println("Победил игрок: " + second.name + "!");
+                    break;
+                }
+                System.out.println("Игрок 1: ");
+                first.addSymbol(scan);
+                printGameBoard();
+                if (isThereWinner()) {
+                    System.out.println("Победил игрок: " + first.name + "!");
+                    break;
+                }
+            }
+        }
+
+/*        while (true) {
             System.out.println("Игрок 1: ");
             first.addSymbol(scan);
             printGameBoard();
@@ -239,7 +278,7 @@ public class Game {
                 System.out.println("Победил игрок: " + second.name + "!");
                 break;
             }
-        }
+        }*/
 
     }
 

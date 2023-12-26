@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Gamer {
@@ -47,6 +48,16 @@ public class Gamer {
                 indLine = 6;
         }
         Game.setGameBoard(indLine, indColumn, gameSymbol);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null) return false;
+        if (this.getClass() != object.getClass()) return false;
+        Gamer anotherGamer = (Gamer) object;
+        return Objects.equals(name, anotherGamer.name) &&
+                Objects.equals(gameSymbol, anotherGamer.gameSymbol);
     }
 
 

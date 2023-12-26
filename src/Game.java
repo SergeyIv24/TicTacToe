@@ -21,12 +21,8 @@ public class Game {
     public static void setGameBoard(int line, int column, char symbol) {
         gameBoard[line][column] = symbol;
     }
+
     public static void createPrimaryGameBoard() {
-
-    }
-
-
-    public static void printGameBoard() {
         char j = 'A';
         for (int i = 1; i < gameBoard.length; i++) {
             if (i == 2) {
@@ -48,6 +44,10 @@ public class Game {
                 }
             }
         }
+    }
+
+    public static void printGameBoard() {
+
         for (char[] chars : gameBoard) {
             System.out.println(chars);
         }
@@ -219,21 +219,27 @@ public class Game {
     }
 
 
-
-
     public void game() {
         FirstGamer first = createFirsGamer();
         SeckondGamer second = createSecondGamer();
+        createPrimaryGameBoard();
         printGameBoard();
-        while (!isThereWinner()) {
+        while (true) {
             System.out.println("Игрок 1: ");
             first.addSymbol(scan);
             printGameBoard();
+            if (isThereWinner()) {
+                System.out.println("Победил игрок: " + first.name + "!");
+                break;
+            }
             System.out.println("Игрок 2: ");
             second.addSymbol(scan);
             printGameBoard();
+            if (isThereWinner()) {
+                System.out.println("Победил игрок: " + second.name + "!");
+                break;
+            }
         }
-
 
     }
 

@@ -46,7 +46,7 @@ public class Gamer {
             case 'C':
                 indLine = 6;
         }
-        Game.setGameBoard(indLine, indLine, gameSymbol);
+        Game.setGameBoard(indLine, indColumn, gameSymbol);
     }
 
 

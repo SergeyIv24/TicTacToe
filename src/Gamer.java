@@ -15,7 +15,7 @@ public class Gamer {
         return name;
     }
 
-    public void addSymbol(Scanner scanner) {
+    public int selectColumn(Scanner scanner) {
         System.out.println("Чтобы сделать ход, укажите ячейку на игровом поле.");
         System.out.println("Укажите колонку: ");
         int indColumn = scanner.nextInt();
@@ -29,8 +29,14 @@ public class Gamer {
             case 3:
                 indColumn = 6;
                 break;
-        }
+            default:
+                indColumn = selectColumn(scanner);
 
+        }
+        return indColumn;
+    }
+
+    public int selectLine(Scanner scanner) {
         System.out.println("Укажите строку: ");
         int indLine = 0;
         String column = scanner.next();
@@ -46,8 +52,16 @@ public class Gamer {
                 break;
             case 'C':
                 indLine = 6;
+                break;
+            default:
+                indLine = selectLine(scanner);
+                break;
         }
-        Game.setGameBoard(indLine, indColumn, gameSymbol);
+        return indLine;
+    }
+
+    public void addSymbol(int column, int line) {
+            Game.setGameBoard(line, column, gameSymbol);
     }
 
     @Override

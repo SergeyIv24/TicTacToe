@@ -2,15 +2,15 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Game {
-    private static final char[][] gameBoard = new char[7][7];
+    private static final char[][] gameBoard = new char[7][8];
     private static final char[] winX = new char[3];
     private static final char[] win0 = new char[3];
-    static Gamer[] arrayOfGamers;
+    private static Gamer[] arrayOfGamers;
     private static Random rdn;
     Scanner scan;
 
     public Game(){
-        gameBoard[0] = new char[]{' ', '|', '1', '|', '2', '|', '3'};
+        gameBoard[0] = new char[]{' ', '|', '1', '|', '2', '|', '3', '|'};
         arrayOfGamers = new Gamer[2];
         scan = new Scanner(System.in);
         rdn = new Random();
@@ -232,14 +232,14 @@ public class Game {
         while (true) {
             if (whoFirst.equals(first)) {
                 System.out.println("Игрок 1: ");
-                first.addSymbol(scan);
+                first.addSymbol(first.selectColumn(scan), first.selectLine(scan));
                 printGameBoard();
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + first.name + "!");
                     break;
                 }
                 System.out.println("Игрок 2: ");
-                second.addSymbol(scan);
+                second.addSymbol(second.selectColumn(scan), second.selectLine(scan));
                 printGameBoard();
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + second.name + "!");
@@ -247,14 +247,14 @@ public class Game {
                 }
             } else {
                 System.out.println("Игрок 2: ");
-                second.addSymbol(scan);
+                second.addSymbol(second.selectColumn(scan), second.selectLine(scan));
                 printGameBoard();
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + second.name + "!");
                     break;
                 }
                 System.out.println("Игрок 1: ");
-                first.addSymbol(scan);
+                first.addSymbol(first.selectColumn(scan), first.selectLine(scan));
                 printGameBoard();
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + first.name + "!");
@@ -262,24 +262,6 @@ public class Game {
                 }
             }
         }
-
-/*        while (true) {
-            System.out.println("Игрок 1: ");
-            first.addSymbol(scan);
-            printGameBoard();
-            if (isThereWinner()) {
-                System.out.println("Победил игрок: " + first.name + "!");
-                break;
-            }
-            System.out.println("Игрок 2: ");
-            second.addSymbol(scan);
-            printGameBoard();
-            if (isThereWinner()) {
-                System.out.println("Победил игрок: " + second.name + "!");
-                break;
-            }
-        }*/
-
     }
 
 }

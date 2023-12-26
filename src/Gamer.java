@@ -30,6 +30,7 @@ public class Gamer {
                 indColumn = 6;
                 break;
             default:
+                System.out.println("Такой колонки нет. Доступные колонки: 1, 2, 3");
                 indColumn = selectColumn(scanner);
 
         }
@@ -54,6 +55,7 @@ public class Gamer {
                 indLine = 6;
                 break;
             default:
+                System.out.println("Такой строки нет. Доступные строки: A, B, C");
                 indLine = selectLine(scanner);
                 break;
         }

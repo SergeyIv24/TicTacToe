@@ -18,9 +18,13 @@ public class Game {
         return gameBoard;
     }
 
-    public static void setGameBoard(char line, char column, char symbol) {
+    public static void setGameBoard(int line, int column, char symbol) {
         gameBoard[line][column] = symbol;
     }
+    public static void createPrimaryGameBoard() {
+
+    }
+
 
     public static void printGameBoard() {
         char j = 'A';
@@ -49,8 +53,7 @@ public class Game {
         }
     }
 
-
-    public void printMenu() {
+    public FirstGamer createFirsGamer() {
         System.out.println("Введите Ваше имя: ");
         String nameOfFirstUser = scan.next();
         System.out.println("Введите каким символом будете играть:\n");
@@ -66,6 +69,11 @@ public class Game {
 
         FirstGamer firstGamer = new FirstGamer(nameOfFirstUser, user1SelectCh);
 
+        arrayOfGamers[0] = firstGamer;
+        return firstGamer;
+    }
+
+    public SeckondGamer createSecondGamer() {
         System.out.println("Введите Ваше имя: ");
         String nameOfSecondUser = scan.next();
         System.out.println("Введите каким символом будете играть:\n");
@@ -76,19 +84,21 @@ public class Game {
         if (user2Select == 2) {
             user2SelectCh = '0';
         }
-        System.out.println("Игрок 1: " + nameOfSecondUser + ".");
+        System.out.println("Игрок 2: " + nameOfSecondUser + ".");
         System.out.println("Выбранный символ:" + user2SelectCh);
 
         SeckondGamer seckondGamer = new SeckondGamer(nameOfSecondUser, user2SelectCh);
 
-        arrayOfGamers[0] = firstGamer;
         arrayOfGamers[1] = seckondGamer;
+        return seckondGamer;
+
     }
+
 
     public static void defineWhoFirst() {
         Random rdn = new Random(2); //TODO возможен выход за диапазон
         int indexOfGamer = rdn.nextInt();
-        System.out.println("Игрок: " + arrayOfGamers[indexOfGamer].getName() + ".Ходит первым!");
+        System.out.println("Игрок: " + arrayOfGamers[indexOfGamer].getName() + ". Ходит первым!");
     }
 
     public static boolean checkAmountOfSymb() {
@@ -195,14 +205,35 @@ public class Game {
 
     }
 
+    public static boolean isThereWinner() {
+        char[] checkOne = checkWinIfSymInCentralPosition();
+
+        if (checkOne != null) {
+            return true;
+        }
+        char[] checkTwo = checkWinWhenSymInDifferentPos();
+        if (checkTwo != null) {
+            return true;
+        }
+        return false;
+    }
 
 
 
-    public void game(FirstGamer firstGamer, SeckondGamer seckondGamer) {
-        printMenu();
+
+    public void game() {
+        FirstGamer first = createFirsGamer();
+        SeckondGamer second = createSecondGamer();
         printGameBoard();
-        firstGamer.addSymbol(scan);
-        seckondGamer.addSymbol(scan);
+        while (!isThereWinner()) {
+            System.out.println("Игрок 1: ");
+            first.addSymbol(scan);
+            printGameBoard();
+            System.out.println("Игрок 2: ");
+            second.addSymbol(scan);
+            printGameBoard();
+        }
+
 
     }
 

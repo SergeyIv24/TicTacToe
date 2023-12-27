@@ -16,6 +16,10 @@ public class Game {
         rdn = new Random();
     }
 
+    public static char[][] getGameBoard(){
+        return gameBoard;
+    }
+
 
     public static void setGameBoard(int line, int column, char symbol) {
         gameBoard[line][column] = symbol;

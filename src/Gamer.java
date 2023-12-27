@@ -76,7 +76,13 @@ public class Gamer {
     }
 
     public void addSymbol(int column, int line) {
+
+        if (Game.getGameBoard()[line][column] == ' ') {
             Game.setGameBoard(line, column, gameSymbol);
+        } else {
+            System.out.println("Позиция занята");
+        }
+
     }
 
     @Override

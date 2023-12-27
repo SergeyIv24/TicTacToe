@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.Random;
 
-//todo Проверка что у игроков разные символы в половине ветвлений null
+//todo рандом выбора символа
 
 public class Game {
     private static final char[][] gameBoard = new char[7][8]; //Пустой массив игровой доски
@@ -77,7 +77,7 @@ public class Game {
         }
 
         if (user1Select == 2) {
-            if (arrayOfGamers[1].gameSymbol == '0') {
+            if ((arrayOfGamers[1] != null) && (arrayOfGamers[1].gameSymbol == '0')) {
                 System.out.println("Символ \"0\" уже занят. Ваш символ: \"X\"");
                 user1SelectCh = 'X';
             } else {
@@ -106,7 +106,7 @@ public class Game {
         char user2SelectCh = ' ';
 
         if (user2Select == 1) {
-            if (arrayOfGamers[0].gameSymbol == 'X') {
+            if ((arrayOfGamers[0] != null) && (arrayOfGamers[0].gameSymbol == 'X')) {
                 System.out.println("Символ \"X\" уже занят. Ваш символ: \"0\"");
                 user2SelectCh = '0';
             } else {
@@ -115,7 +115,7 @@ public class Game {
         }
 
         if (user2Select == 2) {
-            if (arrayOfGamers[0].gameSymbol == '0') {
+            if ((arrayOfGamers[0] != null) && (arrayOfGamers[1].gameSymbol == '0')) {
                 System.out.println("Символ \"0\" уже занят. Ваш символ: \"X\"");
                 user2SelectCh = 'X';
             } else {

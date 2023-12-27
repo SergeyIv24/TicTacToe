@@ -15,10 +15,23 @@ public class Gamer {
         return name;
     }
 
-    public int selectColumn(Scanner scanner) {
+    public int selectColumn() {
+
         System.out.println("Чтобы сделать ход, укажите ячейку на игровом поле.");
-        System.out.println("Укажите колонку: ");
-        int indColumn = scanner.nextInt();
+
+        int indColumn = 0;
+        Scanner scanner;
+        while (true) {
+            System.out.println("Укажите колонку: ");
+            scanner = new Scanner(System.in);
+            if (scanner.hasNextInt()) {
+                indColumn = scanner.nextInt();
+                scanner.close();
+                break;
+            }
+        }
+
+        scanner.close();
         switch (indColumn) {
             case 1:
                 indColumn = 2;
@@ -31,9 +44,10 @@ public class Gamer {
                 break;
             default:
                 System.out.println("Такой колонки нет. Доступные колонки: 1, 2, 3");
-                indColumn = selectColumn(scanner);
-
+                indColumn = selectColumn();
+                break;
         }
+
         return indColumn;
     }
 

@@ -232,14 +232,14 @@ public class Game {
         while (true) {
             if (whoFirst.equals(first)) {
                 System.out.println("Игрок 1: ");
-                first.addSymbol(first.selectColumn(), first.selectLine(scan));
+                first.addSymbol(first.selectColumn(), first.selectLine());
                 printGameBoard();
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + first.name + "!");
                     break;
                 }
                 System.out.println("Игрок 2: ");
-                second.addSymbol(second.selectColumn(), second.selectLine(scan));
+                second.addSymbol(second.selectColumn(), second.selectLine());
                 printGameBoard();
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + second.name + "!");
@@ -247,14 +247,14 @@ public class Game {
                 }
             } else {
                 System.out.println("Игрок 2: ");
-                second.addSymbol(second.selectColumn(), second.selectLine(scan));
+                second.addSymbol(second.selectColumn(), second.selectLine());
                 printGameBoard();
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + second.name + "!");
                     break;
                 }
                 System.out.println("Игрок 1: ");
-                first.addSymbol(first.selectColumn(), first.selectLine(scan));
+                first.addSymbol(first.selectColumn(), first.selectLine());
                 printGameBoard();
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + first.name + "!");

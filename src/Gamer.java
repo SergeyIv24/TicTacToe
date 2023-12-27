@@ -19,19 +19,17 @@ public class Gamer {
 
         System.out.println("Чтобы сделать ход, укажите ячейку на игровом поле.");
 
-        int indColumn = 0;
+        int indColumn;
         Scanner scanner;
         while (true) {
             System.out.println("Укажите колонку: ");
             scanner = new Scanner(System.in);
             if (scanner.hasNextInt()) {
                 indColumn = scanner.nextInt();
-                scanner.close();
                 break;
             }
         }
 
-        scanner.close();
         switch (indColumn) {
             case 1:
                 indColumn = 2;
@@ -51,8 +49,9 @@ public class Gamer {
         return indColumn;
     }
 
-    public int selectLine(Scanner scanner) {
+    public int selectLine() {
         System.out.println("Укажите строку: ");
+        Scanner scanner = new Scanner(System.in);
         int indLine = 0;
         String column = scanner.next();
         char[] columnToChArr = column.toCharArray();
@@ -70,7 +69,7 @@ public class Gamer {
                 break;
             default:
                 System.out.println("Такой строки нет. Доступные строки: A, B, C");
-                indLine = selectLine(scanner);
+                indLine = selectLine();
                 break;
         }
         return indLine;

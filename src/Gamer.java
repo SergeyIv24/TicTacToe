@@ -75,12 +75,14 @@ public class Gamer {
         return indLine;
     }
 
-    public void addSymbol(int column, int line) {
+    public boolean addSymbol(int column, int line) {
 
         if (Game.getGameBoard()[line][column] == ' ') {
             Game.setGameBoard(line, column, gameSymbol);
+            return true;
         } else {
             System.out.println("Позиция занята");
+            return false;
         }
 
     }

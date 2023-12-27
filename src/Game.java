@@ -237,14 +237,22 @@ public class Game {
         while (true) { //Пока нет победителя
             if (whoFirst.equals(first)) { //Если первый ходит игрок 1
                 System.out.println("Игрок 1: ");
-                first.addSymbol(first.selectColumn(), first.selectLine()); //Ход
+                //Бесконечный цикл для неверного хода
+                while (!first.addSymbol(first.selectColumn(), first.selectLine())) {
+                    first.addSymbol(first.selectColumn(), first.selectLine()); //Ход
+                }
+
                 printGameBoard(); //Вывод доски с ходом
                 if (isThereWinner()) { //Если игрок 1 победил
                     System.out.println("Победил игрок: " + first.name + "!");
                     break;
                 }
                 System.out.println("Игрок 2: ");
-                second.addSymbol(second.selectColumn(), second.selectLine()); //Ход
+
+                while (!second.addSymbol(second.selectColumn(), second.selectLine())) {
+                    second.addSymbol(second.selectColumn(), second.selectLine()); //Ход
+                }
+
                 printGameBoard(); //Вывод доски
                 if (isThereWinner()) { //Если второй игрок победил
                     System.out.println("Победил игрок: " + second.name + "!");
@@ -252,14 +260,22 @@ public class Game {
                 }
             } else { //Если первый ходит игрок 2
                 System.out.println("Игрок 2: ");
-                second.addSymbol(second.selectColumn(), second.selectLine());
+
+                while (!second.addSymbol(second.selectColumn(), second.selectLine())) {
+                    second.addSymbol(second.selectColumn(), second.selectLine()); //Ход
+                }
+
                 printGameBoard();
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + second.name + "!");
                     break;
                 }
                 System.out.println("Игрок 1: ");
-                first.addSymbol(first.selectColumn(), first.selectLine());
+
+                while (!first.addSymbol(first.selectColumn(), first.selectLine())) {
+                    first.addSymbol(first.selectColumn(), first.selectLine()); //Ход
+                }
+
                 printGameBoard();
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + first.name + "!");

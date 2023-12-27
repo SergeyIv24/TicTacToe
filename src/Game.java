@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.Random;
 
+//todo Проверка что у игроков разные символы в половине ветвлений null
+
 public class Game {
     private static final char[][] gameBoard = new char[7][8]; //Пустой массив игровой доски
     private static final char[] winX = new char[3]; //Массив для определения победителя X
@@ -64,11 +66,26 @@ public class Game {
         System.out.println("Введите каким символом будете играть:\n");
         System.out.println("1 - X, 2 - 0");
         int user1Select = scan.nextInt();
-        char user1SelectCh = 'X';
+        char user1SelectCh = ' ';
+        if ((user1Select == 1) && (arrayOfGamers != null)) {
+            if ((arrayOfGamers[1] != null) && (arrayOfGamers[1].gameSymbol == 'X')) {
+                System.out.println("Символ \"X\" уже занят. Ваш символ: \"0\"");
+                user1SelectCh = '0';
+            } else {
+                user1SelectCh = 'X';
+            }
+        }
 
         if (user1Select == 2) {
-            user1SelectCh = '0';
+            if (arrayOfGamers[1].gameSymbol == '0') {
+                System.out.println("Символ \"0\" уже занят. Ваш символ: \"X\"");
+                user1SelectCh = 'X';
+            } else {
+                user1SelectCh = '0';
+            }
+
         }
+
         System.out.println("Игрок 1: " + nameOfFirstUser + ".");
         System.out.println("Выбранный символ:" + user1SelectCh);
 
@@ -84,11 +101,27 @@ public class Game {
         String nameOfSecondUser = scan.next();
         System.out.println("Введите каким символом будете играть:\n");
         System.out.println("1 - X, 2 - 0");
+
         int user2Select = scan.nextInt();
-        char user2SelectCh = 'X';
+        char user2SelectCh = ' ';
+
+        if (user2Select == 1) {
+            if (arrayOfGamers[0].gameSymbol == 'X') {
+                System.out.println("Символ \"X\" уже занят. Ваш символ: \"0\"");
+                user2SelectCh = '0';
+            } else {
+                user2SelectCh = 'X';
+            }
+        }
 
         if (user2Select == 2) {
-            user2SelectCh = '0';
+            if (arrayOfGamers[0].gameSymbol == '0') {
+                System.out.println("Символ \"0\" уже занят. Ваш символ: \"X\"");
+                user2SelectCh = 'X';
+            } else {
+                user2SelectCh = '0';
+            }
+
         }
         System.out.println("Игрок 2: " + nameOfSecondUser + ".");
         System.out.println("Выбранный символ:" + user2SelectCh);

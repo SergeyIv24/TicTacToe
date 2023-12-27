@@ -11,6 +11,10 @@ public class Gamer {
 
     }
 
+    public char getGameSymbol() {
+        return gameSymbol;
+    }
+
     public String getName() {
         return name;
     }

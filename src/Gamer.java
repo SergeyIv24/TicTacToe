@@ -15,13 +15,12 @@ public class Gamer {
         return name;
     }
 
+    //Выбор колонки для хода
     public int selectColumn() {
-
         System.out.println("Чтобы сделать ход, укажите ячейку на игровом поле.");
-
         int indColumn;
         Scanner scanner;
-        while (true) {
+        while (true) { //Бесконечный цикл для проверки типа данных ввода
             System.out.println("Укажите колонку: ");
             scanner = new Scanner(System.in);
             if (scanner.hasNextInt()) {
@@ -29,7 +28,7 @@ public class Gamer {
                 break;
             }
         }
-
+        //Соответствие отображаемых колонок доски с индексами элементов
         switch (indColumn) {
             case 1:
                 indColumn = 2;
@@ -42,21 +41,22 @@ public class Gamer {
                 break;
             default:
                 System.out.println("Такой колонки нет. Доступные колонки: 1, 2, 3");
-                indColumn = selectColumn();
+                indColumn = selectColumn(); //Рекурсия, если колонки не существует
                 break;
         }
 
         return indColumn;
     }
 
+    //Выбор линии для хода
     public int selectLine() {
         System.out.println("Укажите строку: ");
         Scanner scanner = new Scanner(System.in);
-        int indLine = 0;
+        int indLine;
         String column = scanner.next();
         char[] columnToChArr = column.toCharArray();
         char columnCh = columnToChArr[0];
-
+        //Соответствие отображаемых колонок доски с индексами элементов
         switch (columnCh) {
             case 'A':
                 indLine = 2;
@@ -69,7 +69,7 @@ public class Gamer {
                 break;
             default:
                 System.out.println("Такой строки нет. Доступные строки: A, B, C");
-                indLine = selectLine();
+                indLine = selectLine(); //Рекурсия, если строки не существует
                 break;
         }
         return indLine;

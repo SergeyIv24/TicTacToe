@@ -2,32 +2,30 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Game {
-    private static final char[][] gameBoard = new char[7][8];
-    private static final char[] winX = new char[3];
-    private static final char[] win0 = new char[3];
-    private static Gamer[] arrayOfGamers;
+    private static final char[][] gameBoard = new char[7][8]; //Пустой массив игровой доски
+    private static final char[] winX = new char[3]; //Массив для определения победителя X
+    private static final char[] win0 = new char[3]; //Массив для определения победителя 0
+    private static Gamer[] arrayOfGamers; //Массив игроков для рандома
     private static Random rdn;
-    Scanner scan;
+    private final Scanner scan;
 
     public Game(){
-        gameBoard[0] = new char[]{' ', '|', '1', '|', '2', '|', '3', '|'};
+        gameBoard[0] = new char[]{' ', '|', '1', '|', '2', '|', '3', '|'}; //Первая строка игровой доски
         arrayOfGamers = new Gamer[2];
         scan = new Scanner(System.in);
         rdn = new Random();
     }
 
-    public static char[][] getGameBoard() {
-        return gameBoard;
-    }
 
     public static void setGameBoard(int line, int column, char symbol) {
         gameBoard[line][column] = symbol;
     }
 
+    //Создание первичной игровой доски
     public static void createPrimaryGameBoard() {
         char j = 'A';
         for (int i = 1; i < gameBoard.length; i++) {
-            if (i == 2) {
+            if (i == 2) { //Буквы по своим позициям
                 j = 'A';
             } else if (i == 4) {
                 j = 'B';
@@ -48,13 +46,14 @@ public class Game {
         }
     }
 
+    //Вывод игровой доски
     public static void printGameBoard() {
-
         for (char[] chars : gameBoard) {
             System.out.println(chars);
         }
     }
 
+    //Создание игрока 1
     public FirstGamer createFirsGamer() {
         System.out.println("Введите Ваше имя: ");
         String nameOfFirstUser = scan.next();
@@ -75,6 +74,7 @@ public class Game {
         return firstGamer;
     }
 
+    //Создание игрока 2
     public SeckondGamer createSecondGamer() {
         System.out.println("Введите Ваше имя: ");
         String nameOfSecondUser = scan.next();
@@ -96,7 +96,7 @@ public class Game {
 
     }
 
-
+    //Определение кто первый ходит
     public static Gamer defineWhoFirst() {
         int indexOfGamer = rdn.nextInt(2);
         System.out.println("Игрок: " + arrayOfGamers[indexOfGamer].getName() + ". Ходит первым!");
@@ -107,11 +107,11 @@ public class Game {
         boolean checkAmount = false;
         int amountX = 0;
         int amountO = 0;
-        for (int i = 0; i < gameBoard.length; i++) {
-            for (int h = 0; h < gameBoard[i].length; h++) {
-                if (gameBoard[i][h] == 'X') {
+        for (char[] chars : gameBoard) {
+            for (char aChar : chars) {
+                if (aChar == 'X') {
                     amountX += 1;
-                } else if (gameBoard[i][h] == '0') {
+                } else if (aChar == '0') {
                     amountO += 1;
                 }
             }
@@ -124,18 +124,18 @@ public class Game {
         return false;
     }
 
+    //Проверка ходов, если игровой символ в центральной позиции
     public static char[] checkWinIfSymInCentralPosition() {
-
         for (int i = 0; i < gameBoard.length; i++) {
-            for (int h = 0; h < gameBoard[i].length; h++) {
-                if (gameBoard[4][4] == 'X') {
+            for (int h = 0; h < gameBoard[i].length; h++) { //Цикл по элементам
+                if (gameBoard[4][4] == 'X') { //Если в центре Х
                     winX[0] = 'X';
-                    if (gameBoard[2][6] == 'X') {
+                    if (gameBoard[2][6] == 'X') { //Проверка диагональных ячеек
                         winX[1] = 'X';
                         if (gameBoard[6][2] == 'X') {
                             winX[2] = 'X';
                         }
-                    } else if (gameBoard[2][2] == 'X'){
+                    } else if (gameBoard[2][2] == 'X'){ //Проверка дигональных ячеек
                         winX[1] = 'X';
                         if (gameBoard[6][6] == 'X') {
                             winX[2] = 'X';
@@ -145,12 +145,12 @@ public class Game {
                 }
                 if (gameBoard[4][4] == '0') {
                     win0[0] = '0';
-                    if (gameBoard[2][6] == '0') {
+                    if (gameBoard[2][6] == '0') { //Проверка диагональных ячеек
                         win0[1] = '0';
                         if (gameBoard[6][2] == '0') {
                             win0[2] = '0';
                         }
-                    } else if (gameBoard[2][2] == '0'){
+                    } else if (gameBoard[2][2] == '0'){ //Проверка диагональных ячеек
                         win0[1] = '0';
                         if (gameBoard[6][6] == '0') {
                             win0[2] = '0';
@@ -163,6 +163,7 @@ public class Game {
         return null;
     }
 
+    //Проверка ходом, если игровой символ в любой ячейке
     public static char[] checkWinWhenSymInDifferentPos() {
         int amountX = 0;
         int j;
@@ -172,14 +173,12 @@ public class Game {
                 if (gameBoard[i][j] == 'X') {
                     winX[k] = 'X';
                     amountX += 1;
-
                 } else {
                     winX[0] = ' ';
                     winX[1] = ' ';
                     winX[2] = ' ';
                     break;
                 }
-
             }
             if (amountX == winX.length) {
                 return winX;
@@ -207,6 +206,7 @@ public class Game {
 
     }
 
+    //Определение есть ли победитель
     public static boolean isThereWinner() {
         char[] checkOne = checkWinIfSymInCentralPosition();
 
@@ -221,6 +221,7 @@ public class Game {
     }
 
 
+    //Игра
     public void game() {
         FirstGamer first = createFirsGamer();
         SeckondGamer second = createSecondGamer();
@@ -229,23 +230,23 @@ public class Game {
 
         Gamer whoFirst = defineWhoFirst();
 
-        while (true) {
-            if (whoFirst.equals(first)) {
+        while (true) { //Пока нет победителя
+            if (whoFirst.equals(first)) { //Если первый ходит игрок 1
                 System.out.println("Игрок 1: ");
-                first.addSymbol(first.selectColumn(), first.selectLine());
-                printGameBoard();
-                if (isThereWinner()) {
+                first.addSymbol(first.selectColumn(), first.selectLine()); //Ход
+                printGameBoard(); //Вывод доски с ходом
+                if (isThereWinner()) { //Если игрок 1 победил
                     System.out.println("Победил игрок: " + first.name + "!");
                     break;
                 }
                 System.out.println("Игрок 2: ");
-                second.addSymbol(second.selectColumn(), second.selectLine());
-                printGameBoard();
-                if (isThereWinner()) {
+                second.addSymbol(second.selectColumn(), second.selectLine()); //Ход
+                printGameBoard(); //Вывод доски
+                if (isThereWinner()) { //Если второй игрок победил
                     System.out.println("Победил игрок: " + second.name + "!");
                     break;
                 }
-            } else {
+            } else { //Если первый ходит игрок 2
                 System.out.println("Игрок 2: ");
                 second.addSymbol(second.selectColumn(), second.selectLine());
                 printGameBoard();

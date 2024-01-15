@@ -14,7 +14,7 @@ public class Game {
     protected final Scanner scan;
 
     public Game(){
-        gameBoard[0] = new char[]{' ', '|', '1', '|', '2', '|', '3', '|'}; //Первая строка игровой доски
+        gameBoard[0] = new char[]{'#', '|', '1', '|', '2', '|', '3', '|'}; //Первая строка игровой доски
         arrayOfGamers = new Gamer[2];
         gameSymbol = new char[]{'X', '0'};
         scan = new Scanner(System.in);

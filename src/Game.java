@@ -3,13 +3,13 @@ import java.util.Random;
 
 
 public class Game {
-    private static final char[][] gameBoard = new char[7][8]; //Пустой массив игровой доски
-    private static final char[] winX = new char[3]; //Массив для определения победителя X
-    private static final char[] win0 = new char[3]; //Массив для определения победителя 0
-    private static Gamer[] arrayOfGamers; //Массив игроков для рандома
-    private static char[] gameSymbol; //Массив для рандома игрового символа
-    private static Random rdn;
-    private final Scanner scan;
+    protected static final char[][] gameBoard = new char[7][8]; //Пустой массив игровой доски
+    protected static final char[] winX = new char[3]; //Массив для определения победителя X
+    protected static final char[] win0 = new char[3]; //Массив для определения победителя 0
+    protected static Gamer[] arrayOfGamers; //Массив игроков для рандома
+    protected static char[] gameSymbol; //Массив для рандома игрового символа
+    protected static Random rdn;
+    protected final Scanner scan;
 
     public Game(){
         gameBoard[0] = new char[]{' ', '|', '1', '|', '2', '|', '3', '|'}; //Первая строка игровой доски
@@ -60,45 +60,7 @@ public class Game {
         }
     }
 
-    //Создание игрока 1
-    public FirstGamer createFirsGamer() {
-        System.out.println("Введите Ваше имя: ");
-        String nameOfFirstUser = scan.next();
 
-        char user1Select = defineRandomGameSymbol();
-
-        System.out.println("Игрок 1: " + nameOfFirstUser + ".");
-        System.out.println("Игровой символ:" + user1Select);
-
-        FirstGamer firstGamer = new FirstGamer(nameOfFirstUser, user1Select);
-
-        arrayOfGamers[0] = firstGamer;
-        return firstGamer;
-    }
-
-    //Создание игрока 2
-    public SeckondGamer createSecondGamer() {
-        System.out.println("Введите Ваше имя: ");
-        String nameOfSecondUser = scan.next();
-
-        char user2Select = defineRandomGameSymbol();
-
-        if ((arrayOfGamers[0] != null) && (user2Select == arrayOfGamers[0].gameSymbol)
-                && (user2Select == gameSymbol[0])) {
-            user2Select = '0';
-        } else if ((arrayOfGamers[0] != null) && (user2Select == arrayOfGamers[0].gameSymbol)
-                && (user2Select == gameSymbol[1])) {
-            user2Select = 'X';
-        }
-
-        System.out.println("Игрок 2: " + nameOfSecondUser + ".");
-        System.out.println("Игровой символ:" + user2Select);
-
-        SeckondGamer seckondGamer = new SeckondGamer(nameOfSecondUser, user2Select);
-
-        arrayOfGamers[1] = seckondGamer;
-        return seckondGamer;
-    }
 
     //Определение кто первый ходит
     public static Gamer defineWhoFirst() {
@@ -231,72 +193,6 @@ public class Game {
     }
 
 
-    //Игра
-    public void game() {
-        FirstGamer first = createFirsGamer();
-        SeckondGamer second = createSecondGamer();
-        createPrimaryGameBoard();
-        printGameBoard();
 
-        Gamer whoFirst = defineWhoFirst();
-
-        while (true) { //Пока нет победителя
-            if (whoFirst.equals(first)) { //Если первый ходит игрок 1
-                System.out.println("Игрок 1: ");
-                //Бесконечный цикл для неверного хода
-                while (true) {
-                    if (first.addSymbol(first.selectColumn(), first.selectLine())) { //ход
-                        break;
-                    }
-                }
-
-                printGameBoard(); //Вывод доски с ходом
-                if (isThereWinner()) { //Если игрок 1 победил
-                    System.out.println("Победил игрок: " + first.name + "!");
-                    break;
-                }
-                System.out.println("Игрок 2: ");
-
-                while (true) {
-                    if (second.addSymbol(second.selectColumn(), second.selectLine())) { //ход
-                        break;
-                    }
-                }
-
-                printGameBoard(); //Вывод доски
-                if (isThereWinner()) { //Если второй игрок победил
-                    System.out.println("Победил игрок: " + second.name + "!");
-                    break;
-                }
-            } else { //Если первый ходит игрок 2
-                System.out.println("Игрок 2: ");
-
-                while (true) {
-                    if (second.addSymbol(second.selectColumn(), second.selectLine())) { //ход
-                        break;
-                    }
-                }
-
-                printGameBoard();
-                if (isThereWinner()) {
-                    System.out.println("Победил игрок: " + second.name + "!");
-                    break;
-                }
-                System.out.println("Игрок 1: ");
-
-                while (true) {
-                    if (first.addSymbol(first.selectColumn(), first.selectLine())) { //ход
-                        break;
-                    }
-                }
-
-                printGameBoard();
-                if (isThereWinner()) {
-                    System.out.println("Победил игрок: " + first.name + "!");
-                    break;
-                }
-            }
-        }
-    }
 
 }

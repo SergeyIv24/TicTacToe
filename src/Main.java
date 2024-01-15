@@ -2,7 +2,7 @@
 
 public class Main {
     public static void main(String[] args) {
-        Game game = new Game();
+        GamerVsGamer game = new GamerVsGamer();
         game.game();
     }
 }

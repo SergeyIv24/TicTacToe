@@ -1,19 +1,20 @@
 import java.util.Scanner;
 import java.util.Random;
 
-//todo рандом выбора символа
 
 public class Game {
     private static final char[][] gameBoard = new char[7][8]; //Пустой массив игровой доски
     private static final char[] winX = new char[3]; //Массив для определения победителя X
     private static final char[] win0 = new char[3]; //Массив для определения победителя 0
     private static Gamer[] arrayOfGamers; //Массив игроков для рандома
+    private static char[] gameSymbol; //Массив для рандома игрового символа
     private static Random rdn;
     private final Scanner scan;
 
     public Game(){
         gameBoard[0] = new char[]{' ', '|', '1', '|', '2', '|', '3', '|'}; //Первая строка игровой доски
         arrayOfGamers = new Gamer[2];
+        gameSymbol = new char[]{'X', '0'};
         scan = new Scanner(System.in);
         rdn = new Random();
     }
@@ -63,33 +64,13 @@ public class Game {
     public FirstGamer createFirsGamer() {
         System.out.println("Введите Ваше имя: ");
         String nameOfFirstUser = scan.next();
-        System.out.println("Введите каким символом будете играть:\n");
-        System.out.println("1 - X, 2 - 0");
-        int user1Select = scan.nextInt();
-        char user1SelectCh = ' ';
-        if ((user1Select == 1) && (arrayOfGamers != null)) {
-            if ((arrayOfGamers[1] != null) && (arrayOfGamers[1].gameSymbol == 'X')) {
-                System.out.println("Символ \"X\" уже занят. Ваш символ: \"0\"");
-                user1SelectCh = '0';
-            } else {
-                user1SelectCh = 'X';
-            }
-        }
 
-        if (user1Select == 2) {
-            if ((arrayOfGamers[1] != null) && (arrayOfGamers[1].gameSymbol == '0')) {
-                System.out.println("Символ \"0\" уже занят. Ваш символ: \"X\"");
-                user1SelectCh = 'X';
-            } else {
-                user1SelectCh = '0';
-            }
-
-        }
+        char user1Select = defineRandomGameSymbol();
 
         System.out.println("Игрок 1: " + nameOfFirstUser + ".");
-        System.out.println("Выбранный символ:" + user1SelectCh);
+        System.out.println("Игровой символ:" + user1Select);
 
-        FirstGamer firstGamer = new FirstGamer(nameOfFirstUser, user1SelectCh);
+        FirstGamer firstGamer = new FirstGamer(nameOfFirstUser, user1Select);
 
         arrayOfGamers[0] = firstGamer;
         return firstGamer;
@@ -99,38 +80,24 @@ public class Game {
     public SeckondGamer createSecondGamer() {
         System.out.println("Введите Ваше имя: ");
         String nameOfSecondUser = scan.next();
-        System.out.println("Введите каким символом будете играть:\n");
-        System.out.println("1 - X, 2 - 0");
 
-        int user2Select = scan.nextInt();
-        char user2SelectCh = ' ';
+        char user2Select = defineRandomGameSymbol();
 
-        if (user2Select == 1) {
-            if ((arrayOfGamers[0] != null) && (arrayOfGamers[0].gameSymbol == 'X')) {
-                System.out.println("Символ \"X\" уже занят. Ваш символ: \"0\"");
-                user2SelectCh = '0';
-            } else {
-                user2SelectCh = 'X';
-            }
+        if ((arrayOfGamers[0] != null) && (user2Select == arrayOfGamers[0].gameSymbol)
+                && (user2Select == gameSymbol[0])) {
+            user2Select = '0';
+        } else if ((arrayOfGamers[0] != null) && (user2Select == arrayOfGamers[0].gameSymbol)
+                && (user2Select == gameSymbol[1])) {
+            user2Select = 'X';
         }
 
-        if (user2Select == 2) {
-            if ((arrayOfGamers[0] != null) && (arrayOfGamers[1].gameSymbol == '0')) {
-                System.out.println("Символ \"0\" уже занят. Ваш символ: \"X\"");
-                user2SelectCh = 'X';
-            } else {
-                user2SelectCh = '0';
-            }
-
-        }
         System.out.println("Игрок 2: " + nameOfSecondUser + ".");
-        System.out.println("Выбранный символ:" + user2SelectCh);
+        System.out.println("Игровой символ:" + user2Select);
 
-        SeckondGamer seckondGamer = new SeckondGamer(nameOfSecondUser, user2SelectCh);
+        SeckondGamer seckondGamer = new SeckondGamer(nameOfSecondUser, user2Select);
 
         arrayOfGamers[1] = seckondGamer;
         return seckondGamer;
-
     }
 
     //Определение кто первый ходит
@@ -138,6 +105,12 @@ public class Game {
         int indexOfGamer = rdn.nextInt(2);
         System.out.println("Игрок: " + arrayOfGamers[indexOfGamer].getName() + ". Ходит первым!");
         return arrayOfGamers[indexOfGamer];
+    }
+
+    //Определение кто каким символом играет
+    public static char defineRandomGameSymbol() {
+        int indexOfSymbol = rdn.nextInt(2);
+        return gameSymbol[indexOfSymbol];
     }
 
     public static boolean checkAmountOfSymb() {
@@ -271,7 +244,7 @@ public class Game {
             if (whoFirst.equals(first)) { //Если первый ходит игрок 1
                 System.out.println("Игрок 1: ");
                 //Бесконечный цикл для неверного хода
-                while (true) { //!first.addSymbol(first.selectColumn(), first.selectLine())
+                while (true) {
                     if (first.addSymbol(first.selectColumn(), first.selectLine())) { //ход
                         break;
                     }
@@ -284,7 +257,7 @@ public class Game {
                 }
                 System.out.println("Игрок 2: ");
 
-                while (true) { //!first.addSymbol(first.selectColumn(), first.selectLine())
+                while (true) {
                     if (second.addSymbol(second.selectColumn(), second.selectLine())) { //ход
                         break;
                     }
@@ -298,7 +271,7 @@ public class Game {
             } else { //Если первый ходит игрок 2
                 System.out.println("Игрок 2: ");
 
-                while (true) { //!first.addSymbol(first.selectColumn(), first.selectLine())
+                while (true) {
                     if (second.addSymbol(second.selectColumn(), second.selectLine())) { //ход
                         break;
                     }
@@ -311,7 +284,7 @@ public class Game {
                 }
                 System.out.println("Игрок 1: ");
 
-                while (true) { //!first.addSymbol(first.selectColumn(), first.selectLine())
+                while (true) {
                     if (first.addSymbol(first.selectColumn(), first.selectLine())) { //ход
                         break;
                     }

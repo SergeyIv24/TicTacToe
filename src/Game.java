@@ -271,8 +271,10 @@ public class Game {
             if (whoFirst.equals(first)) { //Если первый ходит игрок 1
                 System.out.println("Игрок 1: ");
                 //Бесконечный цикл для неверного хода
-                while (!first.addSymbol(first.selectColumn(), first.selectLine())) {
-                    first.addSymbol(first.selectColumn(), first.selectLine()); //Ход
+                while (true) { //!first.addSymbol(first.selectColumn(), first.selectLine())
+                    if (first.addSymbol(first.selectColumn(), first.selectLine())) { //ход
+                        break;
+                    }
                 }
 
                 printGameBoard(); //Вывод доски с ходом
@@ -282,8 +284,10 @@ public class Game {
                 }
                 System.out.println("Игрок 2: ");
 
-                while (!second.addSymbol(second.selectColumn(), second.selectLine())) {
-                    second.addSymbol(second.selectColumn(), second.selectLine()); //Ход
+                while (true) { //!first.addSymbol(first.selectColumn(), first.selectLine())
+                    if (second.addSymbol(second.selectColumn(), second.selectLine())) { //ход
+                        break;
+                    }
                 }
 
                 printGameBoard(); //Вывод доски
@@ -294,8 +298,10 @@ public class Game {
             } else { //Если первый ходит игрок 2
                 System.out.println("Игрок 2: ");
 
-                while (!second.addSymbol(second.selectColumn(), second.selectLine())) {
-                    second.addSymbol(second.selectColumn(), second.selectLine()); //Ход
+                while (true) { //!first.addSymbol(first.selectColumn(), first.selectLine())
+                    if (second.addSymbol(second.selectColumn(), second.selectLine())) { //ход
+                        break;
+                    }
                 }
 
                 printGameBoard();
@@ -305,8 +311,10 @@ public class Game {
                 }
                 System.out.println("Игрок 1: ");
 
-                while (!first.addSymbol(first.selectColumn(), first.selectLine())) {
-                    first.addSymbol(first.selectColumn(), first.selectLine()); //Ход
+                while (true) { //!first.addSymbol(first.selectColumn(), first.selectLine())
+                    if (first.addSymbol(first.selectColumn(), first.selectLine())) { //ход
+                        break;
+                    }
                 }
 
                 printGameBoard();

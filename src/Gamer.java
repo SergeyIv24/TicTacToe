@@ -52,6 +52,7 @@ public class Gamer {
         return indColumn;
     }
 
+
     //Выбор линии для хода
     public int selectLine() {
         System.out.println("Укажите строку: ");

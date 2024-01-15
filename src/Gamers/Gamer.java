@@ -1,3 +1,5 @@
+package Gamers;
+import Game.*;
 import java.util.Objects;
 import java.util.Scanner;
 

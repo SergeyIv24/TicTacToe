@@ -1,3 +1,5 @@
+package Gamers;
+
 public class FirstGamer extends Gamer {
 
 

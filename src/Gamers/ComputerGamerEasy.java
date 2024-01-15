@@ -1,3 +1,5 @@
+package Gamers;
+import Game.*;
 import java.util.Random;
 
 public class ComputerGamerEasy extends Gamer {

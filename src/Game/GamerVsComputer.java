@@ -1,3 +1,5 @@
+package Game;
+import Gamers.*;
 import java.util.Random;
 
 public class GamerVsComputer extends Game{
@@ -22,10 +24,10 @@ public class GamerVsComputer extends Game{
     public ComputerGamerEasy createComputerGamer() {
         char compSymb = defineRandomGameSymbol();
         Random rnd = new Random();
-        if ((arrayOfGamers[0] != null) && (compSymb == arrayOfGamers[0].gameSymbol)
+        if ((arrayOfGamers[0] != null) && (compSymb == arrayOfGamers[0].getGameSymbol())
                 && (compSymb == gameSymbol[0])) {
             compSymb = '0';
-        } else if ((arrayOfGamers[0] != null) && (compSymb == arrayOfGamers[0].gameSymbol)
+        } else if ((arrayOfGamers[0] != null) && (compSymb == arrayOfGamers[0].getGameSymbol())
                 && (compSymb == gameSymbol[1])) {
             compSymb = 'X';
         }
@@ -56,7 +58,7 @@ public class GamerVsComputer extends Game{
                 }
                 printGameBoard(); //Вывод доски с ходом
                 if (isThereWinner()) { //Если игрок 1 победил
-                    System.out.println("Победил игрок: " + firstGamer.name + "!");
+                    System.out.println("Победил игрок: " + firstGamer.getName() + "!");
                     break;
                 }
 
@@ -69,7 +71,7 @@ public class GamerVsComputer extends Game{
                 }
                 printGameBoard(); //Вывод доски
                 if (isThereWinner()) { //Если второй игрок победил
-                    System.out.println("Победил игрок: " + computerGamerEasy.name + "!");
+                    System.out.println("Победил игрок: " + computerGamerEasy.getName() + "!");
                     break;
                 }
 
@@ -83,7 +85,7 @@ public class GamerVsComputer extends Game{
 
                 printGameBoard();
                 if (isThereWinner()) {
-                    System.out.println("Победил игрок: " + computerGamerEasy.name + "!");
+                    System.out.println("Победил игрок: " + computerGamerEasy.getName() + "!");
                     break;
                 }
                 System.out.println("Игрок 1: ");
@@ -96,7 +98,7 @@ public class GamerVsComputer extends Game{
 
                 printGameBoard();
                 if (isThereWinner()) {
-                    System.out.println("Победил игрок: " + firstGamer.name + "!");
+                    System.out.println("Победил игрок: " + firstGamer.getName() + "!");
                     break;
                 }
             }

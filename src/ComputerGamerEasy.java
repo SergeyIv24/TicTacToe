@@ -10,7 +10,6 @@ public class ComputerGamerEasy extends Gamer {
 
     @Override
     public int selectColumn() {
-        System.out.println("Я компьютер! Это мой ход!");
         int columnForComp = rdn.nextInt(3);
 
         //Соответствие отображаемых колонок доски с индексами элементов
@@ -43,6 +42,18 @@ public class ComputerGamerEasy extends Gamer {
                 break;
         }
         return lineForComp;
+    }
+
+    @Override
+    public boolean addSymbol(int column, int line) {
+        if (Game.getGameBoard()[line][column] == ' ') {
+            Game.setGameBoard(line, column, gameSymbol);
+            return true;
+        } else {
+            selectColumn();
+            selectLine();
+            return false;
+        }
     }
 
 }

@@ -81,7 +81,6 @@ public class Gamer {
     }
 
     public boolean addSymbol(int column, int line) {
-
         if (Game.getGameBoard()[line][column] == ' ') {
             Game.setGameBoard(line, column, gameSymbol);
             return true;

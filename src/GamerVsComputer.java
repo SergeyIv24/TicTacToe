@@ -45,6 +45,62 @@ public class GamerVsComputer extends Game{
         createPrimaryGameBoard();
         printGameBoard();
         Gamer whoFirst = defineWhoFirst();
+
+        while (true) { //Пока нет победителя
+            if (whoFirst.equals(firstGamer)) {
+                System.out.println("Игрок 1: ");
+                while (true) {
+                    if (firstGamer.addSymbol(firstGamer.selectColumn(), firstGamer.selectLine())) { //ход
+                        break;
+                    }
+                }
+                printGameBoard(); //Вывод доски с ходом
+                if (isThereWinner()) { //Если игрок 1 победил
+                    System.out.println("Победил игрок: " + firstGamer.name + "!");
+                    break;
+                }
+
+                System.out.println("Игрок компьютер: ");
+
+                while (true) {
+                    if (computerGamerEasy.addSymbol(computerGamerEasy.selectColumn(), computerGamerEasy.selectLine())) { //ход
+                        break;
+                    }
+                }
+                printGameBoard(); //Вывод доски
+                if (isThereWinner()) { //Если второй игрок победил
+                    System.out.println("Победил игрок: " + computerGamerEasy.name + "!");
+                    break;
+                }
+
+            } else {
+                System.out.println("Игрок компьютер: ");
+                while (true) {
+                    if (computerGamerEasy.addSymbol(computerGamerEasy.selectColumn(), computerGamerEasy.selectLine())) { //ход
+                        break;
+                    }
+                }
+
+                printGameBoard();
+                if (isThereWinner()) {
+                    System.out.println("Победил игрок: " + computerGamerEasy.name + "!");
+                    break;
+                }
+                System.out.println("Игрок 1: ");
+
+                while (true) {
+                    if (firstGamer.addSymbol(firstGamer.selectColumn(), firstGamer.selectLine())) { //ход
+                        break;
+                    }
+                }
+
+                printGameBoard();
+                if (isThereWinner()) {
+                    System.out.println("Победил игрок: " + firstGamer.name + "!");
+                    break;
+                }
+            }
+        }
     }
 
 }

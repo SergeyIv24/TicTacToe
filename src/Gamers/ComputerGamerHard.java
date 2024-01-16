@@ -78,6 +78,7 @@ public class ComputerGamerHard extends Gamer{
     }
     //Определяет куда делать ход
     public int[] algorithms() {
+        int[] arrOfIndexes = new int[2]; //Столбец, строка
 
         if(!Arrays.equals(checkGapBetweenSymbolsOnLines(), checkArr)) {
             return checkGapBetweenSymbolsOnLines();
@@ -86,45 +87,48 @@ public class ComputerGamerHard extends Gamer{
             return checkGapBetweenSymbolsOnColumns();
         }
 
-
-
-
-
-
-
-        return new int[2];
-    }
-    //Делает ход, ставит символ
-    public boolean addSymbol(int[] indexes) {
-        return false;
-    }
-
-
-
-    @Override
-    public int selectColumn() {
-        int[] arrOfIndexes = new int[2]; //Столбец, строка
         if (Game.getGameBoard()[4][4] == ' ') {
             arrOfIndexes[0] = 4;
             arrOfIndexes[1] = 4;
-        } else if ((Game.getGameBoard()[4][4] != ' ') && ((Game.getGameBoard()[4][2] != ' ')
-                || (Game.getGameBoard()[4][6] != ' ') || (Game.getGameBoard()[2][4] != ' ')
-                || (Game.getGameBoard()[6][4] != ' '))) {
+            return arrOfIndexes;
+        }
+
+        if (((Game.getGameBoard()[4][2] != ' ') || (Game.getGameBoard()[4][6] != ' ')
+                || (Game.getGameBoard()[2][4] != ' ') || (Game.getGameBoard()[6][4] != ' '))) {
             int[] coord = parseCoordinates(cornerCages, makeRandom());
             arrOfIndexes[0] = coord[0];
             arrOfIndexes[1] = coord[1];
+            return arrOfIndexes;
         }
 
+        return new int[2];
+    }
 
-
-        return 0;
+    @Override
+    public int selectColumn() {
+        int[] coordinates = algorithms();
+        int column;
+        return column = coordinates[0];
     }
 
     @Override
     public int selectLine() {
-        return 0;
+        int[] coordinates = algorithms();
+        int line;
+        return line = coordinates[1];
     }
 
-
+    //Делает ход, ставит символ
+    @Override
+    public boolean addSymbol(int column, int line) {
+        if (Game.getGameBoard()[line][column] == ' ') {
+            Game.setGameBoard(line, column, gameSymbol);
+            return true;
+        } else {
+            selectColumn();
+            selectLine();
+            return false;
+        }
+    }
 
 }

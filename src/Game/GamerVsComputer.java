@@ -3,6 +3,15 @@ import Gamers.*;
 import java.util.Random;
 
 public class GamerVsComputer extends Game{
+    private static boolean isLevelEasy = true;
+
+    public boolean getIsLevelEasy () {
+        return isLevelEasy;
+    }
+
+    public void setIsLevelEasy(boolean newLevel) {
+        isLevelEasy = newLevel;
+    }
 
     //Создание игрока
     public FirstGamer createGamer() {
@@ -21,7 +30,7 @@ public class GamerVsComputer extends Game{
     }
 
     //Создание игрока компьютера
-    public ComputerGamerEasy createComputerGamer() {
+    public Gamer createComputerGamer() {
         char compSymb = defineRandomGameSymbol();
         Random rnd = new Random();
         if ((arrayOfGamers[0] != null) && (compSymb == arrayOfGamers[0].getGameSymbol())
@@ -34,16 +43,20 @@ public class GamerVsComputer extends Game{
 
         System.out.println("Игрок компьютер.");
         System.out.println("Игровой символ:" + compSymb);
+        Gamer computerGamer = null;
+        if (isLevelEasy) {
+            computerGamer = new ComputerGamerEasy("Компьютер", compSymb, rdn);
+        } else {
+            computerGamer = new ComputerGamerHard("Компьютер", compSymb, rdn);
+        }
 
-        ComputerGamerEasy computerGamerEasy = new ComputerGamerEasy("Компьютер", compSymb, rdn);
-
-        arrayOfGamers[1] = computerGamerEasy;
-        return computerGamerEasy;
+        arrayOfGamers[1] = computerGamer;
+        return computerGamer;
     }
 
     public void gameAgainstComputer() {
         FirstGamer firstGamer = createGamer();
-        ComputerGamerEasy computerGamerEasy = createComputerGamer();
+        Gamer computerGamer = createComputerGamer();
         createPrimaryGameBoard();
         printGameBoard();
         Gamer whoFirst = defineWhoFirst();
@@ -65,27 +78,27 @@ public class GamerVsComputer extends Game{
                 System.out.println("Игрок компьютер: ");
 
                 while (true) {
-                    if (computerGamerEasy.addSymbol(computerGamerEasy.selectColumn(), computerGamerEasy.selectLine())) { //ход
+                    if (computerGamer.addSymbol(computerGamer.selectColumn(), computerGamer.selectLine())) { //ход
                         break;
                     }
                 }
                 printGameBoard(); //Вывод доски
                 if (isThereWinner()) { //Если второй игрок победил
-                    System.out.println("Победил игрок: " + computerGamerEasy.getName() + "!");
+                    System.out.println("Победил игрок: " + computerGamer.getName() + "!");
                     break;
                 }
 
             } else {
                 System.out.println("Игрок компьютер: ");
                 while (true) {
-                    if (computerGamerEasy.addSymbol(computerGamerEasy.selectColumn(), computerGamerEasy.selectLine())) { //ход
+                    if (computerGamer.addSymbol(computerGamer.selectColumn(), computerGamer.selectLine())) { //ход
                         break;
                     }
                 }
 
                 printGameBoard();
                 if (isThereWinner()) {
-                    System.out.println("Победил игрок: " + computerGamerEasy.getName() + "!");
+                    System.out.println("Победил игрок: " + computerGamer.getName() + "!");
                     break;
                 }
                 System.out.println("Игрок 1: ");

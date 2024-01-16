@@ -8,10 +8,11 @@ import java.util.Random;
 public class ComputerGamerHard extends Gamer{
     static String[] cornerCages = new String[]{"22", "26", "62", "66"}; //Координаты угловых ячеек
     int[] checkArr = new int[2];
+    Random rdn;
 
-
-    public ComputerGamerHard(String name, char gameSymbol) {
+    public ComputerGamerHard(String name, char gameSymbol, Random rdn) {
         super(name, gameSymbol);
+        this.rdn = rdn;
     }
 
     public static int[] parseCoordinates(String[] cornerCages, int indexOfCornerCages) {
@@ -34,15 +35,15 @@ public class ComputerGamerHard extends Gamer{
     public int[] checkGapBetweenSymbolsOnLines() {
         boolean isThereEmptyCellar = false;
         int[] coordinatesGap = new int[2];
-        for (int i = 2; i <= Game.getGameBoard().length; i = i + 2) {
+        for (int i = 2; i < Game.getGameBoard().length; i = i + 2) {
             byte countOfSymbol = 0;
-            for (int j = 2; j <= Game.getGameBoard()[i].length; j = j + 2) {
-                if (Game.getGameBoard()[i][j] == '0') {
+            for (int j = 2; j < Game.getGameBoard()[i].length; j = j + 2) {
+                if ((Game.getGameBoard()[i][j] == '0') || (Game.getGameBoard()[i][j] == 'X')) {
                     countOfSymbol += 1;
                 }
                 if (Game.getGameBoard()[i][j] == ' ') {
-                    coordinatesGap[0] = i;
-                    coordinatesGap[1] = j;
+                    coordinatesGap[0] = j;
+                    coordinatesGap[1] = i;
                     isThereEmptyCellar = true;
                 }
                 if ((countOfSymbol == 2) && (isThereEmptyCellar)) {
@@ -57,15 +58,15 @@ public class ComputerGamerHard extends Gamer{
         boolean isThereEmptyCellar = false;
         int[] coordinatesGap = new int[2];
 
-        for (int i = 2; i <= Game.getGameBoard().length; i = i + 2) {
+        for (int i = 2; i < Game.getGameBoard().length; i = i + 2) {
             byte countOfSymbol = 0;
-            for (int j = 2; j <= Game.getGameBoard()[i].length; j = j + 2) {
-                if (Game.getGameBoard()[j][i] == '0') {
+            for (int j = 2; j < Game.getGameBoard()[i].length; j = j + 2) {
+                if ((Game.getGameBoard()[j][i] == '0') || (Game.getGameBoard()[j][i] == 'X')) {
                     countOfSymbol += 1;
                 }
                 if (Game.getGameBoard()[j][i] == ' ') {
-                    coordinatesGap[0] = i;
-                    coordinatesGap[1] = j;
+                    coordinatesGap[0] = j;
+                    coordinatesGap[1] = i;
                     isThereEmptyCellar = true;
                 }
                 if ((countOfSymbol == 2) && (isThereEmptyCellar)) {
@@ -79,12 +80,14 @@ public class ComputerGamerHard extends Gamer{
     //Определяет куда делать ход
     public int[] algorithms() {
         int[] arrOfIndexes = new int[2]; //Столбец, строка
+        int[] checkGapOnLines = checkGapBetweenSymbolsOnLines();
+        int[] checkGapOnColumns = checkGapBetweenSymbolsOnColumns();
 
-        if(!Arrays.equals(checkGapBetweenSymbolsOnLines(), checkArr)) {
-            return checkGapBetweenSymbolsOnLines();
+        if(!Arrays.equals(checkGapOnLines, checkArr)) {
+            return checkGapOnLines;
         }
-        if (!Arrays.equals(checkGapBetweenSymbolsOnColumns(), checkArr)) {
-            return checkGapBetweenSymbolsOnColumns();
+        if (!Arrays.equals(checkGapOnColumns, checkArr)) {
+            return checkGapOnColumns;
         }
 
         if (Game.getGameBoard()[4][4] == ' ') {
@@ -107,15 +110,14 @@ public class ComputerGamerHard extends Gamer{
     @Override
     public int selectColumn() {
         int[] coordinates = algorithms();
-        int column;
-        return column = coordinates[0];
+        return coordinates[0];
     }
 
     @Override
     public int selectLine() {
         int[] coordinates = algorithms();
-        int line;
-        return line = coordinates[1];
+
+        return coordinates[1];
     }
 
     //Делает ход, ставит символ

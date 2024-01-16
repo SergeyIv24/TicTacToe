@@ -3,7 +3,7 @@ package Game;
 import java.util.Scanner;
 import java.util.Random;
 import Gamers.*;
-
+//todo переписать метод определения победителя.
 public class Game {
     protected static final char[][] gameBoard = new char[7][8]; //Пустой массив игровой доски
     protected static final char[] winX = new char[3]; //Массив для определения победителя X
@@ -138,47 +138,56 @@ public class Game {
     }
 
     //Проверка ходом, если игровой символ в любой ячейке
-    public static char[] checkWinWhenSymInDifferentPos() {
-        int amountX = 0;
-        int j;
-        int k;
+    public static char[] checkWinnerOnLines() {
         for (int i = 2; i < gameBoard.length; i = i + 2) {
-            for (j = 2, k = 0; j < gameBoard[i].length; j = j + 2, k++) {
+            byte countX = 0;
+            byte count0 = 0;
+            for (int j = 2, k = 0; j < gameBoard[i].length; j = j + 2, k++) {
                 if (gameBoard[i][j] == 'X') {
-                    winX[k] = 'X';
-                    amountX += 1;
-                } else {
-                    winX[0] = ' ';
-                    winX[1] = ' ';
-                    winX[2] = ' ';
-                    break;
+                    countX += 1;
+                    winX[k] = gameBoard[i][j];
                 }
-            }
-            if (amountX == winX.length) {
-                return winX;
+                if (gameBoard[i][j] == '0') {
+                    count0 += 1;
+                    win0[k] = gameBoard[i][j];
+                }
+                if (countX == 3) {
+                    return winX;
+                }
+                if (count0 == 3) {
+                    return win0;
+                }
             }
 
         }
-        int amountO = 0;
+          return null;
+    }
+
+    public static char[] checkWinnerOnColumns() {
         for (int i = 2; i < gameBoard.length; i = i + 2) {
-            for (j = 2, k = 0; j < gameBoard[i].length; j = j + 2, k++) {
-                if (gameBoard[i][j] == '0') {
-                    win0[k] = '0';
-                    amountO += 1;
-                } else {
-                    win0[0] = ' ';
-                    win0[1] = ' ';
-                    win0[2] = ' ';
-                    break;
+            byte countX = 0;
+            byte count0 = 0;
+            for (int j = 2, k = 0; j < gameBoard[i].length; j = j + 2, k++) {
+                if (gameBoard[j][i] == 'X') {
+                    countX += 1;
+                    winX[k] = gameBoard[j][i];
+                }
+                if (gameBoard[j][i] == '0') {
+                    count0 += 1;
+                    win0[k] = gameBoard[j][i];
+                }
+                if (countX == 3) {
+                    return winX;
+                }
+                if (count0 == 3) {
+                    return win0;
                 }
             }
-            if (amountO == win0.length) {
-                return win0;
-            }
+
         }
         return null;
-
     }
+
 
     //Определение есть ли победитель
     public static boolean isThereWinner() {
@@ -187,14 +196,11 @@ public class Game {
         if (checkOne != null) {
             return true;
         }
-        char[] checkTwo = checkWinWhenSymInDifferentPos();
-        if (checkTwo != null) {
+        char[] winnerLine = checkWinnerOnLines();
+        char[] winnerColumns = checkWinnerOnColumns();
+        if ((winnerLine != null) || (winnerColumns != null)) {
             return true;
         }
         return false;
     }
-
-
-
-
 }

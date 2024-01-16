@@ -3,7 +3,7 @@ package Game;
 import java.util.Scanner;
 import java.util.Random;
 import Gamers.*;
-//todo переписать метод определения победителя.
+
 public class Game {
     protected static final char[][] gameBoard = new char[7][8]; //Пустой массив игровой доски
     protected static final char[] winX = new char[3]; //Массив для определения победителя X
@@ -158,9 +158,8 @@ public class Game {
                     return win0;
                 }
             }
-
         }
-          return null;
+        return null;
     }
 
     public static char[] checkWinnerOnColumns() {
@@ -183,7 +182,6 @@ public class Game {
                     return win0;
                 }
             }
-
         }
         return null;
     }

@@ -1,10 +1,14 @@
 package Gamers;
 
 import Game.Game;
+
+import java.util.Arrays;
 import java.util.Random;
 
 public class ComputerGamerHard extends Gamer{
     static String[] cornerCages = new String[]{"22", "26", "62", "66"}; //Координаты угловых ячеек
+    int[] checkArr = new int[2];
+
 
     public ComputerGamerHard(String name, char gameSymbol) {
         super(name, gameSymbol);
@@ -47,19 +51,54 @@ public class ComputerGamerHard extends Gamer{
             }
         }
         return new int[2];
-
     }
 
     public int[] checkGapBetweenSymbolsOnColumns() {
         boolean isThereEmptyCellar = false;
         int[] coordinatesGap = new int[2];
 
-        for (int j = 2; j <= Game.getGameBoard().length; j = j + 2) {
-
+        for (int i = 2; i <= Game.getGameBoard().length; i = i + 2) {
+            byte countOfSymbol = 0;
+            for (int j = 2; j <= Game.getGameBoard()[i].length; j = j + 2) {
+                if (Game.getGameBoard()[j][i] == '0') {
+                    countOfSymbol += 1;
+                }
+                if (Game.getGameBoard()[j][i] == ' ') {
+                    coordinatesGap[0] = i;
+                    coordinatesGap[1] = j;
+                    isThereEmptyCellar = true;
+                }
+                if ((countOfSymbol == 2) && (isThereEmptyCellar)) {
+                    return coordinatesGap;
+                }
+            }
         }
 
         return new int[2];
     }
+    //Определяет куда делать ход
+    public int[] algorithms() {
+
+        if(!Arrays.equals(checkGapBetweenSymbolsOnLines(), checkArr)) {
+            return checkGapBetweenSymbolsOnLines();
+        }
+        if (!Arrays.equals(checkGapBetweenSymbolsOnColumns(), checkArr)) {
+            return checkGapBetweenSymbolsOnColumns();
+        }
+
+
+
+
+
+
+
+        return new int[2];
+    }
+    //Делает ход, ставит символ
+    public boolean addSymbol(int[] indexes) {
+        return false;
+    }
+
 
 
     @Override
@@ -87,7 +126,5 @@ public class ComputerGamerHard extends Gamer{
     }
 
 
-    public boolean addSymbol(int[] indexes) {
-        return false;
-    }
+
 }

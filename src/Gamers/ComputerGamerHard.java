@@ -4,7 +4,7 @@ import Game.Game;
 
 import java.util.Arrays;
 import java.util.Random;
-
+//todo алгоритм если противник сделал ход в угл
 public class ComputerGamerHard extends Gamer{
     static String[] cornerCages = new String[]{"22", "26", "62", "66"}; //Координаты угловых ячеек
     int[] checkArr = new int[2];

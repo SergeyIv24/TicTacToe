@@ -69,13 +69,13 @@ public class GamerVsComputer extends Game{
                         break;
                     }
                 }
-                printGameBoard(); //Вывод доски с ходом
-                if(!defineDraw()) {
-                    System.out.println("Ничья!");
-                    break;
-                }
+                printGameBoard(); //Вывод доски с ходо
                 if (isThereWinner()) { //Если игрок 1 победил
                     System.out.println("Победил игрок: " + firstGamer.getName() + "!");
+                    break;
+                }
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
                     break;
                 }
 
@@ -87,12 +87,13 @@ public class GamerVsComputer extends Game{
                     }
                 }
                 printGameBoard(); //Вывод доски
-                if(!defineDraw()) {
-                    System.out.println("Ничья!");
-                    break;
-                }
+
                 if (isThereWinner()) { //Если второй игрок победил
                     System.out.println("Победил игрок: " + computerGamer.getName() + "!");
+                    break;
+                }
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
                     break;
                 }
 
@@ -105,12 +106,13 @@ public class GamerVsComputer extends Game{
                 }
 
                 printGameBoard();
-                if(!defineDraw()) {
-                    System.out.println("Ничья!");
-                    break;
-                }
+
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + computerGamer.getName() + "!");
+                    break;
+                }
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
                     break;
                 }
                 System.out.println("Игрок 1: ");
@@ -122,12 +124,12 @@ public class GamerVsComputer extends Game{
                 }
 
                 printGameBoard();
-                if(!defineDraw()) {
-                    System.out.println("Ничья!");
-                    break;
-                }
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + firstGamer.getName() + "!");
+                    break;
+                }
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
                     break;
                 }
             }

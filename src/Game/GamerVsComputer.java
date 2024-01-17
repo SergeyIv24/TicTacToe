@@ -78,7 +78,7 @@ public class GamerVsComputer extends Game{
                 System.out.println("Игрок компьютер: ");
 
                 while (true) {
-                    if (computerGamer.addSymbol(computerGamer.selectColumn(), computerGamer.selectLine())) { //ход
+                    if (computerGamer.addSymbol(computerGamer.selectLine(), computerGamer.selectColumn())) { //ход
                         break;
                     }
                 }
@@ -91,7 +91,7 @@ public class GamerVsComputer extends Game{
             } else {
                 System.out.println("Игрок компьютер: ");
                 while (true) {
-                    if (computerGamer.addSymbol(computerGamer.selectColumn(), computerGamer.selectLine())) { //ход
+                    if (computerGamer.addSymbol(computerGamer.selectLine(), computerGamer.selectColumn())) { //ход
                         break;
                     }
                 }

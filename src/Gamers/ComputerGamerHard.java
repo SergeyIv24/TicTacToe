@@ -38,12 +38,12 @@ public class ComputerGamerHard extends Gamer{
         for (int i = 2; i < Game.getGameBoard().length; i = i + 2) {
             byte countOfSymbol = 0;
             for (int j = 2; j < Game.getGameBoard()[i].length; j = j + 2) {
-                if ((Game.getGameBoard()[i][j] == '0') || (Game.getGameBoard()[i][j] == 'X')) {
+                if ((Game.getGameBoard()[i][j] != gameSymbol) && (Game.getGameBoard()[i][j] != ' ')) {
                     countOfSymbol += 1;
                 }
                 if (Game.getGameBoard()[i][j] == ' ') {
-                    coordinatesGap[0] = j;
-                    coordinatesGap[1] = i;
+                    coordinatesGap[0] = i;
+                    coordinatesGap[1] = j;
                     isThereEmptyCellar = true;
                 }
                 if ((countOfSymbol == 2) && (isThereEmptyCellar)) {
@@ -61,7 +61,7 @@ public class ComputerGamerHard extends Gamer{
         for (int i = 2; i < Game.getGameBoard().length; i = i + 2) {
             byte countOfSymbol = 0;
             for (int j = 2; j < Game.getGameBoard()[i].length; j = j + 2) {
-                if ((Game.getGameBoard()[j][i] == '0') || (Game.getGameBoard()[j][i] == 'X')) {
+                if ((Game.getGameBoard()[j][i] != gameSymbol) && (Game.getGameBoard()[j][i] != ' ')) {
                     countOfSymbol += 1;
                 }
                 if (Game.getGameBoard()[j][i] == ' ') {
@@ -79,7 +79,7 @@ public class ComputerGamerHard extends Gamer{
     }
     //Определяет куда делать ход
     public int[] algorithms() {
-        int[] arrOfIndexes = new int[2]; //Столбец, строка
+        int[] arrOfIndexes = new int[2]; //Строка, столбец
         int[] checkGapOnLines = checkGapBetweenSymbolsOnLines();
         int[] checkGapOnColumns = checkGapBetweenSymbolsOnColumns();
 
@@ -110,14 +110,13 @@ public class ComputerGamerHard extends Gamer{
     @Override
     public int selectColumn() {
         int[] coordinates = algorithms();
-        return coordinates[0];
+        return coordinates[1];
     }
 
     @Override
     public int selectLine() {
         int[] coordinates = algorithms();
-
-        return coordinates[1];
+        return coordinates[0];
     }
 
     //Делает ход, ставит символ

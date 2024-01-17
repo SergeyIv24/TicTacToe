@@ -108,8 +108,9 @@ public class Game {
                         winX[1] = 'X';
                         if (gameBoard[6][2] == 'X') {
                             winX[2] = 'X';
+                            return winX;
                         }
-                    } else if (gameBoard[2][2] == 'X'){ //Проверка дигональных ячеек
+                    } else if (gameBoard[2][2] == 'X'){ //Проверка диагональных ячеек
                         winX[1] = 'X';
                         if (gameBoard[6][6] == 'X') {
                             winX[2] = 'X';
@@ -123,6 +124,7 @@ public class Game {
                         win0[1] = '0';
                         if (gameBoard[6][2] == '0') {
                             win0[2] = '0';
+                            return win0;
                         }
                     } else if (gameBoard[2][2] == '0'){ //Проверка диагональных ячеек
                         win0[1] = '0';

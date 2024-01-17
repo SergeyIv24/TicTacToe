@@ -70,6 +70,10 @@ public class GamerVsComputer extends Game{
                     }
                 }
                 printGameBoard(); //Вывод доски с ходом
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
+                    break;
+                }
                 if (isThereWinner()) { //Если игрок 1 победил
                     System.out.println("Победил игрок: " + firstGamer.getName() + "!");
                     break;
@@ -83,6 +87,10 @@ public class GamerVsComputer extends Game{
                     }
                 }
                 printGameBoard(); //Вывод доски
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
+                    break;
+                }
                 if (isThereWinner()) { //Если второй игрок победил
                     System.out.println("Победил игрок: " + computerGamer.getName() + "!");
                     break;
@@ -97,6 +105,10 @@ public class GamerVsComputer extends Game{
                 }
 
                 printGameBoard();
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
+                    break;
+                }
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + computerGamer.getName() + "!");
                     break;
@@ -110,6 +122,10 @@ public class GamerVsComputer extends Game{
                 }
 
                 printGameBoard();
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
+                    break;
+                }
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + firstGamer.getName() + "!");
                     break;

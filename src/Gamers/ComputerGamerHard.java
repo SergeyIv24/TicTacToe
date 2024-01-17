@@ -4,7 +4,7 @@ import Game.Game;
 
 import java.util.Arrays;
 import java.util.Random;
-
+//todo алгоритм если противник сделал ход в угл
 public class ComputerGamerHard extends Gamer{
     static String[] cornerCages = new String[]{"22", "26", "62", "66"}; //Координаты угловых ячеек
     int[] checkArr = new int[2];
@@ -42,11 +42,12 @@ public class ComputerGamerHard extends Gamer{
                     countOfSymbol += 1;
                 }
                 if (Game.getGameBoard()[i][j] == ' ') {
+                    coordinatesGap[0] = i;
+                    coordinatesGap[1] = j;
                     isThereEmptyCellar = true;
                 }
                 if ((countOfSymbol == 2) && (isThereEmptyCellar)) {
-                    coordinatesGap[0] = i;
-                    coordinatesGap[1] = j;
+
                     return coordinatesGap;
                 }
             }
@@ -64,11 +65,12 @@ public class ComputerGamerHard extends Gamer{
                     countOfSymbol += 1;
                 }
                 if (Game.getGameBoard()[j][i] == ' ') {
+                    coordinatesGap[0] = j;
+                    coordinatesGap[1] = i;
                     isThereEmptyCellar = true;
                 }
                 if ((countOfSymbol == 2) && (isThereEmptyCellar)) {
-                    coordinatesGap[0] = j;
-                    coordinatesGap[1] = i;
+
                     return coordinatesGap;
                 }
             }
@@ -86,11 +88,12 @@ public class ComputerGamerHard extends Gamer{
                     countOfSymbol += 1;
                 }
                 if (Game.getGameBoard()[i][j] == ' ') {
+                    coordinatesGap[0] = i;
+                    coordinatesGap[1] = j;
                     isThereEmptyCellar = true;
                 }
                 if ((countOfSymbol == 2) && (isThereEmptyCellar)) {
-                    coordinatesGap[0] = i;
-                    coordinatesGap[1] = j;
+
                     return coordinatesGap;
                 }
             }
@@ -108,11 +111,12 @@ public class ComputerGamerHard extends Gamer{
                     countOfSymbol += 1;
                 }
                 if (Game.getGameBoard()[j][i] == ' ') {
+                    coordinatesGap[0] = j;
+                    coordinatesGap[1] = i;
                     isThereEmptyCellar = true;
                 }
                 if ((countOfSymbol == 2) && (isThereEmptyCellar)) {
-                    coordinatesGap[0] = j;
-                    coordinatesGap[1] = i;
+
                     return coordinatesGap;
                 }
             }
@@ -124,11 +128,12 @@ public class ComputerGamerHard extends Gamer{
 
         //Определяет куда делать ход
     public int[] algorithms() {
+        boolean isThereSymbolInCorners = ((Game.getGameBoard()[2][2] != ' ') && (Game.getGameBoard()[2][6] != ' ')
+                && (Game.getGameBoard()[6][2] != ' ') && (Game.getGameBoard()[6][6] != ' '));
         int[] arrOfIndexes = new int[2]; //Строка, столбец
         int[] checkGapOnLines = preventVictoryOfEnemyOnLines();
         int[] checkGapOnColumns = preventVictoryOfEnemyOnColumns();
-        boolean isThereSymbolInCorners = ((Game.getGameBoard()[2][2] != ' ') || (Game.getGameBoard()[2][6] != ' ')
-                || (Game.getGameBoard()[6][2] != ' ') || (Game.getGameBoard()[6][6] != ' '));
+
 
         if(!Arrays.equals(checkGapOnLines, checkArr)) {
             return checkGapOnLines;
@@ -136,26 +141,38 @@ public class ComputerGamerHard extends Gamer{
         if (!Arrays.equals(checkGapOnColumns, checkArr)) {
             return checkGapOnColumns;
         }
+
         if (Game.getGameBoard()[4][4] == ' ') {
             arrOfIndexes[0] = 4;
             arrOfIndexes[1] = 4;
             return arrOfIndexes;
-        } else {
-            if (isThereSymbolInCorners) {
-                int[] checkWinGapsOnLines = searchVictoryCombinationsOnLines();
-                int[] checkWinGapsOnColumns = searchVictoryCombinationsOnColumns();
-                if (!Arrays.equals(checkWinGapsOnLines, checkArr)) {
-                    return checkWinGapsOnLines;
-                }
-                if (!Arrays.equals(checkWinGapsOnColumns, checkArr)) {
-                    return checkWinGapsOnColumns;
+        }
+
+        if (isThereSymbolInCorners) {
+            int[] checkWinGapsOnLines = searchVictoryCombinationsOnLines();
+            int[] checkWinGapsOnColumns = searchVictoryCombinationsOnColumns();
+
+            if (!Arrays.equals(checkWinGapsOnLines, checkArr)) {
+                return checkWinGapsOnLines;
+            } else if (!Arrays.equals(checkWinGapsOnColumns, checkArr)) {
+                return checkWinGapsOnColumns;
+            } else {
+                for (int i = 2; i < Game.getGameBoard().length; i = i + 2) {
+                    for (int j = 2; j < Game.getGameBoard()[i].length; j = j + 1) {
+                        if (Game.getGameBoard()[i][j] == ' ') {
+                            arrOfIndexes[0] = i;
+                            arrOfIndexes[1] = j;
+                            return arrOfIndexes;
+                        }
+                    }
                 }
             }
-            int[] coord = parseCoordinates(cornerCages, makeRandom());
-            arrOfIndexes[0] = coord[0];
-            arrOfIndexes[1] = coord[1];
-            return arrOfIndexes;
         }
+        int[] coord = parseCoordinates(cornerCages, makeRandom());
+        arrOfIndexes[0] = coord[0];
+        arrOfIndexes[1] = coord[1];
+        return arrOfIndexes;
+
     }
 
     @Override
@@ -182,4 +199,5 @@ public class ComputerGamerHard extends Gamer{
             return false;
         }
     }
+
 }

@@ -188,6 +188,21 @@ public class Game {
         return null;
     }
 
+    public static boolean defineDraw() {
+        byte countEmptyCellar = 0;
+        for (int i = 2; i < gameBoard.length; i = i + 2) {
+            for (int j = 2; j < gameBoard[i].length; j = j + 2) {
+                if (gameBoard[i][j] == ' ') {
+                    countEmptyCellar += 1;
+                }
+            }
+        }
+        if (countEmptyCellar == 0) {
+            return false;
+        }
+        return true;
+    }
+
 
     //Определение есть ли победитель
     public static boolean isThereWinner() {

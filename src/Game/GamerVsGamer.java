@@ -65,6 +65,10 @@ public class GamerVsGamer extends Game {
                 }
 
                 printGameBoard(); //Вывод доски с ходом
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
+                    break;
+                }
                 if (isThereWinner()) { //Если игрок 1 победил
                     System.out.println("Победил игрок: " + first.getName() + "!");
                     break;
@@ -78,6 +82,10 @@ public class GamerVsGamer extends Game {
                 }
 
                 printGameBoard(); //Вывод доски
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
+                    break;
+                }
                 if (isThereWinner()) { //Если второй игрок победил
                     System.out.println("Победил игрок: " + second.getName() + "!");
                     break;
@@ -92,6 +100,10 @@ public class GamerVsGamer extends Game {
                 }
 
                 printGameBoard();
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
+                    break;
+                }
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + second.getName() + "!");
                     break;
@@ -105,6 +117,10 @@ public class GamerVsGamer extends Game {
                 }
 
                 printGameBoard();
+                if(!defineDraw()) {
+                    System.out.println("Ничья!");
+                    break;
+                }
                 if (isThereWinner()) {
                     System.out.println("Победил игрок: " + first.getName() + "!");
                     break;

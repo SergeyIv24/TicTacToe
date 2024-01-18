@@ -77,31 +77,11 @@ public class Game {
         return gameSymbol[indexOfSymbol];
     }
 
-    public static boolean checkAmountOfSymb() {
-        boolean checkAmount = false;
-        int amountX = 0;
-        int amountO = 0;
-        for (char[] chars : gameBoard) {
-            for (char aChar : chars) {
-                if (aChar == 'X') {
-                    amountX += 1;
-                } else if (aChar == '0') {
-                    amountO += 1;
-                }
-            }
-        }
-        if (amountX >= 3) {
-            return true;
-        } else if (amountO >= 3) {
-            return true;
-        }
-        return false;
-    }
 
     //Проверка ходов, если игровой символ в центральной позиции
     public static char[] checkWinIfSymInCentralPosition() {
-        for (int i = 0; i < gameBoard.length; i++) {
-            for (int h = 0; h < gameBoard[i].length; h++) { //Цикл по элементам
+        for (char[] chars : gameBoard) {
+            for (int h = 0; h < chars.length; h++) { //Цикл по элементам
                 if (gameBoard[4][4] == 'X') { //Если в центре Х
                     winX[0] = 'X';
                     if (gameBoard[2][6] == 'X') { //Проверка диагональных ячеек
@@ -110,7 +90,7 @@ public class Game {
                             winX[2] = 'X';
                             return winX;
                         }
-                    } else if (gameBoard[2][2] == 'X'){ //Проверка диагональных ячеек
+                    } else if (gameBoard[2][2] == 'X') { //Проверка диагональных ячеек
                         winX[1] = 'X';
                         if (gameBoard[6][6] == 'X') {
                             winX[2] = 'X';
@@ -126,7 +106,7 @@ public class Game {
                             win0[2] = '0';
                             return win0;
                         }
-                    } else if (gameBoard[2][2] == '0'){ //Проверка диагональных ячеек
+                    } else if (gameBoard[2][2] == '0') { //Проверка диагональных ячеек
                         win0[1] = '0';
                         if (gameBoard[6][6] == '0') {
                             win0[2] = '0';

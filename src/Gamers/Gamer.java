@@ -60,9 +60,10 @@ public class Gamer {
         System.out.println("Укажите строку: ");
         Scanner scanner = new Scanner(System.in);
         int indLine;
-        String column = scanner.next();
-        char[] columnToChArr = column.toCharArray();
-        char columnCh = columnToChArr[0];
+        String line = scanner.next();
+        char[] lineToChArr = line.toCharArray();
+        char columnCh = lineToChArr[0];
+        columnCh = Character.toUpperCase(columnCh);
         //Соответствие отображаемых колонок доски с индексами элементов
         switch (columnCh) {
             case 'A':

@@ -1,13 +1,8 @@
 package Game;
 import Gamers.*;
-import java.util.Random;
 
 public class GamerVsComputer extends Game{
     private static boolean isLevelEasy = true;
-
-    public boolean getIsLevelEasy () {
-        return isLevelEasy;
-    }
 
     public void setIsLevelEasy(boolean newLevel) {
         isLevelEasy = newLevel;
@@ -32,7 +27,6 @@ public class GamerVsComputer extends Game{
     //Создание игрока компьютера
     public Gamer createComputerGamer() {
         char compSymb = defineRandomGameSymbol();
-        Random rnd = new Random();
         if ((arrayOfGamers[0] != null) && (compSymb == arrayOfGamers[0].getGameSymbol())
                 && (compSymb == gameSymbol[0])) {
             compSymb = '0';
@@ -43,7 +37,7 @@ public class GamerVsComputer extends Game{
 
         System.out.println("Игрок компьютер.");
         System.out.println("Игровой символ:" + compSymb);
-        Gamer computerGamer = null;
+        Gamer computerGamer;
         if (isLevelEasy) {
             computerGamer = new ComputerGamerEasy("Компьютер", compSymb, rdn);
         } else {

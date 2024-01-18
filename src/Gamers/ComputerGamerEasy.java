@@ -12,7 +12,7 @@ public class ComputerGamerEasy extends Gamer {
 
     @Override
     public int selectColumn() {
-        int columnForComp = rdn.nextInt(3);
+        int columnForComp = rdn.nextInt(4);
 
         //Соответствие отображаемых колонок доски с индексами элементов
         switch (columnForComp) {
@@ -30,7 +30,7 @@ public class ComputerGamerEasy extends Gamer {
     }
     @Override
     public int selectLine() {
-        int lineForComp = rdn.nextInt(3);
+        int lineForComp = rdn.nextInt(4);
 
         switch (lineForComp) {
             case 1:

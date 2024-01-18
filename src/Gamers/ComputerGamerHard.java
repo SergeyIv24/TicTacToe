@@ -27,8 +27,7 @@ public class ComputerGamerHard extends Gamer{
 
     public static int makeRandom() {
         Random rdn = new Random();
-        int index = rdn.nextInt(4);
-        return index;
+        return rdn.nextInt(4);
     }
 
 

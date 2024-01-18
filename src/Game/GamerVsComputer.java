@@ -12,35 +12,34 @@ public class GamerVsComputer extends Game{
     public FirstGamer createGamer() {
         System.out.println("Введите Ваше имя: ");
         String nameOfFirstUser = scan.next();
-
-        char userSymbol = defineRandomGameSymbol();
-
+        char userSymbol = defineRandomGameSymbol(); //Вызов метода рандомного определения игрового символа
         System.out.println("Игрок: " + nameOfFirstUser + ".");
         System.out.println("Игровой символ: " + userSymbol);
 
         FirstGamer firstGamer = new FirstGamer(nameOfFirstUser, userSymbol);
 
-        arrayOfGamers[0] = firstGamer;
+        arrayOfGamers[0] = firstGamer; //Добавление в массив игроков
         return firstGamer;
     }
 
     //Создание игрока компьютера
     public Gamer createComputerGamer() {
-        char compSymb = defineRandomGameSymbol();
+        char compSymb = defineRandomGameSymbol(); //Вывзов метода рандомного определения игрового символа
         if ((arrayOfGamers[0] != null) && (compSymb == arrayOfGamers[0].getGameSymbol())
-                && (compSymb == gameSymbol[0])) {
-            compSymb = '0';
+                && (compSymb == gameSymbol[0])) { //Если символы игроков равны и если символ ПК - Х
+            compSymb = '0'; //То символ будет 0
         } else if ((arrayOfGamers[0] != null) && (compSymb == arrayOfGamers[0].getGameSymbol())
-                && (compSymb == gameSymbol[1])) {
-            compSymb = 'X';
+                && (compSymb == gameSymbol[1])) { //Если символы игроков равны и если символ ПК - 0
+            compSymb = 'X'; //То символ будет Х
         }
 
         System.out.println("Игрок компьютер.");
         System.out.println("Игровой символ:" + compSymb);
         Gamer computerGamer;
-        if (isLevelEasy) {
+        //Создание нужного объекта компьютера в зависимости от сложности игры
+        if (isLevelEasy) { //Легкий уровень
             computerGamer = new ComputerGamerEasy("Компьютер", compSymb, rdn);
-        } else {
+        } else { //Сложный уровень
             computerGamer = new ComputerGamerHard("Компьютер", compSymb, rdn);
         }
 
@@ -48,12 +47,13 @@ public class GamerVsComputer extends Game{
         return computerGamer;
     }
 
+    //Игра против компьютера
     public void gameAgainstComputer() {
         FirstGamer firstGamer = createGamer();
         Gamer computerGamer = createComputerGamer();
         createPrimaryGameBoard();
         printGameBoard();
-        Gamer whoFirst = defineWhoFirst();
+        Gamer whoFirst = defineWhoFirst(); //Рандомное определение первого хода
 
         while (true) { //Пока нет победителя
             if (whoFirst.equals(firstGamer)) {
@@ -63,12 +63,12 @@ public class GamerVsComputer extends Game{
                         break;
                     }
                 }
-                printGameBoard(); //Вывод доски с ходо
+                printGameBoard(); //Вывод доски с ходами
                 if (isThereWinner()) { //Если игрок 1 победил
                     System.out.println("Победил игрок: " + firstGamer.getName() + "!");
                     break;
                 }
-                if(!defineDraw()) {
+                if(!defineDraw()) { //Проверка ничьи
                     System.out.println("Ничья!");
                     break;
                 }
@@ -86,7 +86,7 @@ public class GamerVsComputer extends Game{
                     System.out.println("Победил игрок: " + computerGamer.getName() + "!");
                     break;
                 }
-                if(!defineDraw()) {
+                if(!defineDraw()) { //Проверка ничьи
                     System.out.println("Ничья!");
                     break;
                 }
@@ -105,7 +105,7 @@ public class GamerVsComputer extends Game{
                     System.out.println("Победил игрок: " + computerGamer.getName() + "!");
                     break;
                 }
-                if(!defineDraw()) {
+                if(!defineDraw()) { //Проверка ничьи
                     System.out.println("Ничья!");
                     break;
                 }
@@ -122,7 +122,7 @@ public class GamerVsComputer extends Game{
                     System.out.println("Победил игрок: " + firstGamer.getName() + "!");
                     break;
                 }
-                if(!defineDraw()) {
+                if(!defineDraw()) { //Проверка ничьи
                     System.out.println("Ничья!");
                     break;
                 }

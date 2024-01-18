@@ -78,7 +78,7 @@ public class Game {
     }
 
 
-    //Проверка ходов, если игровой символ в центральной позиции
+    //Проверка наличия победителя по диагоналям
     public static char[] checkWinIfSymInCentralPosition() {
         for (char[] chars : gameBoard) {
             for (int h = 0; h < chars.length; h++) { //Цикл по элементам
@@ -119,7 +119,7 @@ public class Game {
         return null;
     }
 
-    //Проверка ходом, если игровой символ в любой ячейке
+    //Проверка наличия победителя, если выигрышная комбинация на строках
     public static char[] checkWinnerOnLines() {
         for (int i = 2; i < gameBoard.length; i = i + 2) {
             byte countX = 0;
@@ -144,6 +144,7 @@ public class Game {
         return null;
     }
 
+    //Проверка наличия победителя, если выигрышная комбинация на столбцах
     public static char[] checkWinnerOnColumns() {
         for (int i = 2; i < gameBoard.length; i = i + 2) {
             byte countX = 0;
@@ -168,31 +169,32 @@ public class Game {
         return null;
     }
 
+    //Проверка ничьи
     public static boolean defineDraw() {
-        byte countEmptyCellar = 0;
+        byte countEmptyCellar = 0; //Счетчик количества пустых ячеек
         for (int i = 2; i < gameBoard.length; i = i + 2) {
             for (int j = 2; j < gameBoard[i].length; j = j + 2) {
-                if (gameBoard[i][j] == ' ') {
-                    countEmptyCellar += 1;
+                if (gameBoard[i][j] == ' ') { //Если ячейка пустая
+                    countEmptyCellar += 1; // + 1
                 }
             }
         }
-        if (countEmptyCellar == 0) {
-            return false;
+        if (countEmptyCellar == 0) { //Если количество пустых ячеек 0
+            return false; //ничья
         }
-        return true;
+        return true; //Нет ничьи
     }
 
 
     //Определение есть ли победитель
     public static boolean isThereWinner() {
-        char[] checkOne = checkWinIfSymInCentralPosition();
+        char[] checkOne = checkWinIfSymInCentralPosition(); //Поиск победителя по диагоналям
 
         if (checkOne != null) {
             return true;
         }
-        char[] winnerLine = checkWinnerOnLines();
-        char[] winnerColumns = checkWinnerOnColumns();
+        char[] winnerLine = checkWinnerOnLines(); //Поиск победителя на строках
+        char[] winnerColumns = checkWinnerOnColumns(); //Поиск победителя на колонках
         if ((winnerLine != null) || (winnerColumns != null)) {
             return true;
         }

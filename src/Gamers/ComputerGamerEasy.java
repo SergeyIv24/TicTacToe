@@ -1,6 +1,7 @@
 package Gamers;
 import Game.*;
 import java.util.Random;
+//Легкий ПК - выбор хода рандом
 
 public class ComputerGamerEasy extends Gamer {
     Random rdn;
@@ -11,7 +12,7 @@ public class ComputerGamerEasy extends Gamer {
     }
 
     @Override
-    public int selectColumn() {
+    public int selectColumn() { //Определение колонки для хода
         int columnForComp = rdn.nextInt(4);
 
         //Соответствие отображаемых колонок доски с индексами элементов
@@ -28,8 +29,9 @@ public class ComputerGamerEasy extends Gamer {
         }
         return columnForComp;
     }
+
     @Override
-    public int selectLine() {
+    public int selectLine() { //Определение строки для хода
         int lineForComp = rdn.nextInt(4);
 
         switch (lineForComp) {
@@ -47,7 +49,7 @@ public class ComputerGamerEasy extends Gamer {
     }
 
     @Override
-    public boolean addSymbol(int column, int line) {
+    public boolean addSymbol(int column, int line) { //Метод добавления хода на доску
         if (Game.getGameBoard()[line][column] == ' ') {
             Game.setGameBoard(line, column, gameSymbol);
             return true;

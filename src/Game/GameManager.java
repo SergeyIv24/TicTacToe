@@ -1,9 +1,8 @@
 package Game;
-
+//Утилитарный класс для запуска нужного режима игры
 import java.util.Scanner;
 
 public class GameManager {
-
 
     public static void chooseGameOption() {
         Scanner scanner = new Scanner(System.in);
@@ -37,7 +36,5 @@ public class GameManager {
             default:
                 System.out.println("Такой опции нет");
         }
-
     }
-
 }

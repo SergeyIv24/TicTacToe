@@ -52,7 +52,7 @@ public class GamerVsGamer extends Game {
         createPrimaryGameBoard();
         printGameBoard();
 
-        Gamer whoFirst = defineWhoFirst();
+        Gamer whoFirst = defineWhoFirst(); //Рандомное определение первого хода
 
         while (true) { //Пока нет победителя
             if (whoFirst.equals(first)) { //Если первый ходит игрок 1
@@ -64,13 +64,13 @@ public class GamerVsGamer extends Game {
                     }
                 }
 
-                printGameBoard(); //Вывод доски с ходом
+                printGameBoard(); //Вывод доски с ходами
 
                 if (isThereWinner()) { //Если игрок 1 победил
                     System.out.println("Победил игрок: " + first.getName() + "!");
                     break;
                 }
-                if(!defineDraw()) {
+                if(!defineDraw()) { //Проверка ничьи
                     System.out.println("Ничья!");
                     break;
                 }
@@ -88,7 +88,7 @@ public class GamerVsGamer extends Game {
                     System.out.println("Победил игрок: " + second.getName() + "!");
                     break;
                 }
-                if(!defineDraw()) {
+                if(!defineDraw()) { //Проверка ничьи
                     System.out.println("Ничья!");
                     break;
                 }
@@ -107,7 +107,7 @@ public class GamerVsGamer extends Game {
                     System.out.println("Победил игрок: " + second.getName() + "!");
                     break;
                 }
-                if(!defineDraw()) {
+                if(!defineDraw()) { //Проверка ничьи
                     System.out.println("Ничья!");
                     break;
                 }
@@ -125,7 +125,7 @@ public class GamerVsGamer extends Game {
                     System.out.println("Победил игрок: " + first.getName() + "!");
                     break;
                 }
-                if(!defineDraw()) {
+                if(!defineDraw()) { //Проверка ничьи
                     System.out.println("Ничья!");
                     break;
                 }

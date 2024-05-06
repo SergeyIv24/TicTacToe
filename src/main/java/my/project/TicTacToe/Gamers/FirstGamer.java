@@ -1,4 +1,4 @@
-package Gamers;
+package my.project.TicTacToe.Gamers;
 
 public class FirstGamer extends Gamer {
 

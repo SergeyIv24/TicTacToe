@@ -1,7 +1,5 @@
-package Gamers;
-
-import Game.Game;
-
+package my.project.TicTacToe.Gamers;
+import my.project.TicTacToe.Game.*;
 import java.util.Arrays;
 import java.util.Random;
 

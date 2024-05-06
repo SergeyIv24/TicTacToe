@@ -1,5 +1,5 @@
-package Game;
-import Gamers.*;
+package my.project.TicTacToe.Game;
+import my.project.TicTacToe.Gamers.*;
 
 public class GamerVsComputer extends Game{
     private static boolean isLevelEasy = true;

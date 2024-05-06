@@ -1,8 +1,8 @@
-package Game;
+package my.project.TicTacToe.Game;
+import my.project.TicTacToe.Gamers.Gamer;
 
 import java.util.Scanner;
 import java.util.Random;
-import Gamers.*;
 
 public class Game {
     protected static final char[][] gameBoard = new char[7][8]; //Пустой массив игровой доски

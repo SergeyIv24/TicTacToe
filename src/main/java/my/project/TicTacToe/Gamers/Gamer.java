@@ -1,5 +1,5 @@
-package Gamers;
-import Game.*;
+package my.project.TicTacToe.Gamers;
+import my.project.TicTacToe.Game.*;
 import java.util.Objects;
 import java.util.Scanner;
 

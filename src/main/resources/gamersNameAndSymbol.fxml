@@ -6,11 +6,11 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.project.TicTacToe.GUI.controllers.namesAndSymbolsController">
    <children>
       <Label text="Введите имя игрока 1:" />
-      <TextField fx:id="firstGamerName" />
+      <TextField fx:id="firstGamerName" onAction="#defineGameSymbolsForFirst" />
       <Label fx:id="firstGamerSymbol" text="Игровой символ:" />
       <Label text="Введите имя игрока 2:" />
-      <TextField fx:id="ssecondGamerName" />
+      <TextField fx:id="secondGamerName" onAction="#defineGameSymbolsForSecond" />
       <Label fx:id="secondGamerSymbol" text="Игровой символ:" />
-      <Button fx:id="start" mnemonicParsing="false" text="Начать" />
+      <Button fx:id="start" mnemonicParsing="false" onAction="#startGame" text="Начать" />
    </children>
 </VBox>

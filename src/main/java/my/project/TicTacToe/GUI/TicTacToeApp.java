@@ -7,6 +7,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class TicTacToeApp extends Application {
     @Override
@@ -22,6 +23,7 @@ public class TicTacToeApp extends Application {
 
     public static void main(String[] args) {
         launch();
+        //System.out.println(Arrays.deepToString(new char[3][3]));
     }
 
 

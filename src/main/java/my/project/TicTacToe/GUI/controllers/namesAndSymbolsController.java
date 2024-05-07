@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import my.project.TicTacToe.Game.Game;
 import my.project.TicTacToe.Game.GameService;
 import my.project.TicTacToe.Game.GamerVsGamer;
+import my.project.TicTacToe.Gamers.Gamer;
 
 import java.io.IOException;
 
@@ -31,6 +32,10 @@ public class namesAndSymbolsController {
     @FXML
     private Button start;
 
+    protected static Gamer firstGamer;
+    protected static Gamer secondGamer;
+
+
     @FXML
     protected void defineGameSymbolsForFirst() {
         if (firstGamerName.getText().isEmpty() || firstGamerName.getText().isBlank()) {
@@ -39,8 +44,8 @@ public class namesAndSymbolsController {
         if (firstGamerSymbol.getText().contains("X") || firstGamerSymbol.getText().contains("0")) {
             return;
         }
-        firstGamerSymbol.setText(firstGamerSymbol.getText()
-                + " " + GameService.createFirstGamer(firstGamerName.getText()).getGameSymbol());
+        firstGamer = GameService.createFirstGamer(firstGamerName.getText());
+        firstGamerSymbol.setText(firstGamerSymbol.getText() + " " + firstGamer.getGameSymbol());
         firstGamerName.setDisable(true);
     }
 
@@ -52,8 +57,8 @@ public class namesAndSymbolsController {
         if (secondGamerSymbol.getText().contains("X") || secondGamerSymbol.getText().contains("0")) {
             return;
         }
-        secondGamerSymbol.setText(secondGamerSymbol.getText()
-                + " " + GameService.createSecondGamer(secondGamerName.getText()).getGameSymbol());
+        secondGamer = GameService.createSecondGamer(secondGamerName.getText());
+        secondGamerSymbol.setText(secondGamerSymbol.getText() + " " + secondGamer.getGameSymbol());
         secondGamerName.setDisable(true);
     }
 

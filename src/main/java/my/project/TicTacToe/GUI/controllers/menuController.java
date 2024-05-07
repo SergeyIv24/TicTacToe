@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import my.project.TicTacToe.Game.GameService;
 
 import java.io.IOException;
 

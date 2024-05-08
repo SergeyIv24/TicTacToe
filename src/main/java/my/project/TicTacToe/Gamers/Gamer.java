@@ -104,8 +104,8 @@ public class Gamer {
 
 
     public boolean addSymbol1(int line, int column) {
-        if ((Game.getGameBoard()[line][column] == '\u0000')
-                || (Game.getGameBoard()[line][column] == ' ')) {
+        if ((GameService.getGameBoard()[line][column] == '\u0000')
+                || (GameService.getGameBoard()[line][column] == ' ')) {
             GameService.setGameBoard(line, column, gameSymbol);
             return true;
         } else {

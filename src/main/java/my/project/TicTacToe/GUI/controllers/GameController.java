@@ -1,54 +1,25 @@
 package my.project.TicTacToe.GUI.controllers;
-
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import my.project.TicTacToe.Game.GameService;
 import my.project.TicTacToe.Game.GamerVGamer;
-import my.project.TicTacToe.Gamers.Gamer;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
-public class gameController implements Initializable {
-    //private char[][] gameBoardArr;
+public class GameController implements Initializable {
+
+    @FXML
+    Label gamerName;
 
     @FXML
     private GridPane gameBoard;
 
-    @FXML
-    private Label coord00;
-
-    @FXML
-    private Label coord01;
-
-    @FXML
-    private Label coord02;
-
-    @FXML
-    private Label coord10;
-
-    @FXML
-    private Label coord11;
-
-    @FXML
-    private Label coord12;
-
-    @FXML
-    private Label coord20;
-
-    @FXML
-    private Label coord21;
-
-    @FXML
-    private Label coord22;
-
-    private Node[][] arrGridPane = new Node[3][3];
+    private final Node[][] arrGridPane = new Node[3][3];
 
     private void fillGridArray() {
         for (Node node : gameBoard.getChildren()) {
@@ -70,7 +41,7 @@ public class gameController implements Initializable {
         while ((i != 3) && (j < arrGridPane[i].length)) {
             if (node == arrGridPane[i][j]) {
                 System.out.println(arrGridPane[i][j].getId());
-                return "" + i + j; //i - строка, j - колонка
+                return "" + i + j; //i - строка, j - колонка //todo лишний объект
             }
             if (j++ == arrGridPane[i].length - 1) {
                 i++;
@@ -86,41 +57,48 @@ public class gameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fillGridArray();
         GamerVGamer.startGame();
+        //gamerName.setText(getGamerName());
     }
 
 
 
     @FXML
-    protected void gamerCourse(MouseEvent event) {
-
-        if (whichGameSymbol().isEmpty()) {
+    protected void gamerCourse(MouseEvent event) throws IOException {
+        if (GamerVGamer.getCourses() == -1) {
             return;
         }
-        Label label = (Label) event.getSource();
-        label.setText(whichGameSymbol());
-        String nodeCoordinates = defineCoordinatesNode(label);
-        System.out.println(nodeCoordinates);
-        int line = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(0)));
-        int column = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(1)));
-        GamerVGamer.game(line, column);
+
+        if (getGameSymbol().isEmpty()) {
+            return;
+        }
+
+        gamerName.setText(" " + getGamerName());
+
+        Label label = (Label) event.getSource(); //Нажатие на объект Label
+        label.setText(getGameSymbol()); //Установка игрового символа
+        String nodeCoordinates = defineCoordinatesNode(label); //Координаты хода
+        int line = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(0))); //Строка
+        int column = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(1))); //Колонка
+
+        if (GamerVGamer.game(line, column).isPresent()) {
+            ModalWindowWinner windowWinner = new ModalWindowWinner();
+            windowWinner.winnerModalWindow();
+        }
 
     }
 
-    //Определение какой символ ставить
-    private String whichGameSymbol() {
+    //Определение текущего символа
+    private String getGameSymbol() {
         if (GamerVGamer.whichCourse().isPresent()) {
             return String.valueOf(GamerVGamer.whichCourse().get().getGameSymbol());
         }
         return "";
     }
 
+    private String getGamerName() {
+        if (GamerVGamer.whichCourse().isPresent()) {
+            return String.valueOf(GamerVGamer.whichCourse().get().getName());
+        }
+        return "";
+    }
 }
-
-
-
-/*        if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
-
-
-
-
-        }*/

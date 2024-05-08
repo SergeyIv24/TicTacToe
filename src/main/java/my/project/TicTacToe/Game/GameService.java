@@ -4,6 +4,7 @@ import my.project.TicTacToe.Gamers.FirstGamer;
 import my.project.TicTacToe.Gamers.Gamer;
 import my.project.TicTacToe.Gamers.SeckondGamer;
 
+import java.util.Optional;
 import java.util.Random;
 
 public class GameService {
@@ -12,14 +13,17 @@ public class GameService {
     protected static final char[] winX = new char[3]; //Массив для определения победителя X
     protected static final char[] win0 = new char[3]; //Массив для определения победителя 0
     protected static Random rdn = new Random();
-    static char[][] gameBoard = prepareGameBoard();
+    private static final char[][] gameBoard = prepareGameBoard();
 
     public static void setGameBoard(int line, int column, char symbol) {
         gameBoard[line][column] = symbol;
     }
 
-    //Создание игрока 1 //todo перегружен, чтобы поддерживать совместимость с консольным интерфейсом
-    //todo нужно сделать единый метод, независящий от интерфейса. Также, для второго игрока
+    public static char[][] getGameBoard() {
+        return gameBoard;
+    }
+
+    //Создание игрока 1
     public static FirstGamer createFirstGamer(String name) {
         char firstGamerSymbol = defineRandomGameSymbol();
         FirstGamer firstGamer = new FirstGamer(name, firstGamerSymbol);
@@ -27,7 +31,6 @@ public class GameService {
         return firstGamer;
     }
 
-    //todo нужен рефакторинг метода и алгоритма
     public static SeckondGamer createSecondGamer(String name) {
         char secondGamerSymbol = defineRandomGameSymbol();
         if ((arrayOfGamers[0] != null) && (secondGamerSymbol == arrayOfGamers[0].getGameSymbol())
@@ -184,6 +187,42 @@ public class GameService {
             return true;
         }
         return false;
+    }
+
+    //Возвращает объект игрока победителя.
+    private static Gamer defineWinnerGamer(char[] symbols) {
+        char winSymbol;
+        if (symbols[0] == 'X' && symbols[1] == 'X' && symbols[2] == 'X') {
+            winSymbol = 'X';
+        } else {
+            winSymbol = '0';
+        }
+        if (arrayOfGamers[0].getGameSymbol() == winSymbol) {
+            return arrayOfGamers[0];
+        }
+        return arrayOfGamers[1];
+
+    }
+
+    //Определение есть ли победитель
+    public static Optional<Gamer> findWinner() {
+        char[] checkOne = checkWinIfSymInCentralPosition(); //Поиск победителя по диагоналям
+        if (checkOne != null) { //Если массив не пуст
+            return Optional.of(defineWinnerGamer(checkOne)); //Определение конкретного игрока
+        }
+
+        char[] winnerLine = checkWinnerOnLines(); //Поиск победителя на строках
+
+        if (winnerLine != null) {
+            return Optional.of(defineWinnerGamer(winnerLine));
+        }
+
+        char[] winnerColumns = checkWinnerOnColumns(); //Поиск победителя на колонках
+        if ((winnerColumns != null)) {
+            return Optional.of(defineWinnerGamer(winnerColumns));
+        }
+        return Optional.empty();
+
     }
 
 

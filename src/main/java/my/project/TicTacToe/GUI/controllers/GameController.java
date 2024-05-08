@@ -6,21 +6,23 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import my.project.TicTacToe.Game.GamerVGamer;
-
+import my.project.TicTacToe.Gamers.Gamer;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
 
     @FXML
-    Label gamerName;
+    private Label gamerName;
 
     @FXML
     private GridPane gameBoard;
 
     private final Node[][] arrGridPane = new Node[3][3];
 
+    //Заполнить двумерный массив объектами из GridPane для поиска объектов и получения координат в таблице
     private void fillGridArray() {
         for (Node node : gameBoard.getChildren()) {
             Integer currentRowIndex = GridPane.getRowIndex(node);
@@ -51,16 +53,12 @@ public class GameController implements Initializable {
         return "";
     }
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fillGridArray();
         GamerVGamer.startGame();
-        //gamerName.setText(getGamerName());
+        gamerName.setText(GamerVGamer.getFirstCourseGamer().getName());
     }
-
-
 
     @FXML
     protected void gamerCourse(MouseEvent event) throws IOException {
@@ -72,19 +70,17 @@ public class GameController implements Initializable {
             return;
         }
 
-        gamerName.setText(" " + getGamerName());
-
         Label label = (Label) event.getSource(); //Нажатие на объект Label
         label.setText(getGameSymbol()); //Установка игрового символа
         String nodeCoordinates = defineCoordinatesNode(label); //Координаты хода
         int line = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(0))); //Строка
         int column = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(1))); //Колонка
-
-        if (GamerVGamer.game(line, column).isPresent()) {
+        Optional<Gamer> winner = GamerVGamer.game(line, column);
+        if (winner.isPresent()) {
             ModalWindowWinner windowWinner = new ModalWindowWinner();
-            windowWinner.winnerModalWindow();
+            windowWinner.winnerModalWindow(winner.get().getName());
         }
-
+        gamerName.setText(" " + getGamerName());
     }
 
     //Определение текущего символа

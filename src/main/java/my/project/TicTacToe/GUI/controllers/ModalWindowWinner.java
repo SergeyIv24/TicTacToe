@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class ModalWindowWinner {
 
-    public void winnerModalWindow() throws IOException {
+    public void winnerModalWindow(String winnerName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TicTacToeApp.class.getResource("/ModalWindow.fxml"));
         Parent rootNode = fxmlLoader.load();
         Stage modalWindow = new Stage();

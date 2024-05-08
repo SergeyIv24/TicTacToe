@@ -52,9 +52,8 @@ public class GameService {
     }
 
     //Определение кто первый ходит
-    public static Gamer defineWhoFirst() {
-        int indexOfGamer = rdn.nextInt(2);
-        return arrayOfGamers[indexOfGamer];
+    public static Gamer defineWhoFirst(int index) {
+        return arrayOfGamers[index];
     }
 
     //Определение кто первый ходит

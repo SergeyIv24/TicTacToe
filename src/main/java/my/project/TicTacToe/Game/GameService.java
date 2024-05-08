@@ -14,6 +14,10 @@ public class GameService {
     protected static Random rdn = new Random();
     static char[][] gameBoard = prepareGameBoard();
 
+    public static void setGameBoard(int line, int column, char symbol) {
+        gameBoard[line][column] = symbol;
+    }
+
     //Создание игрока 1 //todo перегружен, чтобы поддерживать совместимость с консольным интерфейсом
     //todo нужно сделать единый метод, независящий от интерфейса. Также, для второго игрока
     public static FirstGamer createFirstGamer(String name) {
@@ -56,7 +60,7 @@ public class GameService {
     }
 
     //Массив игровая доска
-    private static char[][] prepareGameBoard() {
+    public static char[][] prepareGameBoard() {
         return new char[3][3];
     }
 
@@ -171,7 +175,6 @@ public class GameService {
     //Определение есть ли победитель
     public static boolean isThereWinner() {
         char[] checkOne = checkWinIfSymInCentralPosition(); //Поиск победителя по диагоналям
-
         if (checkOne != null) {
             return true;
         }

@@ -9,6 +9,14 @@ public class GamerVGamer {
     private static Gamer oddCourses;
     private static Gamer evenCourse;
     private static final int firstCourseGamerIndex = GameService.defineWhoFirstIndex();
+    private final Gamer firstGamer = GameService.arrayOfGamers[0];
+    private final Gamer secondGamer = GameService.arrayOfGamers[1];
+    private final char[][] gameBoardArr = GameService.prepareGameBoard();
+
+    public static void startGame() {
+        courses++;
+    }
+
 
     public static short getCourses() {
         return courses;
@@ -45,11 +53,12 @@ public class GamerVGamer {
     }
 
 
-    public static void game(Gamer firstGamer, Gamer secondGamer) {
-
-
-
+    public static void game(int line, int column) {
         //Определяет чей ход и делает ход
+        if (whichCourse().isPresent()) {
+            whichCourse().get().addSymbol1(line, column);
+        }
+        GameService.isThereWinner();
         courses++;
 
 

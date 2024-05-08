@@ -168,9 +168,9 @@ public class GameService {
             }
         }
         if (countEmptyCellar == 0) { //Если количество пустых ячеек 0
-            return false; //ничья
+            return true; //ничья
         }
-        return true; //Нет ничьи
+        return false; //Нет ничьи
     }
 
 

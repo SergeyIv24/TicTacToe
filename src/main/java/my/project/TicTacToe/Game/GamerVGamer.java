@@ -63,6 +63,10 @@ public class GamerVGamer {
             courses = -1;
             return winner;
         }
+        if (!GameService.defineDraw()) {
+            courses = -1;
+            return Optional.empty();
+        }
         courses++; //При вызове метода делается ход, счетчик увеличивается
         return Optional.empty();
     }

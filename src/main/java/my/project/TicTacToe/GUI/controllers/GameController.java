@@ -18,6 +18,9 @@ public class GameController implements Initializable {
     private Label gamerName;
 
     @FXML
+    private Label currentSymbol;
+
+    @FXML
     private GridPane gameBoard;
 
     private final Node[][] arrGridPane = new Node[3][3];
@@ -58,6 +61,7 @@ public class GameController implements Initializable {
         fillGridArray();
         GamerVGamer.startGame();
         gamerName.setText(GamerVGamer.getFirstCourseGamer().getName());
+        currentSymbol.setText(String.valueOf(GamerVGamer.getFirstCourseGamer().getGameSymbol()));
     }
 
     @FXML
@@ -79,8 +83,16 @@ public class GameController implements Initializable {
         if (winner.isPresent()) {
             ModalWindowWinner windowWinner = new ModalWindowWinner();
             windowWinner.winnerModalWindow(winner.get().getName());
+            return;
         }
+        if (GamerVGamer.getCourses() == -1) {
+            ModalWindowWinner windowWinner = new ModalWindowWinner();
+            windowWinner.winnerModalWindow("Ничья");
+            return;
+        }
+
         gamerName.setText(" " + getGamerName());
+        currentSymbol.setText(" " + getGameSymbol());
     }
 
     //Определение текущего символа

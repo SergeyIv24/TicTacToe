@@ -1,5 +1,4 @@
 package my.project.TicTacToe.GUI.controllers;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -25,7 +24,7 @@ public class ModalWindowWinner  {
 
     public void setWinnerText(String text, Label textResult, Label result) {
         if (text.equalsIgnoreCase("Ничья!")) {
-            textResult.setText("Победила дружба"); //todo вынести в файл конфигурации
+            textResult.setText("Победила дружба");
             result.setText("");
         }
         textResult.setText("Победил игрок:");

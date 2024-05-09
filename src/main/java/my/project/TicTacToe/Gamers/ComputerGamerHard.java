@@ -181,7 +181,6 @@ public class ComputerGamerHard extends Gamer{
 
     }
 
-    //todo рефакторинг, во избежание повторного вызова метода
     public int selectColumn() {
         int[] coordinates = algorithms(); //Вызов алгоритма для определения колонки
         return coordinates[1];

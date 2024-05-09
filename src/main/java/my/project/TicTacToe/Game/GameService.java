@@ -1,9 +1,7 @@
 package my.project.TicTacToe.Game;
 
-import my.project.TicTacToe.Gamers.ComputerGamerEasy;
-import my.project.TicTacToe.Gamers.FirstGamer;
-import my.project.TicTacToe.Gamers.Gamer;
-import my.project.TicTacToe.Gamers.SeckondGamer;
+import my.project.TicTacToe.Gamers.*;
+
 import java.util.Optional;
 import java.util.Random;
 
@@ -31,6 +29,7 @@ public class GameService {
         return firstGamer;
     }
 
+    //Создание второго игрока
     public static Gamer createSecondGamer(String name) {
         char secondGamerSymbol = defineRandomGameSymbol();
         if ((arrayOfGamers[0] != null) && (secondGamerSymbol == arrayOfGamers[0].getGameSymbol())
@@ -54,9 +53,17 @@ public class GameService {
                 && (computerEasySymbol == gameSymbol[1])) {
             computerEasySymbol = 'X';
         }
-        ComputerGamerEasy computerGamerEasy = new ComputerGamerEasy(name, computerEasySymbol, new Random());
-        arrayOfGamers[1] = computerGamerEasy;
-        return computerGamerEasy;
+
+        Gamer computerGamer;
+
+        if (level) {
+            computerGamer = new ComputerGamerHard(name, computerEasySymbol, new Random());
+        } else {
+            computerGamer = new ComputerGamerEasy(name, computerEasySymbol, new Random());
+        }
+
+        arrayOfGamers[1] = computerGamer;
+        return computerGamer;
     }
 
     //Определение кто каким символом играет
@@ -237,7 +244,4 @@ public class GameService {
         return Optional.empty();
 
     }
-
-
-
 }

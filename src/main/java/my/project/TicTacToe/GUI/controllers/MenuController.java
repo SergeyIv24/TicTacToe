@@ -26,11 +26,6 @@ public class MenuController {
     @FXML
     private MenuItem computerHard;
 
-    private static boolean isGameAgainstComputer = false;
-
-    private static boolean isGameHard = false;
-
-
     @FXML
     protected void goNameAndSymbol() throws IOException {
         FXMLLoader loaderNextScene = new FXMLLoader(this.getClass().getResource("/gamersNameAndSymbol.fxml"));

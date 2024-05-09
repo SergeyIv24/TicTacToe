@@ -37,7 +37,6 @@ public class NamesAndSymbolsController implements Initializable {
     private static boolean isGameHard;
     protected static Gamer firstGamer;
     protected static Gamer secondGamer;
-    protected static Gamer computerGamer;
 
     public void setIsGameAgainstComputer(boolean againstComputer) {
         isGameAgainstComputer = againstComputer;
@@ -55,14 +54,8 @@ public class NamesAndSymbolsController implements Initializable {
         return isGameHard;
     }
 
-
-
-
     @FXML
     protected void defineGameSymbolsForFirst() {
-        if (firstGamerName.getText().isEmpty() || firstGamerName.getText().isBlank()) {
-            //todo throw new exception
-        }
         if (firstGamerSymbol.getText().contains("X") || firstGamerSymbol.getText().contains("0")) {
             return;
         }
@@ -71,23 +64,19 @@ public class NamesAndSymbolsController implements Initializable {
         firstGamerName.setDisable(true);
 
         if (isGameAgainstComputer) {
-            setComputerName();
-            start.setDisable(false);
+            createComputerGamer(isGameHard);
         }
     }
 
     @FXML
     protected void defineGameSymbolsForSecond() {
-        if (secondGamerName.getText().isEmpty() || secondGamerName.getText().isBlank()) {
-            //todo throw new exception
-        }
         if (secondGamerSymbol.getText().contains("X") || secondGamerSymbol.getText().contains("0")) {
             return;
         }
         secondGamer = GameService.createSecondGamer(secondGamerName.getText());
         secondGamerSymbol.setText(secondGamerSymbol.getText() + " " + secondGamer.getGameSymbol());
         secondGamerName.setDisable(true);
-        start.setDisable(false);
+
     }
 
     private void setComputerName() {
@@ -97,6 +86,12 @@ public class NamesAndSymbolsController implements Initializable {
             return;
         }
         secondGamerName.setText("Компьютер (легко)");
+    }
+
+    private void createComputerGamer(boolean isGameHard) {
+        setComputerName();
+        secondGamer = GameService.createComputerGamer(isGameHard, "Компьютер");
+        start.setDisable(false);
     }
 
     @FXML

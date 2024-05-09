@@ -65,10 +65,9 @@ public class GameController implements Initializable {
 
     @FXML
     protected void gamerCourse(MouseEvent event) {
-        if (GamerVGamer.getCourses() == -1) {
+        if (GamerVGamer.getCourses() == -1) { //Игра не начала или закончена
             return;
         }
-
         if (getGameSymbol().isEmpty()) {
             return;
         }
@@ -76,9 +75,28 @@ public class GameController implements Initializable {
         Label label = (Label) event.getSource(); //Нажатие на объект Label
         label.setText(getGameSymbol()); //Установка игрового символа
         String nodeCoordinates = defineCoordinatesNode(label); //Координаты хода
+
+        //todo  метод реал геймер
         int line = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(0))); //Строка
         int column = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(1))); //Колонка
+
         Optional<Gamer> winner = GamerVGamer.game(line, column);
+        defineWinner(winner);
+
+
+        //Переключение имени и символа
+        switchNameAndSymbol(getGamerName(), getGameSymbol());
+    }
+
+    private void realGamerCourses() {
+
+    }
+
+    private void computerCourses() {
+
+    }
+
+    private void defineWinner(Optional<Gamer> winner) {
         if (winner.isPresent()) {
             ModalWindowWinner windowWinner = new ModalWindowWinner();
             windowWinner.winnerModalWindow(winner.get().getName());
@@ -87,11 +105,13 @@ public class GameController implements Initializable {
         if (GamerVGamer.getCourses() == -1) {
             ModalWindowWinner windowWinner = new ModalWindowWinner();
             windowWinner.winnerModalWindow("Ничья!");
-            return;
         }
+    }
 
-        gamerName.setText(" " + getGamerName());
-        currentSymbol.setText(" " + getGameSymbol());
+
+    private void switchNameAndSymbol(String name, String symbol) {
+        gamerName.setText(" " + name);
+        currentSymbol.setText(" " + symbol);
     }
 
     //Определение текущего символа

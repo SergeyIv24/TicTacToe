@@ -7,7 +7,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import my.project.TicTacToe.Game.GamerVGamer;
 import my.project.TicTacToe.Gamers.Gamer;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -65,7 +64,7 @@ public class GameController implements Initializable {
     }
 
     @FXML
-    protected void gamerCourse(MouseEvent event) throws IOException {
+    protected void gamerCourse(MouseEvent event) {
         if (GamerVGamer.getCourses() == -1) {
             return;
         }
@@ -87,7 +86,7 @@ public class GameController implements Initializable {
         }
         if (GamerVGamer.getCourses() == -1) {
             ModalWindowWinner windowWinner = new ModalWindowWinner();
-            windowWinner.winnerModalWindow("Ничья");
+            windowWinner.winnerModalWindow("Ничья!");
             return;
         }
 

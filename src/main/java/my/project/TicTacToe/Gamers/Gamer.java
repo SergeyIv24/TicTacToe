@@ -10,7 +10,6 @@ public class Gamer {
     public Gamer(String name, char gameSymbol) {
         this.name = name;
         this.gameSymbol = gameSymbol;
-
     }
 
     public char getGameSymbol() {
@@ -21,11 +20,8 @@ public class Gamer {
         return name;
     }
 
-
-
-
-
     //Выбор колонки для хода
+    @Deprecated //todo перенести
     public int selectColumn() {
         System.out.println("Чтобы сделать ход, укажите ячейку на игровом поле.");
         int indColumn;
@@ -39,27 +35,23 @@ public class Gamer {
             }
         }
         //Соответствие отображаемых колонок доски с индексами элементов
-        switch (indColumn) {
-            case 1:
-                indColumn = 2;
-                break;
-            case 2:
-                indColumn = 4;
-                break;
-            case 3:
-                indColumn = 6;
-                break;
-            default:
+        //Рекурсия, если колонки не существует
+        indColumn = switch (indColumn) {
+            case 1 -> 2;
+            case 2 -> 4;
+            case 3 -> 6;
+            default -> {
                 System.out.println("Такой колонки нет. Доступные колонки: 1, 2, 3");
-                indColumn = selectColumn(); //Рекурсия, если колонки не существует
-                break;
-        }
+                yield selectColumn();
+            }
+        };
 
         return indColumn;
     }
 
 
     //Выбор линии для хода
+    @Deprecated //todo перенести
     public int selectLine() {
         System.out.println("Укажите строку: ");
         Scanner scanner = new Scanner(System.in);
@@ -82,7 +74,7 @@ public class Gamer {
         return indLine;
     }
 
-    public boolean addSymbol(int column, int line) {
+/*    public boolean addSymbol(int column, int line) {
         if (Game.getGameBoard()[line][column] == ' ') {
             Game.setGameBoard(line, column, gameSymbol);
             return true;
@@ -90,20 +82,9 @@ public class Gamer {
             System.out.println("Позиция занята");
             return false;
         }
-    }
+    }*/
 
-
-
-
-
-
-
-
-
-
-
-
-    public boolean addSymbol1(int line, int column) {
+    public boolean addSymbol(int line, int column) {
         if ((GameService.getGameBoard()[line][column] == '\u0000')
                 || (GameService.getGameBoard()[line][column] == ' ')) {
             GameService.setGameBoard(line, column, gameSymbol);
@@ -112,7 +93,6 @@ public class Gamer {
             return false;
         }
     }
-
 
     @Override
     public boolean equals(Object object) {
@@ -123,6 +103,4 @@ public class Gamer {
         return Objects.equals(name, anotherGamer.name) &&
                 Objects.equals(gameSymbol, anotherGamer.gameSymbol);
     }
-
-
 }

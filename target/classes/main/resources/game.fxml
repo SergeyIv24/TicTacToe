@@ -33,15 +33,15 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
          <children>
-            <Label fx:id="coord00" onMouseClicked="#gamerCourse" prefHeight="65.0" prefWidth="191.0" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label fx:id="coord01" onMouseClicked="#gamerCourse" prefHeight="65.0" prefWidth="191.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Label fx:id="coord02" onMouseClicked="#gamerCourse" prefHeight="63.0" prefWidth="187.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-            <Label fx:id="coord12" onMouseClicked="#gamerCourse" prefHeight="67.0" prefWidth="187.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label fx:id="coord10" onMouseClicked="#gamerCourse" prefHeight="61.0" prefWidth="187.0" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label fx:id="coord11" onMouseClicked="#gamerCourse" prefHeight="62.0" prefWidth="186.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="coord21" onMouseClicked="#gamerCourse" prefHeight="59.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="coord20" onMouseClicked="#gamerCourse" prefHeight="62.0" prefWidth="186.0" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Label fx:id="coord22" onMouseClicked="#gamerCourse" prefHeight="69.0" prefWidth="204.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="coord00" onMouseClicked="#gamerCourse" prefHeight="65.0" prefWidth="191.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label fx:id="coord01" onMouseClicked="#gamerCourse" prefHeight="65.0" prefWidth="191.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label fx:id="coord02" onMouseClicked="#gamerCourse" prefHeight="63.0" prefWidth="187.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <Label fx:id="coord12" onMouseClicked="#gamerCourse" prefHeight="67.0" prefWidth="187.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="coord10" onMouseClicked="#gamerCourse" prefHeight="61.0" prefWidth="187.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label fx:id="coord11" onMouseClicked="#gamerCourse" prefHeight="62.0" prefWidth="186.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="coord21" onMouseClicked="#gamerCourse" prefHeight="59.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="coord20" onMouseClicked="#gamerCourse" prefHeight="62.0" prefWidth="186.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label fx:id="coord22" onMouseClicked="#gamerCourse" prefHeight="69.0" prefWidth="204.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Button fx:id="exit" mnemonicParsing="false" text="Выход" />

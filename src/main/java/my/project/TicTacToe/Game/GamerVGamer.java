@@ -56,7 +56,7 @@ public class GamerVGamer {
     public static Optional<Gamer> game(int line, int column) {
         //Определение чей ход.
         if (whichCourse().isPresent()) {
-            whichCourse().get().addSymbol1(line, column); //Выполнение хода
+            whichCourse().get().addSymbol(line, column); //Выполнение хода
         }
         Optional<Gamer> winner = GameService.findWinner();
         if (winner.isPresent()) { //Определение есть ли победитель

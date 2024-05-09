@@ -1,5 +1,6 @@
 package my.project.TicTacToe.Game;
 
+import my.project.TicTacToe.Gamers.ComputerGamerEasy;
 import my.project.TicTacToe.Gamers.FirstGamer;
 import my.project.TicTacToe.Gamers.Gamer;
 import my.project.TicTacToe.Gamers.SeckondGamer;
@@ -24,14 +25,14 @@ public class GameService {
     }
 
     //Создание игрока 1
-    public static FirstGamer createFirstGamer(String name) {
+    public static Gamer createFirstGamer(String name) {
         char firstGamerSymbol = defineRandomGameSymbol();
         FirstGamer firstGamer = new FirstGamer(name, firstGamerSymbol);
         arrayOfGamers[0] = firstGamer;
         return firstGamer;
     }
 
-    public static SeckondGamer createSecondGamer(String name) {
+    public static Gamer createSecondGamer(String name) {
         char secondGamerSymbol = defineRandomGameSymbol();
         if ((arrayOfGamers[0] != null) && (secondGamerSymbol == arrayOfGamers[0].getGameSymbol())
                 && (secondGamerSymbol == gameSymbol[0])) {
@@ -43,6 +44,20 @@ public class GameService {
         SeckondGamer seckondGamer = new SeckondGamer(name, secondGamerSymbol);
         arrayOfGamers[1] = seckondGamer;
         return seckondGamer;
+    }
+
+    public static Gamer createComputerGamer(boolean level, String name) {
+        char computerEasySymbol = defineRandomGameSymbol();
+        if ((arrayOfGamers[0] != null) && (computerEasySymbol == arrayOfGamers[0].getGameSymbol())
+                && (computerEasySymbol == gameSymbol[0])) {
+            computerEasySymbol = '0';
+        } else if ((arrayOfGamers[0] != null) && (computerEasySymbol == arrayOfGamers[0].getGameSymbol())
+                && (computerEasySymbol == gameSymbol[1])) {
+            computerEasySymbol = 'X';
+        }
+        ComputerGamerEasy computerGamerEasy = new ComputerGamerEasy(name, computerEasySymbol, new Random());
+        arrayOfGamers[1] = computerGamerEasy;
+        return computerGamerEasy;
     }
 
     //Определение кто каким символом играет

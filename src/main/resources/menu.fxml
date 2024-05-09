@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.project.TicTacToe.GUI.controllers.MenuController">
+   <children>
+      <Label text="Выберите игроой режим" />
+      <Button fx:id="gamerVsGamer" mnemonicParsing="false" onAction="#goNameAndSymbol" text="Игра против игрока" />
+      <MenuButton fx:id="gamerVsComputer" mnemonicParsing="false" text="Игра против компьютера">
+        <items>
+          <MenuItem fx:id="computerEasy" mnemonicParsing="false" onAction="#goNameAndSymbolCompEasy" text="Легко" />
+          <MenuItem fx:id="computerHard" mnemonicParsing="false" text="Сложно" onAction="#goNameAndSymbolCompHard" />
+        </items>
+      </MenuButton>
+   </children>
+</VBox>

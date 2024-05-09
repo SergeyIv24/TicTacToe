@@ -14,19 +14,13 @@ public class ComputerGamerEasy extends Gamer {
     @Override
     public int selectColumn() { //Определение колонки для хода
         int columnForComp = rdn.nextInt(4);
-
         //Соответствие отображаемых колонок доски с индексами элементов
-        switch (columnForComp) {
-            case 1:
-                columnForComp = 2;
-                break;
-            case 2:
-                columnForComp = 4;
-                break;
-            case 3:
-                columnForComp = 6;
-                break;
-        }
+        columnForComp = switch (columnForComp) {
+            case 1 -> 2;
+            case 2 -> 4;
+            case 3 -> 6;
+            default -> columnForComp;
+        };
         return columnForComp;
     }
 
@@ -34,17 +28,12 @@ public class ComputerGamerEasy extends Gamer {
     public int selectLine() { //Определение строки для хода
         int lineForComp = rdn.nextInt(4);
 
-        switch (lineForComp) {
-            case 1:
-                lineForComp = 2;
-                break;
-            case 2:
-                lineForComp = 4;
-                break;
-            case 3:
-                lineForComp = 6;
-                break;
-        }
+        lineForComp = switch (lineForComp) {
+            case 1 -> 2;
+            case 2 -> 4;
+            case 3 -> 6;
+            default -> lineForComp;
+        };
         return lineForComp;
     }
 

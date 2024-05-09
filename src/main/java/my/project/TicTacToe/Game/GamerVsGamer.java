@@ -20,6 +20,9 @@ public class GamerVsGamer extends Game {
         return firstGamer;
     }
 
+
+
+
     //Создание игрока 2
     public SeckondGamer createSecondGamer() {
         System.out.println("Введите Ваше имя: ");

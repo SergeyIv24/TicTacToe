@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.project.TicTacToe.GUI.controllers.NamesAndSymbolsController">
+   <children>
+      <Label text="Введите имя игрока 1:" />
+      <TextField fx:id="firstGamerName" onAction="#defineGameSymbolsForFirst" />
+      <Label fx:id="firstGamerSymbol" text="Игровой символ:" />
+      <Label text="Введите имя игрока 2:" />
+      <TextField fx:id="secondGamerName" onAction="#defineGameSymbolsForSecond" />
+      <Label fx:id="secondGamerSymbol" text="Игровой символ:" />
+      <Button fx:id="start" mnemonicParsing="false" onAction="#startGame" text="Начать" />
+   </children>
+</VBox>

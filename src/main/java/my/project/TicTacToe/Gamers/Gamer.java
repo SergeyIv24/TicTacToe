@@ -10,7 +10,6 @@ public class Gamer {
     public Gamer(String name, char gameSymbol) {
         this.name = name;
         this.gameSymbol = gameSymbol;
-
     }
 
     public char getGameSymbol() {
@@ -22,6 +21,7 @@ public class Gamer {
     }
 
     //Выбор колонки для хода
+    @Deprecated //todo перенести
     public int selectColumn() {
         System.out.println("Чтобы сделать ход, укажите ячейку на игровом поле.");
         int indColumn;
@@ -35,27 +35,23 @@ public class Gamer {
             }
         }
         //Соответствие отображаемых колонок доски с индексами элементов
-        switch (indColumn) {
-            case 1:
-                indColumn = 2;
-                break;
-            case 2:
-                indColumn = 4;
-                break;
-            case 3:
-                indColumn = 6;
-                break;
-            default:
+        //Рекурсия, если колонки не существует
+        indColumn = switch (indColumn) {
+            case 1 -> 2;
+            case 2 -> 4;
+            case 3 -> 6;
+            default -> {
                 System.out.println("Такой колонки нет. Доступные колонки: 1, 2, 3");
-                indColumn = selectColumn(); //Рекурсия, если колонки не существует
-                break;
-        }
+                yield selectColumn();
+            }
+        };
 
         return indColumn;
     }
 
 
     //Выбор линии для хода
+    @Deprecated //todo перенести
     public int selectLine() {
         System.out.println("Укажите строку: ");
         Scanner scanner = new Scanner(System.in);
@@ -65,25 +61,20 @@ public class Gamer {
         char columnCh = lineToChArr[0];
         columnCh = Character.toUpperCase(columnCh);
         //Соответствие отображаемых колонок доски с индексами элементов
-        switch (columnCh) {
-            case 'A':
-                indLine = 2;
-                break;
-            case 'B':
-                indLine = 4;
-                break;
-            case 'C':
-                indLine = 6;
-                break;
-            default:
+        //Рекурсия, если строки не существует
+        indLine = switch (columnCh) {
+            case 'A' -> 2;
+            case 'B' -> 4;
+            case 'C' -> 6;
+            default -> {
                 System.out.println("Такой строки нет. Доступные строки: A, B, C");
-                indLine = selectLine(); //Рекурсия, если строки не существует
-                break;
-        }
+                yield selectLine();
+            }
+        };
         return indLine;
     }
 
-    public boolean addSymbol(int column, int line) {
+/*    public boolean addSymbol(int column, int line) {
         if (Game.getGameBoard()[line][column] == ' ') {
             Game.setGameBoard(line, column, gameSymbol);
             return true;
@@ -91,7 +82,16 @@ public class Gamer {
             System.out.println("Позиция занята");
             return false;
         }
+    }*/
 
+    public boolean addSymbol(int line, int column) {
+        if ((GameService.getGameBoard()[line][column] == '\u0000')
+                || (GameService.getGameBoard()[line][column] == ' ')) {
+            GameService.setGameBoard(line, column, gameSymbol);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -103,6 +103,4 @@ public class Gamer {
         return Objects.equals(name, anotherGamer.name) &&
                 Objects.equals(gameSymbol, anotherGamer.gameSymbol);
     }
-
-
 }

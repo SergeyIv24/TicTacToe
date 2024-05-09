@@ -1,3 +1,4 @@
+/*
 package my.project.TicTacToe.consoleGUI;//Утилитарный класс для запуска нужного режима игры
 import my.project.TicTacToe.Game.GamerVsComputer;
 import my.project.TicTacToe.Game.GamerVsGamer;
@@ -40,3 +41,4 @@ public class GameManager {
         }
     }
 }
+*/

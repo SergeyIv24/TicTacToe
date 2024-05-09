@@ -11,36 +11,23 @@ public class ComputerGamerEasy extends Gamer {
         this.rdn = rdn;
     }
 
-    @Override
-    public int selectColumn() { //Определение колонки для хода
-        int columnForComp = rdn.nextInt(4);
-        //Соответствие отображаемых колонок доски с индексами элементов
-        columnForComp = switch (columnForComp) {
-            case 1 -> 2;
-            case 2 -> 4;
-            case 3 -> 6;
-            default -> columnForComp;
-        };
-        return columnForComp;
+    private int selectColumn() { //Определение колонки для хода
+        return rdn.nextInt(4);
     }
 
-    @Override
-    public int selectLine() { //Определение строки для хода
-        int lineForComp = rdn.nextInt(4);
-
-        lineForComp = switch (lineForComp) {
-            case 1 -> 2;
-            case 2 -> 4;
-            case 3 -> 6;
-            default -> lineForComp;
-        };
-        return lineForComp;
+    private int selectLine() { //Определение строки для хода
+        return rdn.nextInt(4);
     }
 
     @Override
     public boolean addSymbol(int column, int line) { //Метод добавления хода на доску
-        if (Game.getGameBoard()[line][column] == ' ') {
-            Game.setGameBoard(line, column, gameSymbol);
+        if (column == -1) {
+            column = selectColumn();
+            line = selectLine();
+        }
+
+        if (GameService.getGameBoard()[line][column] == ' ') {
+            GameService.setGameBoard(line, column, gameSymbol);
             return true;
         } else {
             selectColumn();
@@ -48,5 +35,4 @@ public class ComputerGamerEasy extends Gamer {
             return false;
         }
     }
-
 }

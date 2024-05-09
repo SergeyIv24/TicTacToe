@@ -4,7 +4,6 @@ import my.project.TicTacToe.Gamers.ComputerGamerEasy;
 import my.project.TicTacToe.Gamers.FirstGamer;
 import my.project.TicTacToe.Gamers.Gamer;
 import my.project.TicTacToe.Gamers.SeckondGamer;
-
 import java.util.Optional;
 import java.util.Random;
 

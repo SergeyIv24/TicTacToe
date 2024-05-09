@@ -31,18 +31,18 @@ public class ComputerGamerHard extends Gamer{
     }
 
     //Предотвращает победу противника, если у игрока есть выигрышная комбинация. Поиск по строкам массива
-    //Например, когда на одной линии 00..
+    //Например, когда на одной линии 00...
     public int[] preventVictoryOfEnemyOnLines() {
         int[] coordinatesGap = new int[2]; //Массив для хранения координат пустой ячейки, куда нужно поставить символ
-        for (int i = 2; i < Game.getGameBoard().length; i = i + 2) {
+        for (int i = 2; i < GameService.getGameBoard().length; i = i + 2) {
             boolean isThereEmptyCellar = false; //Если есть пустая ячейка
             byte countOfSymbol = 0; //Выигрышных символа противника должно быть 2
-            for (int j = 2; j < Game.getGameBoard()[i].length; j = j + 2) {
+            for (int j = 2; j < GameService.getGameBoard()[i].length; j = j + 2) {
                 //Если это не свой же символ и не пустой.
-                if ((Game.getGameBoard()[i][j] != gameSymbol) && (Game.getGameBoard()[i][j] != ' ')) {
+                if ((GameService.getGameBoard()[i][j] != gameSymbol) && (GameService.getGameBoard()[i][j] != ' ')) {
                     countOfSymbol += 1; //подсчет ячеек
                 }
-                if (Game.getGameBoard()[i][j] == ' ') { // Если встретил пустую ячейку
+                if (GameService.getGameBoard()[i][j] == ' ') { // Если встретил пустую ячейку
                     coordinatesGap[0] = i; //Запись координат пустой ячейки
                     coordinatesGap[1] = j; //Запись координат пустой ячейки
                     isThereEmptyCellar = true;
@@ -58,14 +58,14 @@ public class ComputerGamerHard extends Gamer{
     //Предотвращает победу противника, если у игрока есть выигрышная комбинация. Поиск по столбцам массива
     public int[] preventVictoryOfEnemyOnColumns() {
         int[] coordinatesGap = new int[2]; //Массив для хранения координат пустой ячейки, куда нужно поставить символ
-        for (int i = 2; i < Game.getGameBoard().length; i = i + 2) {
+        for (int i = 2; i < GameService.getGameBoard().length; i = i + 2) {
             boolean isThereEmptyCellar = false; //Если есть пустая ячейка
             byte countOfSymbol = 0; //Выигрышных символа противника должно быть 2
-            for (int j = 2; j < Game.getGameBoard()[i].length; j = j + 2) {
-                if ((Game.getGameBoard()[j][i] != gameSymbol) && (Game.getGameBoard()[j][i] != ' ')) {
+            for (int j = 2; j < GameService.getGameBoard()[i].length; j = j + 2) {
+                if ((GameService.getGameBoard()[j][i] != gameSymbol) && (GameService.getGameBoard()[j][i] != ' ')) {
                     countOfSymbol += 1; //подсчет ячеек
                 }
-                if (Game.getGameBoard()[j][i] == ' ') {
+                if (GameService.getGameBoard()[j][i] == ' ') {
                     coordinatesGap[0] = j; //Запись координат пустой ячейки
                     coordinatesGap[1] = i; //Запись координат пустой ячейки
                     isThereEmptyCellar = true;
@@ -82,15 +82,15 @@ public class ComputerGamerHard extends Gamer{
     //Поиск собственных выигрышных комбинаций по строкам
     public int[] searchVictoryCombinationsOnLines() {
         int[] coordinatesGap = new int[2]; //Массив для хранения координат пустой ячейки, куда надо ходить
-        for (int i = 2; i < Game.getGameBoard().length; i = i + 2) {
+        for (int i = 2; i < GameService.getGameBoard().length; i = i + 2) {
             boolean isThereEmptyCellar = false; //Наличие пустой ячейки
             byte countOfSymbol = 0;
-            for (int j = 2; j < Game.getGameBoard()[i].length; j = j + 2) {
+            for (int j = 2; j < GameService.getGameBoard()[i].length; j = j + 2) {
                 //Если свой же символ и если не пустая ячейка
-                if ((Game.getGameBoard()[i][j] == gameSymbol) && (Game.getGameBoard()[i][j] != ' ')) {
+                if ((GameService.getGameBoard()[i][j] == gameSymbol) && (GameService.getGameBoard()[i][j] != ' ')) {
                     countOfSymbol += 1; //Подсчет количества ячеек подряд
                 }
-                if (Game.getGameBoard()[i][j] == ' ') {
+                if (GameService.getGameBoard()[i][j] == ' ') {
                     coordinatesGap[0] = i; //Запись координат
                     coordinatesGap[1] = j; //Запись координат
                     isThereEmptyCellar = true;
@@ -106,14 +106,14 @@ public class ComputerGamerHard extends Gamer{
     //Поиск собственных выигрышных комбинаций по столбцам
     public int[] searchVictoryCombinationsOnColumns() {
         int[] coordinatesGap = new int[2]; //Массив для хранения координат пустой ячейки, куда надо ходить
-        for (int i = 2; i < Game.getGameBoard().length; i = i + 2) {
+        for (int i = 2; i < GameService.getGameBoard().length; i = i + 2) {
             boolean isThereEmptyCellar = false;
             byte countOfSymbol = 0;
-            for (int j = 2; j < Game.getGameBoard()[i].length; j = j + 2) {
-                if ((Game.getGameBoard()[j][i] == gameSymbol) && (Game.getGameBoard()[j][i] != ' ')) {
+            for (int j = 2; j < GameService.getGameBoard()[i].length; j = j + 2) {
+                if ((GameService.getGameBoard()[j][i] == gameSymbol) && (GameService.getGameBoard()[j][i] != ' ')) {
                     countOfSymbol += 1; //Подсчет количества ячеек подряд
                 }
-                if (Game.getGameBoard()[j][i] == ' ') {
+                if (GameService.getGameBoard()[j][i] == ' ') {
                     coordinatesGap[0] = j; //Запись координат
                     coordinatesGap[1] = i; //Запись координат
                     isThereEmptyCellar = true;
@@ -130,8 +130,8 @@ public class ComputerGamerHard extends Gamer{
 
     //Алгоритм хода компьютера
     public int[] algorithms() {
-        boolean isThereSymbolInCorners = ((Game.getGameBoard()[2][2] != ' ') && (Game.getGameBoard()[2][6] != ' ')
-                && (Game.getGameBoard()[6][2] != ' ') && (Game.getGameBoard()[6][6] != ' ')); //Если нет диагональных ячеек
+        boolean isThereSymbolInCorners = ((GameService.getGameBoard()[2][2] != ' ') && (GameService.getGameBoard()[2][6] != ' ')
+                && (GameService.getGameBoard()[6][2] != ' ') && (GameService.getGameBoard()[6][6] != ' ')); //Если нет диагональных ячеек
         int[] arrOfIndexes = new int[2]; //Строка, столбец для добавления символа
 
         //Проверка, что противник не побеждает
@@ -146,7 +146,7 @@ public class ComputerGamerHard extends Gamer{
         }
 
         // Если центр пуст, всегда ходить в него
-        if (Game.getGameBoard()[4][4] == ' ') {
+        if (GameService.getGameBoard()[4][4] == ' ') {
             arrOfIndexes[0] = 4; //Координаты центра
             arrOfIndexes[1] = 4; //Координаты центра
             return arrOfIndexes;
@@ -162,9 +162,9 @@ public class ComputerGamerHard extends Gamer{
             } else if (!Arrays.equals(checkWinGapsOnColumns, checkArr)) {
                 return checkWinGapsOnColumns; //Если массив не пустой, ставить по его координатам
             } else { //Во всех остальных случаях, поиск любой пустой ячейки и ход в нее
-                for (int i = 2; i < Game.getGameBoard().length; i = i + 2) {
-                    for (int j = 2; j < Game.getGameBoard()[i].length; j = j + 1) {
-                        if (Game.getGameBoard()[i][j] == ' ') {
+                for (int i = 2; i < GameService.getGameBoard().length; i = i + 2) {
+                    for (int j = 2; j < GameService.getGameBoard()[i].length; j = j + 1) {
+                        if (GameService.getGameBoard()[i][j] == ' ') {
                             arrOfIndexes[0] = i;
                             arrOfIndexes[1] = j;
                             return arrOfIndexes;
@@ -181,14 +181,12 @@ public class ComputerGamerHard extends Gamer{
 
     }
 
-    //Рекомендуется рефакторинг, во избежание повторного вызова метода
-    @Override
+    //todo рефакторинг, во избежание повторного вызова метода
     public int selectColumn() {
         int[] coordinates = algorithms(); //Вызов алгоритма для определения колонки
         return coordinates[1];
     }
 
-    @Override
     public int selectLine() {
         int[] coordinates = algorithms(); // Вызов алгоритма для определения координат строки
         return coordinates[0];
@@ -197,8 +195,12 @@ public class ComputerGamerHard extends Gamer{
     //Делает ход, ставит символ
     @Override
     public boolean addSymbol(int line, int column) {
-        if (Game.getGameBoard()[line][column] == ' ') {
-            Game.setGameBoard(line, column, gameSymbol);
+        if (column == -1) {
+            column = selectColumn();
+            line = selectLine();
+        }
+        if (GameService.getGameBoard()[line][column] == ' ') {
+            GameService.setGameBoard(line, column, gameSymbol);
             return true;
         } else { //Ход пока не поставит в пустую ячейку
             selectColumn();

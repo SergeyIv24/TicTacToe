@@ -5,10 +5,19 @@ import java.util.Objects;
 public class Gamer {
     protected String name;
     protected char gameSymbol;
+    protected boolean computer = false;
 
     public Gamer(String name, char gameSymbol) {
         this.name = name;
         this.gameSymbol = gameSymbol;
+    }
+
+    public void setComputer(boolean isItComputer) {
+        computer = isItComputer;
+    }
+
+    public boolean getComputer() {
+        return computer;
     }
 
     public char getGameSymbol() {
@@ -20,13 +29,15 @@ public class Gamer {
     }
 
     //Добавление игрового символа на поле
-    public boolean addSymbol(int line, int column) {
+    public String addSymbol(int line, int column) {
         if ((GameService.getGameBoard()[line][column] == '\u0000')
                 || (GameService.getGameBoard()[line][column] == ' ')) {
             GameService.setGameBoard(line, column, gameSymbol);
-            return true;
+            //return true;
+            return "" + line + column;
         } else {
-            return false;
+            //return false;
+            return "";
         }
     }
 

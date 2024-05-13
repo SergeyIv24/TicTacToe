@@ -24,6 +24,25 @@ public class GameController implements Initializable {
 
     private final Node[][] arrGridPane = new Node[3][3];
 
+    private boolean isGameAgainstComputer = false;
+    private boolean isGameHard = false;
+
+    public void setIsGameAgainstComputer(boolean againstComputer) {
+        isGameAgainstComputer = againstComputer;
+    }
+
+    public boolean getIsGameAgainstComputer() {
+        return isGameAgainstComputer;
+    }
+
+    public void setIsGameHard(boolean hard) {
+        isGameHard = hard;
+    }
+
+    public boolean getIsGameHard() {
+        return isGameHard;
+    }
+
     //Заполнить двумерный массив объектами из GridPane для поиска объектов и получения координат в таблице
     private void fillGridArray() {
         for (Node node : gameBoard.getChildren()) {
@@ -55,12 +74,27 @@ public class GameController implements Initializable {
         return "";
     }
 
+    private Node findLabelByCoordinates(int line, int column) {
+        try {
+            return arrGridPane[line][column];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fillGridArray();
-        GamerVGamer.startGame();
         gamerName.setText(GamerVGamer.getFirstCourseGamer().getName());
         currentSymbol.setText(String.valueOf(GamerVGamer.getFirstCourseGamer().getGameSymbol()));
+        if (gamerName.getText().contains("Компьютер")) {
+            GamerVGamer.startGame();
+            computerCourses();
+            switchNameAndSymbol(getGamerName(), getGameSymbol());
+        } else {
+            GamerVGamer.startGame();
+        }
+
     }
 
     @FXML
@@ -73,26 +107,40 @@ public class GameController implements Initializable {
         }
 
         Label label = (Label) event.getSource(); //Нажатие на объект Label
-        label.setText(getGameSymbol()); //Установка игрового символа
-        String nodeCoordinates = defineCoordinatesNode(label); //Координаты хода
-
-        //todo  метод реал геймер
-        int line = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(0))); //Строка
-        int column = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(1))); //Колонка
-
-        Optional<Gamer> winner = GamerVGamer.game(line, column);
-        defineWinner(winner);
-
+        realGamerCourses(label);
+        GamerVGamer.increaseCourse();
 
         //Переключение имени и символа
         switchNameAndSymbol(getGamerName(), getGameSymbol());
+        if (isItComputerCourse()) {
+            computerCourses();
+            switchNameAndSymbol(getGamerName(), getGameSymbol());
+        }
     }
 
-    private void realGamerCourses() {
-
+    private void realGamerCourses(Label label) {
+        label.setText(getGameSymbol()); //Установка игрового символа
+        String nodeCoordinates = defineCoordinatesNode(label); //Координаты хода
+        int line = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(0))); //Строка
+        int column = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(1))); //Колонка
+        Optional<Gamer> winner = GamerVGamer.game(line, column);
+        defineWinner(winner);
     }
 
     private void computerCourses() {
+        Optional<Gamer> winner = GamerVGamer.game(-1, 0);
+        setComputerCourseOnBoard();
+        defineWinner(winner);
+    }
+
+    //todo принимает координаты, ставит ход на доску
+    private void setComputerCourseOnBoard() {
+        String coordinates = GamerVGamer.getCurrentCourseCoordinates();
+        int line = Integer.parseInt(String.valueOf(coordinates.charAt(0))); //Строка
+        int column = Integer.parseInt(String.valueOf(coordinates.charAt(1))); //Колонка
+        Label label =  (Label) findLabelByCoordinates(line, column);
+        label.setText(getGameSymbol());
+        GamerVGamer.increaseCourse();
 
     }
 
@@ -127,5 +175,11 @@ public class GameController implements Initializable {
             return String.valueOf(GamerVGamer.whichCourse().get().getName());
         }
         return "";
+    }
+
+    private boolean isItComputerCourse() {
+        return isGameAgainstComputer;
+
+
     }
 }

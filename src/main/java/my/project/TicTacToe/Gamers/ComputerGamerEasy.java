@@ -12,27 +12,37 @@ public class ComputerGamerEasy extends Gamer {
     }
 
     private int selectColumn() { //Определение колонки для хода
-        return rdn.nextInt(4);
+        return rdn.nextInt(3);
     }
 
     private int selectLine() { //Определение строки для хода
-        return rdn.nextInt(4);
+        return rdn.nextInt(3);
     }
 
     @Override
-    public boolean addSymbol(int column, int line) { //Метод добавления хода на доску
-        if (column == -1) {
+    public String addSymbol(int column, int line) { //Метод добавления хода на доску
+        column = selectColumn();
+        line = selectLine();
+        GameService.setGameBoard(line, column, gameSymbol);
+        return "" + line + column;
+
+
+
+/*        if (column == -1) {
             column = selectColumn();
             line = selectLine();
-        }
-
-        if (GameService.getGameBoard()[line][column] == ' ') {
+        }*/
+/*        if (GameService.getGameBoard()[line][column] == ' ') {
             GameService.setGameBoard(line, column, gameSymbol);
-            return true;
-        } else {
-            selectColumn();
-            selectLine();
-            return false;
-        }
+            //return true;
+            return "" + line + column;*/
+        //} else {
+/*            column = selectColumn();
+            line = selectLine();
+            GameService.setGameBoard(line, column, gameSymbol);
+            return "" + line + column;*/
+            //return false;
+
+        //}
     }
 }

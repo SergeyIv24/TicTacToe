@@ -9,13 +9,22 @@ public class GamerVGamer {
     private static Gamer evenCourse; // Игрок, который ходит на четные ходы (второй)
     private static final int firstCourseGamerIndex = GameService.defineWhoFirstIndex(); //Определение первого хода
     private static final Gamer firstCourseGamer = GameService.defineWhoFirst(firstCourseGamerIndex);
+    private static String currentCourseCoordinates;
 
     public static Gamer getFirstCourseGamer() {
         return firstCourseGamer;
     }
 
+    public static String getCurrentCourseCoordinates() {
+        return currentCourseCoordinates;
+    }
+
     //При старте игры счетчик ходов 0
     public static void startGame() {
+        courses++;
+    }
+
+    public static void increaseCourse() {
         courses++;
     }
 
@@ -56,7 +65,7 @@ public class GamerVGamer {
     public static Optional<Gamer> game(int line, int column) {
         //Определение чей ход.
         if (whichCourse().isPresent()) {
-            whichCourse().get().addSymbol(line, column); //Выполнение хода
+            currentCourseCoordinates = whichCourse().get().addSymbol(line, column); //Выполнение хода
         }
         Optional<Gamer> winner = GameService.findWinner();
         if (winner.isPresent()) { //Определение есть ли победитель
@@ -67,7 +76,7 @@ public class GamerVGamer {
             courses = -1;
             return Optional.empty();
         }
-        courses++; //При вызове метода делается ход, счетчик увеличивается
+        //courses++; //При вызове метода делается ход, счетчик увеличивается
         return Optional.empty();
     }
 }

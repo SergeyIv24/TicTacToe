@@ -76,6 +76,7 @@ public class NamesAndSymbolsController implements Initializable {
         secondGamer = GameService.createSecondGamer(secondGamerName.getText());
         secondGamerSymbol.setText(secondGamerSymbol.getText() + " " + secondGamer.getGameSymbol());
         secondGamerName.setDisable(true);
+        start.setDisable(false);
 
     }
 
@@ -86,12 +87,15 @@ public class NamesAndSymbolsController implements Initializable {
             return;
         }
         secondGamerName.setText("Компьютер (легко)");
+
     }
 
     private void createComputerGamer(boolean isGameHard) {
         setComputerName();
         secondGamer = GameService.createComputerGamer(isGameHard, "Компьютер");
+        secondGamer.setComputer(true);
         start.setDisable(false);
+        secondGamerSymbol.setText(secondGamerSymbol.getText() + " " + secondGamer.getGameSymbol());
     }
 
     @FXML
@@ -100,6 +104,9 @@ public class NamesAndSymbolsController implements Initializable {
         Stage stage = (Stage) start.getScene().getWindow();
         Parent root = loaderNextScene.load();
         Scene scene = new Scene(root, 600, 600);
+        GameController controller = loaderNextScene.getController();
+        controller.setIsGameAgainstComputer(isGameAgainstComputer);
+        controller.setIsGameHard(isGameHard);
         stage.setScene(scene);
     }
 

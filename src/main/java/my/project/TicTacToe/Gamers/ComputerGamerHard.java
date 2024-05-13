@@ -192,7 +192,7 @@ public class ComputerGamerHard extends Gamer{
     }
 
     //Делает ход, ставит символ
-    @Override
+/*    @Override
     public boolean addSymbol(int line, int column) {
         if (column == -1) {
             column = selectColumn();
@@ -206,6 +206,6 @@ public class ComputerGamerHard extends Gamer{
             selectLine();
             return false;
         }
-    }
+    }*/
 
 }

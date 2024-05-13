@@ -74,14 +74,13 @@ public class GamerVGamer {
         }
         Optional<Gamer> winner = GameService.findWinner();
         if (winner.isPresent()) { //Определение есть ли победитель
-            //courses = -1;
             return winner;
         }
-        if (!GameService.defineDraw()) {
-            //courses = -1;
+        if (GameService.defineDraw()) {
+            courses = 100;
             return Optional.empty();
         }
-        //courses++; //При вызове метода делается ход, счетчик увеличивается
+
         return Optional.empty();
     }
 }

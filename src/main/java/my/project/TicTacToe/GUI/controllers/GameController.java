@@ -158,7 +158,7 @@ public class GameController implements Initializable {
             GamerVGamer.stopGame();
             return;
         }
-        if (GamerVGamer.getCourses() == -1) {
+        if (GamerVGamer.getCourses() == 100) { //todo заменить константой
             ModalWindowWinner windowWinner = new ModalWindowWinner();
             windowWinner.winnerModalWindow("Ничья!");
             GamerVGamer.stopGame();

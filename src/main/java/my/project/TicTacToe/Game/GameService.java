@@ -182,6 +182,10 @@ public class GameService {
 
     //Проверка ничьи
     public static boolean defineDraw() {
+        if (containsEmpty()) { //Если массив не заполнен
+            return false; //Нет ничьи
+        }
+
         byte countEmptyCellar = 0; //Счетчик количества пустых ячеек
         for (int i = 0; i < gameBoard.length; i = i + 1) {
             for (int j = 0; j < gameBoard[i].length; j = j + 1) {
@@ -194,6 +198,17 @@ public class GameService {
             return true; //ничья
         }
         return false; //Нет ничьи
+    }
+
+    private static boolean containsEmpty() {
+        for (char[] line : gameBoard) {
+            for (char symbol : line) {
+                if (symbol == '\u0000') {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 

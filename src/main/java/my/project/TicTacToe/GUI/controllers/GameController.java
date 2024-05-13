@@ -108,11 +108,14 @@ public class GameController implements Initializable {
 
         Label label = (Label) event.getSource(); //Нажатие на объект Label
         realGamerCourses(label);
+        if (GamerVGamer.getCourses() == -1) { //Игра не начала или закончена
+            return;
+        }
         GamerVGamer.increaseCourse();
 
         //Переключение имени и символа
         switchNameAndSymbol(getGamerName(), getGameSymbol());
-        if (isItComputerCourse()) {
+        if (isItComputerCourse() && GamerVGamer.getCourses() != -1) {
             computerCourses();
             switchNameAndSymbol(getGamerName(), getGameSymbol());
         }
@@ -128,32 +131,39 @@ public class GameController implements Initializable {
     }
 
     private void computerCourses() {
-        Optional<Gamer> winner = GamerVGamer.game(-1, 0);
+        Optional<Gamer> winner = GamerVGamer.game(0, 0);
         setComputerCourseOnBoard();
         defineWinner(winner);
     }
 
-    //todo принимает координаты, ставит ход на доску
+    //принимает координаты, ставит ход на доску
     private void setComputerCourseOnBoard() {
         String coordinates = GamerVGamer.getCurrentCourseCoordinates();
+        if (coordinates.isEmpty()) {
+            return;
+        }
         int line = Integer.parseInt(String.valueOf(coordinates.charAt(0))); //Строка
         int column = Integer.parseInt(String.valueOf(coordinates.charAt(1))); //Колонка
         Label label =  (Label) findLabelByCoordinates(line, column);
-        label.setText(getGameSymbol());
+        if (label != null) {
+            label.setText(getGameSymbol());
+        }
         GamerVGamer.increaseCourse();
-
     }
 
     private void defineWinner(Optional<Gamer> winner) {
         if (winner.isPresent()) {
             ModalWindowWinner windowWinner = new ModalWindowWinner();
             windowWinner.winnerModalWindow(winner.get().getName());
+            GamerVGamer.stopGame();
             return;
         }
         if (GamerVGamer.getCourses() == -1) {
             ModalWindowWinner windowWinner = new ModalWindowWinner();
             windowWinner.winnerModalWindow("Ничья!");
+            GamerVGamer.stopGame();
         }
+
     }
 
 
@@ -179,7 +189,5 @@ public class GameController implements Initializable {
 
     private boolean isItComputerCourse() {
         return isGameAgainstComputer;
-
-
     }
 }

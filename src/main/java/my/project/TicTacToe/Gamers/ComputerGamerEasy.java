@@ -1,5 +1,7 @@
 package my.project.TicTacToe.Gamers;
 import my.project.TicTacToe.Game.*;
+
+import java.util.Arrays;
 import java.util.Random;
 //Легкий ПК - выбор хода рандом
 
@@ -20,29 +22,32 @@ public class ComputerGamerEasy extends Gamer {
     }
 
     @Override
-    public String addSymbol(int column, int line) { //Метод добавления хода на доску
-        column = selectColumn();
-        line = selectLine();
+    public String addSymbol(int line, int column) { //Метод добавления хода на доску
+
+        int i = 0;
+        do {
+            line = selectLine();
+            column = selectColumn();
+            i++;
+            if (i > 30) {
+                break;
+            }
+        } while (GameService.getGameBoard()[line][column] != '\u0000');
         GameService.setGameBoard(line, column, gameSymbol);
+        System.out.println(Arrays.deepToString(GameService.getGameBoard()));
         return "" + line + column;
 
 
 
-/*        if (column == -1) {
-            column = selectColumn();
-            line = selectLine();
-        }*/
-/*        if (GameService.getGameBoard()[line][column] == ' ') {
-            GameService.setGameBoard(line, column, gameSymbol);
-            //return true;
-            return "" + line + column;*/
-        //} else {
-/*            column = selectColumn();
-            line = selectLine();
-            GameService.setGameBoard(line, column, gameSymbol);
-            return "" + line + column;*/
-            //return false;
 
-        //}
+
+
+/*
+        if (GameService.getGameBoard()[line][column] != '\u0000') {
+            addSymbol(0, 0);
+        }*/
+
+
+
     }
 }

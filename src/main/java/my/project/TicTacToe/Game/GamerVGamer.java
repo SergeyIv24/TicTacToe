@@ -11,6 +11,7 @@ public class GamerVGamer {
     private static final Gamer firstCourseGamer = GameService.defineWhoFirst(firstCourseGamerIndex);
     private static String currentCourseCoordinates;
 
+
     public static Gamer getFirstCourseGamer() {
         return firstCourseGamer;
     }
@@ -22,6 +23,10 @@ public class GamerVGamer {
     //При старте игры счетчик ходов 0
     public static void startGame() {
         courses++;
+    }
+
+    public static void stopGame() {
+        courses = -1;
     }
 
     public static void increaseCourse() {
@@ -69,11 +74,11 @@ public class GamerVGamer {
         }
         Optional<Gamer> winner = GameService.findWinner();
         if (winner.isPresent()) { //Определение есть ли победитель
-            courses = -1;
+            //courses = -1;
             return winner;
         }
         if (!GameService.defineDraw()) {
-            courses = -1;
+            //courses = -1;
             return Optional.empty();
         }
         //courses++; //При вызове метода делается ход, счетчик увеличивается

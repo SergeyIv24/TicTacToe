@@ -2,6 +2,7 @@ package my.project.TicTacToe.Game;
 
 import my.project.TicTacToe.Gamers.*;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Random;
 
@@ -84,6 +85,7 @@ public class GameService {
 
     //Массив игровая доска
     public static char[][] prepareGameBoard() {
+        System.out.println(Arrays.deepToString(new char[3][3]));
         return new char[3][3];
     }
 

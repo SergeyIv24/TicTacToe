@@ -5,7 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import my.project.TicTacToe.Game.GamerVGamer;
+import my.project.TicTacToe.Game.Constance;
+import my.project.TicTacToe.Game.Game;
 import my.project.TicTacToe.Gamers.Gamer;
 import java.net.URL;
 import java.util.Optional;
@@ -14,7 +15,7 @@ import java.util.ResourceBundle;
 public class GameController implements Initializable {
 
     @FXML
-    private Label gamerName;
+    private Label currentGamerName;
 
     @FXML
     private Label currentSymbol;
@@ -22,25 +23,18 @@ public class GameController implements Initializable {
     @FXML
     private GridPane gameBoard;
 
-    private final Node[][] arrGridPane = new Node[3][3];
+    private final Node[][] arrGridPane = new Node[3][3]; //Массив элементов GridPane. Создан для взаимодействия с
+                                                            //каждым элементом GridPane.
 
-    private boolean isGameAgainstComputer = false;
-    private boolean isGameHard = false;
+    private boolean isGameAgainstComputer; //Режим игры. По умолчанию игра против игрока.
+    private boolean isGameHard; //Сложно ПК для игры. По умолчанию простой.
 
     public void setIsGameAgainstComputer(boolean againstComputer) {
         isGameAgainstComputer = againstComputer;
     }
 
-    public boolean getIsGameAgainstComputer() {
-        return isGameAgainstComputer;
-    }
-
     public void setIsGameHard(boolean hard) {
         isGameHard = hard;
-    }
-
-    public boolean getIsGameHard() {
-        return isGameHard;
     }
 
     //Заполнить двумерный массив объектами из GridPane для поиска объектов и получения координат в таблице
@@ -58,13 +52,14 @@ public class GameController implements Initializable {
         }
     }
 
+    //Определение координат узла в GridPane
     private String defineCoordinatesNode(Node node) {
         int j = 0;
         int i = 0;
         while ((i != 3) && (j < arrGridPane[i].length)) {
             if (node == arrGridPane[i][j]) {
                 System.out.println(arrGridPane[i][j].getId());
-                return "" + i + j; //i - строка, j - колонка //todo лишний объект
+                return String.valueOf(i) + j; //i - строка, j - колонка
             }
             if (j++ == arrGridPane[i].length - 1) {
                 i++;
@@ -74,6 +69,7 @@ public class GameController implements Initializable {
         return "";
     }
 
+    //Метод поиска Node(Label) в массиве GridPane
     private Node findLabelByCoordinates(int line, int column) {
         try {
             return arrGridPane[line][column];
@@ -84,22 +80,18 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fillGridArray();
-        gamerName.setText(GamerVGamer.getFirstCourseGamer().getName());
-        currentSymbol.setText(String.valueOf(GamerVGamer.getFirstCourseGamer().getGameSymbol()));
-        if (gamerName.getText().contains("Компьютер")) {
-            GamerVGamer.startGame();
-            computerCourses();
-            switchNameAndSymbol(getGamerName(), getGameSymbol());
-        } else {
-            GamerVGamer.startGame();
+        fillGridArray(); //Заполнение массива GridPane объектами
+        currentGamerName.setText(Game.getFirstCourseGamer().getName());
+        currentSymbol.setText(String.valueOf(Game.getFirstCourseGamer().getGameSymbol()));
+        Game.createGame();
+        if (Game.getFirstCourseGamer().getComputer()) { //Если игрок компьютер
+            computerCourses(); //Ход компьютера
         }
-
     }
 
     @FXML
     protected void gamerCourse(MouseEvent event) {
-        if (GamerVGamer.getCourses() == -1) { //Игра не начала или закончена
+        if (!Game.checkAbilityToContinue()) { //Если игра закончена или не начата.
             return;
         }
         if (getGameSymbol().isEmpty()) {
@@ -107,38 +99,46 @@ public class GameController implements Initializable {
         }
 
         Label label = (Label) event.getSource(); //Нажатие на объект Label
-        realGamerCourses(label);
-        if (GamerVGamer.getCourses() == -1) { //Игра не начала или закончена
+        realGamerCourses(label); //Ход игрока
+
+        if (!Game.checkAbilityToContinue()) { //Если игра закончена или не начата.
             return;
         }
-        GamerVGamer.increaseCourse();
 
-        //Переключение имени и символа
-        switchNameAndSymbol(getGamerName(), getGameSymbol());
-        if (isItComputerCourse() && GamerVGamer.getCourses() != -1) {
+        //Если игра не закончена, то следующий ход компьютера
+        if (isGameAgainstComputer) {
             computerCourses();
-            switchNameAndSymbol(getGamerName(), getGameSymbol());
         }
     }
 
     private void realGamerCourses(Label label) {
-        label.setText(getGameSymbol()); //Установка игрового символа
+        if (Game.getCourses() == -1) {
+            return;
+        }
+        label.setText(getGameSymbol()); //Установка игрового символа на поле
         String nodeCoordinates = defineCoordinatesNode(label); //Координаты хода
         int line = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(0))); //Строка
         int column = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(1))); //Колонка
-        Optional<Gamer> winner = GamerVGamer.game(line, column);
-        defineWinner(winner);
+        Optional<Gamer> winner = Game.game(line, column); //Ход
+        defineWinner(winner); //После хода, определение победителя
+        Game.increaseCourse();
+        switchNameAndSymbol(getCurrentGamerName(), getGameSymbol()); //Смена текущего игрока и символа
     }
 
     private void computerCourses() {
-        Optional<Gamer> winner = GamerVGamer.game(0, 0);
+        if (Game.getCourses() == -1) {
+            return;
+        }
+        Optional<Gamer> winner = Game.game(0, 0);
         setComputerCourseOnBoard();
         defineWinner(winner);
+        Game.increaseCourse();
+        switchNameAndSymbol(getCurrentGamerName(), getGameSymbol()); //Смена текущего игрока и символа
     }
 
     //принимает координаты, ставит ход на доску
     private void setComputerCourseOnBoard() {
-        String coordinates = GamerVGamer.getCurrentCourseCoordinates();
+        String coordinates = Game.getCurrentCourseCoordinates();
         if (coordinates.isEmpty()) {
             return;
         }
@@ -148,46 +148,40 @@ public class GameController implements Initializable {
         if (label != null) {
             label.setText(getGameSymbol());
         }
-        GamerVGamer.increaseCourse();
     }
 
     private void defineWinner(Optional<Gamer> winner) {
         if (winner.isPresent()) {
             ModalWindowWinner windowWinner = new ModalWindowWinner();
             windowWinner.winnerModalWindow(winner.get().getName());
-            GamerVGamer.stopGame();
+            Game.stopGame();
             return;
         }
-        if (GamerVGamer.getCourses() == 100) { //todo заменить константой
+        if (Game.getCourses() == Constance.EXIT_NUMBER_FOR_DRAW) {
             ModalWindowWinner windowWinner = new ModalWindowWinner();
             windowWinner.winnerModalWindow("Ничья!");
-            GamerVGamer.stopGame();
+            Game.stopGame();
         }
-
     }
 
 
     private void switchNameAndSymbol(String name, String symbol) {
-        gamerName.setText(" " + name);
+        currentGamerName.setText(" " + name);
         currentSymbol.setText(" " + symbol);
     }
 
     //Определение текущего символа
     private String getGameSymbol() {
-        if (GamerVGamer.whichCourse().isPresent()) {
-            return String.valueOf(GamerVGamer.whichCourse().get().getGameSymbol());
+        if (Game.whoseCourse().isPresent()) {
+            return String.valueOf(Game.whoseCourse().get().getGameSymbol());
         }
         return "";
     }
 
-    private String getGamerName() {
-        if (GamerVGamer.whichCourse().isPresent()) {
-            return String.valueOf(GamerVGamer.whichCourse().get().getName());
+    private String getCurrentGamerName() {
+        if (Game.whoseCourse().isPresent()) {
+            return String.valueOf(Game.whoseCourse().get().getName());
         }
         return "";
-    }
-
-    private boolean isItComputerCourse() {
-        return isGameAgainstComputer;
     }
 }

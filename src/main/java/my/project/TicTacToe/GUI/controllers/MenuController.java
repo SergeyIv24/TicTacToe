@@ -6,25 +6,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MenuController {
-
-
 
     @FXML
     private Button gamerVsGamer;
 
     @FXML
     private MenuButton gamerVsComputer;
-
-    @FXML
-    private MenuItem computerEasy;
-
-    @FXML
-    private MenuItem computerHard;
 
     @FXML
     protected void goNameAndSymbol() throws IOException {

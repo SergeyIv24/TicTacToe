@@ -1,7 +1,5 @@
 package my.project.TicTacToe.Gamers;
 import my.project.TicTacToe.Game.*;
-
-import java.util.Arrays;
 import java.util.Random;
 //Легкий ПК - выбор хода рандом
 
@@ -23,31 +21,16 @@ public class ComputerGamerEasy extends Gamer {
 
     @Override
     public String addSymbol(int line, int column) { //Метод добавления хода на доску
-
-        int i = 0;
+        int i = 0; //Количество попыток сделать ход
         do {
-            line = selectLine();
-            column = selectColumn();
+            line = selectLine(); //Выбор строки
+            column = selectColumn(); //Выбор колонки
             i++;
-            if (i > 30) {
+            if (i > 30) { //Если сделал больше 30 попыток выход
                 break;
             }
-        } while (GameService.getGameBoard()[line][column] != '\u0000');
-        GameService.setGameBoard(line, column, gameSymbol);
-        System.out.println(Arrays.deepToString(GameService.getGameBoard()));
+        } while (GameService.getGameBoard()[line][column] != '\u0000'); //Проверка не займет ли чужую клетку
+        GameService.setGameBoard(line, column, gameSymbol); //Установка символа в массив
         return "" + line + column;
-
-
-
-
-
-
-/*
-        if (GameService.getGameBoard()[line][column] != '\u0000') {
-            addSymbol(0, 0);
-        }*/
-
-
-
     }
 }

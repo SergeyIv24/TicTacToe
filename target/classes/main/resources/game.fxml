@@ -9,7 +9,7 @@
       <HBox prefHeight="33.0" prefWidth="600.0">
          <children>
             <Label fx:id="gameCourse" text="Текущий ход:" />
-            <Label fx:id="gamerName" />
+            <Label fx:id="currentGamerName" />
          </children>
       </HBox>
       <HBox prefHeight="52.0" prefWidth="600.0">

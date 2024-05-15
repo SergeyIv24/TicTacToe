@@ -45,7 +45,7 @@ public class GameService {
         return seckondGamer;
     }
 
-    public static Gamer createComputerGamer(boolean level, String name) {
+    public static Gamer createComputerGamer(boolean isGameHard, String name) {
         char computerEasySymbol = defineRandomGameSymbol();
         if ((arrayOfGamers[0] != null) && (computerEasySymbol == arrayOfGamers[0].getGameSymbol())
                 && (computerEasySymbol == gameSymbol[0])) {
@@ -54,15 +54,14 @@ public class GameService {
                 && (computerEasySymbol == gameSymbol[1])) {
             computerEasySymbol = 'X';
         }
-
         Gamer computerGamer;
 
-        if (level) {
+        if (isGameHard) {
             computerGamer = new ComputerGamerHard(name, computerEasySymbol, new Random());
         } else {
             computerGamer = new ComputerGamerEasy(name, computerEasySymbol, new Random());
         }
-
+        computerGamer.setComputer(true);
         arrayOfGamers[1] = computerGamer;
         return computerGamer;
     }
@@ -194,10 +193,9 @@ public class GameService {
                 }
             }
         }
-        if (countEmptyCellar == 0) { //Если количество пустых ячеек 0
-            return true; //ничья
-        }
-        return false; //Нет ничьи
+        //Если количество пустых ячеек 0
+        return countEmptyCellar == 0; //ничья
+//Нет ничьи
     }
 
     private static boolean containsEmpty() {
@@ -259,6 +257,5 @@ public class GameService {
             return Optional.of(defineWinnerGamer(winnerColumns));
         }
         return Optional.empty();
-
     }
 }

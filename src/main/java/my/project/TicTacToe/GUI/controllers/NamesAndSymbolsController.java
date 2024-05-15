@@ -103,10 +103,10 @@ public class NamesAndSymbolsController implements Initializable {
         FXMLLoader loaderNextScene = new FXMLLoader(this.getClass().getResource("/game.fxml"));
         Stage stage = (Stage) start.getScene().getWindow();
         Parent root = loaderNextScene.load();
-        Scene scene = new Scene(root, 600, 600);
         GameController controller = loaderNextScene.getController();
         controller.setIsGameAgainstComputer(isGameAgainstComputer);
         controller.setIsGameHard(isGameHard);
+        Scene scene = new Scene(root, 600, 600);
         stage.setScene(scene);
     }
 

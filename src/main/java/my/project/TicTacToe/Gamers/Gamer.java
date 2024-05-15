@@ -33,10 +33,8 @@ public class Gamer {
         if ((GameService.getGameBoard()[line][column] == '\u0000')
                 || (GameService.getGameBoard()[line][column] == ' ')) {
             GameService.setGameBoard(line, column, gameSymbol);
-            //return true;
             return "" + line + column;
         } else {
-            //return false;
             return "";
         }
     }

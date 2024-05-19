@@ -106,7 +106,7 @@ public class GameController implements Initializable {
         }
 
         //Если игра не закончена, то следующий ход компьютера
-        if (isGameAgainstComputer && !Game.checkAbilityToContinue()) {
+        if (isGameAgainstComputer) {
             computerCourses();
         }
     }

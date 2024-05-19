@@ -32,7 +32,7 @@ public class Game {
 
     //По окончанию игры количество ходов отрицательное
     public static void stopGame() {
-        firstCourseGamer = null;
+        //firstCourseGamer = null;
         GameService.clearGameBoard();
         courses = -1;
     }

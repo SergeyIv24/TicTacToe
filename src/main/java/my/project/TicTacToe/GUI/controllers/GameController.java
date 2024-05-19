@@ -184,4 +184,8 @@ public class GameController implements Initializable {
         }
         return "";
     }
+
+    public boolean isGameHard() {
+        return isGameHard;
+    }
 }

@@ -7,11 +7,14 @@ public class Game {
     private static short courses = 0; //Счетчик ходов. Не может быть больше 128.
     private static Gamer oddCourses; // Игрок, который ходит на нечетные ходы (первый)
     private static Gamer evenCourse; // Игрок, который ходит на четные ходы (второй)
-    private static final int firstCourseGamerIndex = GameService.defineWhoFirstIndex(); //Определение первого хода
-    private static final Gamer firstCourseGamer = GameService.defineWhoFirst(firstCourseGamerIndex);
+    private static int firstCourseGamerIndex; //Определение первого хода
+    private static Gamer firstCourseGamer;
     private static String currentCourseCoordinates; //Координаты текущего хода
 
     public static void createGame() {
+        GameService.prepareGameBoard();
+        firstCourseGamerIndex = GameService.defineWhoFirstIndex();
+        firstCourseGamer = GameService.defineWhoFirst(firstCourseGamerIndex);
         courses = 1;
     }
 
@@ -29,6 +32,8 @@ public class Game {
 
     //По окончанию игры количество ходов отрицательное
     public static void stopGame() {
+        firstCourseGamer = null;
+        GameService.clearGameBoard();
         courses = -1;
     }
 
@@ -74,6 +79,7 @@ public class Game {
         }
         Optional<Gamer> winner = GameService.findWinner(); //Определение победителя
         if (winner.isPresent()) { //Определение есть ли победитель
+            courses = -1;
             return winner;
         }
         if (GameService.defineDraw()) { //Если есть ничья

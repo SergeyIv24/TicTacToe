@@ -2,7 +2,6 @@ package my.project.TicTacToe.Game;
 
 import my.project.TicTacToe.Gamers.*;
 
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.Random;
 
@@ -12,7 +11,7 @@ public class GameService {
     protected static final char[] winX = new char[3]; //Массив для определения победителя X
     protected static final char[] win0 = new char[3]; //Массив для определения победителя 0
     protected static Random rdn = new Random();
-    private static final char[][] gameBoard = prepareGameBoard();
+    private static char[][] gameBoard;
 
     public static void setGameBoard(int line, int column, char symbol) {
         gameBoard[line][column] = symbol;
@@ -83,9 +82,12 @@ public class GameService {
     }
 
     //Массив игровая доска
-    public static char[][] prepareGameBoard() {
-        System.out.println(Arrays.deepToString(new char[3][3]));
-        return new char[3][3];
+    protected static void prepareGameBoard() {
+        gameBoard = new char[3][3];
+    }
+
+    protected static void clearGameBoard() {
+        gameBoard = null;
     }
 
     //Проверка наличия победителя по диагоналям
@@ -195,7 +197,6 @@ public class GameService {
         }
         //Если количество пустых ячеек 0
         return countEmptyCellar == 0; //ничья
-//Нет ничьи
     }
 
     private static boolean containsEmpty() {

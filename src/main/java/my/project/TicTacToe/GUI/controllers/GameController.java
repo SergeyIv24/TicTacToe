@@ -80,10 +80,10 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Game.createGame();
         fillGridArray(); //Заполнение массива GridPane объектами
         currentGamerName.setText(Game.getFirstCourseGamer().getName());
         currentSymbol.setText(String.valueOf(Game.getFirstCourseGamer().getGameSymbol()));
-        Game.createGame();
         if (Game.getFirstCourseGamer().getComputer()) { //Если игрок компьютер
             computerCourses(); //Ход компьютера
         }
@@ -106,7 +106,7 @@ public class GameController implements Initializable {
         }
 
         //Если игра не закончена, то следующий ход компьютера
-        if (isGameAgainstComputer) {
+        if (isGameAgainstComputer && !Game.checkAbilityToContinue()) {
             computerCourses();
         }
     }

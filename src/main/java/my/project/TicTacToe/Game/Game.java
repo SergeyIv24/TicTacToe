@@ -90,7 +90,7 @@ public class Game {
     }
 
     public static boolean checkAbilityToContinue() {
-        return courses != -1; // != -1 true, == -1 false
+        return courses != -1;
     }
 
 }

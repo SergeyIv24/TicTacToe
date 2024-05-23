@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.stage.Stage;
+import my.project.TicTacToe.GUI.Constance;
+
 import java.io.IOException;
 
 public class MenuController {
@@ -22,7 +24,7 @@ public class MenuController {
         FXMLLoader loaderNextScene = new FXMLLoader(this.getClass().getResource("/gamersNameAndSymbol.fxml"));
         Stage stage = (Stage) gamerVsGamer.getScene().getWindow();
         Parent root = loaderNextScene.load();
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, Constance.windowWeight, Constance.windowHeight);
         stage.setScene(scene);
     }
 
@@ -31,7 +33,7 @@ public class MenuController {
         FXMLLoader loaderNextScene = new FXMLLoader(this.getClass().getResource("/gamersNameAndSymbol.fxml"));
         Stage stage = (Stage) gamerVsComputer.getScene().getWindow();
         Parent root = loaderNextScene.load();
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, Constance.windowWeight, Constance.windowHeight);
         NamesAndSymbolsController controller = loaderNextScene.getController();
         controller.setIsGameAgainstComputer(true);
         controller.setIsGameHard(false);
@@ -43,7 +45,7 @@ public class MenuController {
         FXMLLoader loaderNextScene = new FXMLLoader(this.getClass().getResource("/gamersNameAndSymbol.fxml"));
         Stage stage = (Stage) gamerVsComputer.getScene().getWindow();
         Parent root = loaderNextScene.load();
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, Constance.windowWeight, Constance.windowHeight);
         NamesAndSymbolsController controller = loaderNextScene.getController();
         controller.setIsGameAgainstComputer(true);
         controller.setIsGameHard(true);

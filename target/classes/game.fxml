@@ -3,22 +3,36 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.project.TicTacToe.GUI.controllers.GameController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="450.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.project.TicTacToe.GUI.controllers.GameController">
    <children>
+      <Label fx:id="title" alignment="CENTER" prefHeight="21.0" prefWidth="481.0" text="Игра!">
+         <VBox.margin>
+            <Insets top="15.0" />
+         </VBox.margin></Label>
       <HBox prefHeight="33.0" prefWidth="600.0">
          <children>
-            <Label fx:id="gameCourse" text="Текущий ход:" />
-            <Label fx:id="currentGamerName" />
+            <Label fx:id="gameCourse" prefHeight="21.0" prefWidth="98.0" text="Текущий ход:">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin></Label>
+            <Label fx:id="currentGamerName" prefHeight="21.0" prefWidth="60.0" />
          </children>
       </HBox>
       <HBox prefHeight="52.0" prefWidth="600.0">
          <children>
-            <Label text="Игровой символ:" />
-            <Label fx:id="currentSymbol" />
+            <Label prefHeight="21.0" prefWidth="123.0" text="Игровой символ:">
+               <HBox.margin>
+                  <Insets left="30.0" top="5.0" />
+               </HBox.margin></Label>
+            <Label fx:id="currentSymbol" prefHeight="21.0" prefWidth="60.0">
+               <HBox.margin>
+                  <Insets right="5.0" top="5.0" />
+               </HBox.margin></Label>
          </children>
       </HBox>
-      <GridPane fx:id="gameBoard" gridLinesVisible="true" onDragDetected="#gamerCourse" prefHeight="191.0" prefWidth="560.0">
+      <GridPane fx:id="gameBoard" gridLinesVisible="true" onDragDetected="#gamerCourse" prefHeight="200.0" prefWidth="390.0" styleClass="grid-pane">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,20 +44,34 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <VBox.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="20.0" left="30.0" right="20.0" top="20.0" />
          </VBox.margin>
          <children>
-            <Label fx:id="coord00" onMouseClicked="#gamerCourse" prefHeight="65.0" prefWidth="191.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label fx:id="coord01" onMouseClicked="#gamerCourse" prefHeight="65.0" prefWidth="191.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Label fx:id="coord02" onMouseClicked="#gamerCourse" prefHeight="63.0" prefWidth="187.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-            <Label fx:id="coord12" onMouseClicked="#gamerCourse" prefHeight="67.0" prefWidth="187.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label fx:id="coord10" onMouseClicked="#gamerCourse" prefHeight="61.0" prefWidth="187.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label fx:id="coord11" onMouseClicked="#gamerCourse" prefHeight="62.0" prefWidth="186.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="coord21" onMouseClicked="#gamerCourse" prefHeight="59.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="coord20" onMouseClicked="#gamerCourse" prefHeight="62.0" prefWidth="186.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Label fx:id="coord22" onMouseClicked="#gamerCourse" prefHeight="69.0" prefWidth="204.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="coord00" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#gamerCourse" prefHeight="65.0" prefWidth="191.0" styleClass="cell" GridPane.columnIndex="0" GridPane.rowIndex="0">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label fx:id="coord01" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#gamerCourse" prefHeight="65.0" prefWidth="191.0" styleClass="cell" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label fx:id="coord02" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#gamerCourse" prefHeight="63.0" prefWidth="187.0" styleClass="cell" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <Label fx:id="coord12" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#gamerCourse" prefHeight="67.0" prefWidth="187.0" styleClass="cell" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="coord10" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#gamerCourse" prefHeight="61.0" prefWidth="187.0" styleClass="cell" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label fx:id="coord11" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#gamerCourse" prefHeight="62.0" prefWidth="186.0" styleClass="cell" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="coord21" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#gamerCourse" prefHeight="59.0" prefWidth="185.0" styleClass="cell" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="coord20" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#gamerCourse" prefHeight="62.0" prefWidth="186.0" styleClass="cell" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label fx:id="coord22" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#gamerCourse" prefHeight="69.0" prefWidth="204.0" styleClass="cell" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="exit" mnemonicParsing="false" text="Выход" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="exit" mnemonicParsing="false" text="Выход" />
+            <Button fx:id="revange" mnemonicParsing="false" text="Реванш">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin></Button>
+         </children>
+         <VBox.margin>
+            <Insets left="30.0" top="20.0" />
+         </VBox.margin>
+      </HBox>
    </children>
 </VBox>

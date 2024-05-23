@@ -1,9 +1,11 @@
 package my.project.TicTacToe.GUI;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class TicTacToeApp extends Application {
@@ -11,16 +13,17 @@ public class TicTacToeApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TicTacToeApp.class.getResource("/menu.fxml"));
         Parent rootNode = fxmlLoader.load();
-        Scene sceneMenu = new Scene(rootNode, 600, 600);
-        stage.setTitle("Крестики - нолики");
+        Scene sceneMenu = new Scene(rootNode, Constance.windowWeight, Constance.windowHeight);
+        stage.setMaxWidth(Constance.maxWindowWeight);
+        stage.setMaxHeight(Constance.maxWindowHeight);
+        stage.setMinWidth(Constance.minWindowWeight);
+        stage.setMinHeight(Constance.minWindowHeight);
+        stage.setTitle(Constance.gameName);
         stage.setScene(sceneMenu);
         stage.show();
-
     }
 
     public static void main(String[] args) {
         launch();
     }
-
-
 }

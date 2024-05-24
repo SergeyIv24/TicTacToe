@@ -1,13 +1,21 @@
 package my.project.TicTacToe.GUI.controllers;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import my.project.TicTacToe.GUI.TicTacToeApp;
 import my.project.TicTacToe.Game.Constance;
 import my.project.TicTacToe.Game.Game;
 import my.project.TicTacToe.Gamers.Gamer;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -22,6 +30,12 @@ public class GameController implements Initializable {
 
     @FXML
     private GridPane gameBoard;
+
+    @FXML
+    private Button menu;
+
+    @FXML
+    private Button revenge;
 
     private final Node[][] arrGridPane = new Node[3][3]; //Массив элементов GridPane. Создан для взаимодействия с
                                                             //каждым элементом GridPane.
@@ -57,7 +71,6 @@ public class GameController implements Initializable {
         int i = 0;
         while ((i != 3) && (j < arrGridPane[i].length)) {
             if (node == arrGridPane[i][j]) {
-                System.out.println(arrGridPane[i][j].getId());
                 return String.valueOf(i) + j; //i - строка, j - колонка
             }
             if (j++ == arrGridPane[i].length - 1) {
@@ -75,6 +88,35 @@ public class GameController implements Initializable {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @FXML
+    protected void goExit() {
+        System.exit(0);
+    }
+
+    @FXML
+    protected void goRevenge() throws IOException {
+        FXMLLoader loaderNextScene = new FXMLLoader(this.getClass().getResource("/game.fxml"));
+        Stage stage = (Stage) revenge.getScene().getWindow();
+        Parent root = loaderNextScene.load();
+        GameController controller = loaderNextScene.getController();
+        controller.setIsGameAgainstComputer(isGameAgainstComputer);
+        controller.setIsGameHard(isGameHard);
+        Scene scene = new Scene(root, my.project.TicTacToe.GUI.Constance.windowWeight,
+                my.project.TicTacToe.GUI.Constance.windowHeight);
+        stage.setScene(scene);
+    }
+
+    @FXML
+    protected void goMenu() throws IOException {
+        NamesAndSymbolsController.setIsGameAgainstComputer(false);
+        Game.stopGame();
+        FXMLLoader fxmlLoader = new FXMLLoader(TicTacToeApp.class.getResource("/menu.fxml"));
+        Stage stage = (Stage) menu.getScene().getWindow();
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root, my.project.TicTacToe.GUI.Constance.windowWeight, my.project.TicTacToe.GUI.Constance.windowHeight);
+        stage.setScene(scene);
     }
 
     private boolean checkNotEmptyCell(Label label) {
@@ -136,6 +178,7 @@ public class GameController implements Initializable {
         if (Game.getCourses() == -1) {
             return;
         }
+
         Optional<Gamer> winner = Game.game(0, 0);
         setComputerCourseOnBoard();
         defineWinner(winner);
@@ -162,7 +205,6 @@ public class GameController implements Initializable {
             ModalWindowWinner windowWinner = new ModalWindowWinner();
             windowWinner.winnerModalWindow(winner.get().getName());
             Game.stopGame();
-            return;
         }
         if (Game.getCourses() == Constance.EXIT_NUMBER_FOR_DRAW) {
             ModalWindowWinner windowWinner = new ModalWindowWinner();
@@ -170,7 +212,6 @@ public class GameController implements Initializable {
             Game.stopGame();
         }
     }
-
 
     private void switchNameAndSymbol(String name, String symbol) {
         currentGamerName.setText(" " + name);
@@ -190,9 +231,5 @@ public class GameController implements Initializable {
             return String.valueOf(Game.whoseCourse().get().getName());
         }
         return "";
-    }
-
-    public boolean isGameHard() {
-        return isGameHard;
     }
 }

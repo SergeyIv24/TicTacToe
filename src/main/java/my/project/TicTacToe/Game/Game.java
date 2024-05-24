@@ -32,7 +32,6 @@ public class Game {
 
     //По окончанию игры количество ходов отрицательное
     public static void stopGame() {
-        //firstCourseGamer = null;
         GameService.clearGameBoard();
         courses = -1;
     }
@@ -59,9 +58,9 @@ public class Game {
         }
 
         //Игра закончена или не начата, хода нет.
-        if (courses == -1) {
+/*        if (courses == -1) {
             return Optional.empty();
-        }
+        }*/
 
         //Для нечетных ходов (первый игрок)
         if (courses % 2 != 0) {

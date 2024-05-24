@@ -27,7 +27,7 @@
             <Insets left="85.0" right="85.0" top="10.0" />
          </VBox.margin>
       </MenuButton>
-      <Button fx:id="exit" mnemonicParsing="false" prefHeight="40.0" prefWidth="280.0" text="Выход">
+      <Button fx:id="exit" mnemonicParsing="false" onAction="#goExit" prefHeight="40.0" prefWidth="280.0" text="Выход">
          <VBox.margin>
             <Insets left="85.0" right="85.0" top="10.0" />
          </VBox.margin></Button>

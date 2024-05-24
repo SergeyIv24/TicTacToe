@@ -36,7 +36,7 @@
          </VBox.margin></Label>
       <HBox prefHeight="74.0" prefWidth="420.0">
          <children>
-            <Button mnemonicParsing="false" text="Назад">
+            <Button fx:id="back" mnemonicParsing="false" onAction="#goBack" text="Назад">
                <HBox.margin>
                   <Insets />
                </HBox.margin>

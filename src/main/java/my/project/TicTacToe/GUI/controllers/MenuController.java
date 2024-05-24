@@ -51,4 +51,9 @@ public class MenuController {
         controller.setIsGameHard(true);
         stage.setScene(scene);
     }
+
+    @FXML
+    protected void goExit() {
+        System.exit(0);
+    }
 }

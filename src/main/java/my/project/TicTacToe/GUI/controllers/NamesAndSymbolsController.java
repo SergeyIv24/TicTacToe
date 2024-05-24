@@ -9,8 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import my.project.TicTacToe.Exeptions.ValidationException;
+import my.project.TicTacToe.GUI.Constance;
+import my.project.TicTacToe.GUI.TicTacToeApp;
 import my.project.TicTacToe.Game.GameService;
-import my.project.TicTacToe.Gamers.ComputerGamerHard;
 import my.project.TicTacToe.Gamers.Gamer;
 
 import java.io.IOException;
@@ -33,29 +35,30 @@ public class NamesAndSymbolsController implements Initializable {
 
     @FXML
     private Button start;
-    private static boolean isGameAgainstComputer;
-    private static boolean isGameHard;
+
+    @FXML
+    private Button back;
+
+    protected static boolean isGameAgainstComputer;
+    protected static boolean isGameHard;
     protected static Gamer firstGamer;
     protected static Gamer secondGamer;
 
-    public void setIsGameAgainstComputer(boolean againstComputer) {
+    public static void setIsGameAgainstComputer(boolean againstComputer) {
         isGameAgainstComputer = againstComputer;
     }
 
-    public boolean getIsGameAgainstComputer() {
-        return isGameAgainstComputer;
-    }
-
-    public void setIsGameHard(boolean hard) {
+    public static void setIsGameHard(boolean hard) {
         isGameHard = hard;
-    }
-
-    public boolean getIsGameHard() {
-        return isGameHard;
     }
 
     @FXML
     protected void defineGameSymbolsForFirst() {
+        try {
+            validate(firstGamerName.getText());
+        } catch (ValidationException e) {
+            return;
+        }
         if (firstGamerSymbol.getText().contains("X") || firstGamerSymbol.getText().contains("0")) {
             return;
         }
@@ -70,6 +73,12 @@ public class NamesAndSymbolsController implements Initializable {
 
     @FXML
     protected void defineGameSymbolsForSecond() {
+        try {
+            validate(secondGamerName.getText());
+        } catch (ValidationException e) {
+            return;
+        }
+
         if (secondGamerSymbol.getText().contains("X") || secondGamerSymbol.getText().contains("0")) {
             return;
         }
@@ -77,7 +86,12 @@ public class NamesAndSymbolsController implements Initializable {
         secondGamerSymbol.setText(secondGamerSymbol.getText() + " " + secondGamer.getGameSymbol());
         secondGamerName.setDisable(true);
         start.setDisable(false);
+    }
 
+    private void validate(String gamerName) {
+        if (gamerName.isBlank() || gamerName.isEmpty()) {
+            throw new ValidationException("Имя не заполнено");
+        }
     }
 
     private void setComputerName() {
@@ -87,7 +101,6 @@ public class NamesAndSymbolsController implements Initializable {
             return;
         }
         secondGamerName.setText("Компьютер (легко)");
-
     }
 
     private void createComputerGamer(boolean isGameHard) {
@@ -106,10 +119,18 @@ public class NamesAndSymbolsController implements Initializable {
         GameController controller = loaderNextScene.getController();
         controller.setIsGameAgainstComputer(isGameAgainstComputer);
         controller.setIsGameHard(isGameHard);
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, Constance.windowWeight, Constance.windowHeight);
         stage.setScene(scene);
     }
 
+    @FXML
+    protected void goBack() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(TicTacToeApp.class.getResource("/menu.fxml"));
+        Stage stage = (Stage) back.getScene().getWindow();
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root, Constance.windowWeight, Constance.windowHeight);
+        stage.setScene(scene);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

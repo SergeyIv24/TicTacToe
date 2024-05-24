@@ -4,9 +4,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Optional;
 
 public class TicTacToeApp extends Application {
     @Override
@@ -19,8 +22,17 @@ public class TicTacToeApp extends Application {
         stage.setMinWidth(Constance.minWindowWeight);
         stage.setMinHeight(Constance.minWindowHeight);
         stage.setTitle(Constance.gameName);
+        stage.getIcons().add(findAndSetIcon().get());
         stage.setScene(sceneMenu);
         stage.show();
+    }
+
+    private Optional<Image> findAndSetIcon() {
+        InputStream iconStream = TicTacToeApp.class.getResourceAsStream("/toe.png");
+        if (iconStream != null) {
+            return Optional.of(new Image(iconStream));
+        }
+        return Optional.empty();
     }
 
     public static void main(String[] args) {

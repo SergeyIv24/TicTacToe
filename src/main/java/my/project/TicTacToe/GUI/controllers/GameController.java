@@ -25,7 +25,6 @@ public class GameController implements Initializable {
 
     private final Node[][] arrGridPane = new Node[3][3]; //Массив элементов GridPane. Создан для взаимодействия с
                                                             //каждым элементом GridPane.
-
     private boolean isGameAgainstComputer; //Режим игры. По умолчанию игра против игрока.
     private boolean isGameHard; //Сложно ПК для игры. По умолчанию простой.
 
@@ -78,6 +77,10 @@ public class GameController implements Initializable {
         }
     }
 
+    private boolean checkNotEmptyCell(Label label) {
+        return !label.getText().isEmpty();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Game.createGame();
@@ -99,6 +102,10 @@ public class GameController implements Initializable {
         }
 
         Label label = (Label) event.getSource(); //Нажатие на объект Label
+        if (checkNotEmptyCell(label)) {
+            return;
+        }
+
         realGamerCourses(label); //Ход игрока
 
         if (!Game.checkAbilityToContinue()) { //Если игра закончена или не начата.

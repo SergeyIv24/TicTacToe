@@ -16,7 +16,6 @@ public class TestGameVGamerWinFirst extends GeneralGamerVsGamer {
     @BeforeEach
     public void makeAllCourses() {
         super.makeAllCourses(coordinates);
-        System.out.println(Arrays.deepToString(GameService.getGameBoard()));
     }
 
     @Override
@@ -37,4 +36,5 @@ public class TestGameVGamerWinFirst extends GeneralGamerVsGamer {
         Optional<Gamer> winner = GameService.findWinner();
         Assertions.assertEquals(winner.get().getGameSymbol(), firstGamerSymbol);
     }
+
 }

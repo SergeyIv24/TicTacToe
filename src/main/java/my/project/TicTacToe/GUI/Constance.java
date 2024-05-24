@@ -7,7 +7,7 @@ public class Constance {
     public static final int maxWindowHeight = 600;
     public static final int minWindowWeight = 400;
     public static final int minWindowHeight = 400;
-    public static final int modalWindowWeight = 200;
+    public static final int modalWindowWeight = 300;
     public static final int modalWindowHeight = 100;
     public static final String gameName = "Крестики - нолики";
 }

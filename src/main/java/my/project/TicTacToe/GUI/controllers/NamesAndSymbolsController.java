@@ -44,12 +44,23 @@ public class NamesAndSymbolsController implements Initializable {
     protected static Gamer firstGamer;
     protected static Gamer secondGamer;
 
-    public static void setIsGameAgainstComputer(boolean againstComputer) {
+    public void setIsGameAgainstComputer(boolean againstComputer) {
         isGameAgainstComputer = againstComputer;
     }
 
-    public static void setIsGameHard(boolean hard) {
+    public void setIsGameHard(boolean hard) {
         isGameHard = hard;
+        if (isGameAgainstComputer) {
+            secondGamerName.setDisable(true);
+            secondGamerName.setPromptText(setComputerName());
+        }
+    }
+
+    public static void resetSettings() {
+        isGameAgainstComputer = false;
+        isGameHard = false;
+        firstGamer = null;
+        secondGamer = null;
     }
 
     @FXML
@@ -69,6 +80,10 @@ public class NamesAndSymbolsController implements Initializable {
         if (isGameAgainstComputer) {
             createComputerGamer(isGameHard);
         }
+
+        if (isItReadyToStart()) {
+            start.setDisable(false);
+        }
     }
 
     @FXML
@@ -85,7 +100,9 @@ public class NamesAndSymbolsController implements Initializable {
         secondGamer = GameService.createSecondGamer(secondGamerName.getText());
         secondGamerSymbol.setText(secondGamerSymbol.getText() + " " + secondGamer.getGameSymbol());
         secondGamerName.setDisable(true);
-        start.setDisable(false);
+        if (isItReadyToStart()) {
+            start.setDisable(false);
+        }
     }
 
     private void validate(String gamerName) {
@@ -94,13 +111,17 @@ public class NamesAndSymbolsController implements Initializable {
         }
     }
 
-    private void setComputerName() {
-        secondGamerName.setDisable(true);
+    private boolean isItReadyToStart() {
+        return !firstGamerName.getText().isEmpty() && !secondGamerName.getText().isEmpty();
+    }
+
+    private String setComputerName() {
         if (isGameHard) {
-            secondGamerName.setText("Компьютер (сложно)");
-            return;
+            secondGamerName.setText(Constance.pcHard);
+            return Constance.pcHard;
         }
-        secondGamerName.setText("Компьютер (легко)");
+        secondGamerName.setText(Constance.pcEasy);
+        return Constance.pcEasy;
     }
 
     private void createComputerGamer(boolean isGameHard) {
@@ -129,6 +150,7 @@ public class NamesAndSymbolsController implements Initializable {
         Stage stage = (Stage) back.getScene().getWindow();
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root, Constance.windowWeight, Constance.windowHeight);
+        GameService.resetSettings();
         stage.setScene(scene);
     }
 

@@ -21,44 +21,54 @@ public class GameService {
         return gameBoard;
     }
 
+    public static void resetSettings() {
+        arrayOfGamers = new Gamer[2];
+    }
+
     //Создание игрока 1
     public static Gamer createFirstGamer(String name) {
-        char firstGamerSymbol = defineRandomGameSymbol();
-        FirstGamer firstGamer = new FirstGamer(name, firstGamerSymbol);
+        FirstGamer firstGamer = new FirstGamer(name, setSecondRandomSymbol());
         arrayOfGamers[0] = firstGamer;
         return firstGamer;
     }
 
     //Создание второго игрока
     public static Gamer createSecondGamer(String name) {
-        char secondGamerSymbol = defineRandomGameSymbol();
-        if ((arrayOfGamers[0] != null) && (secondGamerSymbol == arrayOfGamers[0].getGameSymbol())
-                && (secondGamerSymbol == gameSymbol[0])) {
-            secondGamerSymbol = '0';
-        } else if ((arrayOfGamers[0] != null) && (secondGamerSymbol == arrayOfGamers[0].getGameSymbol())
-                && (secondGamerSymbol == gameSymbol[1])) {
-            secondGamerSymbol = 'X';
-        }
-        SeckondGamer seckondGamer = new SeckondGamer(name, secondGamerSymbol);
+        SeckondGamer seckondGamer = new SeckondGamer(name, setSecondRandomSymbol());
         arrayOfGamers[1] = seckondGamer;
         return seckondGamer;
     }
 
-    public static Gamer createComputerGamer(boolean isGameHard, String name) {
-        char computerEasySymbol = defineRandomGameSymbol();
-        if ((arrayOfGamers[0] != null) && (computerEasySymbol == arrayOfGamers[0].getGameSymbol())
-                && (computerEasySymbol == gameSymbol[0])) {
-            computerEasySymbol = '0';
-        } else if ((arrayOfGamers[0] != null) && (computerEasySymbol == arrayOfGamers[0].getGameSymbol())
-                && (computerEasySymbol == gameSymbol[1])) {
-            computerEasySymbol = 'X';
+    private static char setSecondRandomSymbol() {
+        if ((arrayOfGamers[0] == null) && (arrayOfGamers[1] == null)) {
+            return defineRandomGameSymbol();
         }
-        Gamer computerGamer;
+        int createdGamerIdx = 0;
+        for (int i = 0; i < arrayOfGamers.length; i++) {
+            if (arrayOfGamers[i] != null) {
+                createdGamerIdx = i;
+                break;
+            }
+        }
 
+        if ((arrayOfGamers[createdGamerIdx] != null)
+                && (arrayOfGamers[createdGamerIdx].getGameSymbol() == gameSymbol[0])) {
+            return gameSymbol[1];
+        }
+
+        if ((arrayOfGamers[createdGamerIdx] != null)
+                && (arrayOfGamers[createdGamerIdx].getGameSymbol() == gameSymbol[1])) {
+            return gameSymbol[0];
+        }
+        return gameSymbol[1];
+    }
+
+    public static Gamer createComputerGamer(boolean isGameHard, String name) {
+        Gamer computerGamer;
         if (isGameHard) {
-            computerGamer = new ComputerGamerHard(name, computerEasySymbol, new Random());
+            computerGamer = new ComputerGamerHard(name, setSecondRandomSymbol(), new Random());
         } else {
-            computerGamer = new ComputerGamerEasy(name, computerEasySymbol, new Random());
+            computerGamer = new ComputerGamerEasy(name, setSecondRandomSymbol(), new Random());
         }
         computerGamer.setComputer(true);
         arrayOfGamers[1] = computerGamer;

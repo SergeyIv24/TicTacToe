@@ -110,7 +110,7 @@ public class GameController implements Initializable {
 
     @FXML
     protected void goMenu() throws IOException {
-        NamesAndSymbolsController.setIsGameAgainstComputer(false);
+        NamesAndSymbolsController.resetSettings();
         Game.stopGame();
         FXMLLoader fxmlLoader = new FXMLLoader(TicTacToeApp.class.getResource("/menu.fxml"));
         Stage stage = (Stage) menu.getScene().getWindow();

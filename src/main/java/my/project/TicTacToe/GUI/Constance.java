@@ -10,4 +10,6 @@ public class Constance {
     public static final int modalWindowWeight = 300;
     public static final int modalWindowHeight = 100;
     public static final String gameName = "Крестики - нолики";
+    public static final String pcHard = "Компьютер (сложно)";
+    public static final String pcEasy = "Компьютер (легко)";
 }

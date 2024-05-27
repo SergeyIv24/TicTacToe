@@ -13,7 +13,7 @@
          </VBox.margin></Label>
       <HBox prefHeight="33.0" prefWidth="600.0">
          <children>
-            <Label fx:id="gameCourse" prefHeight="21.0" prefWidth="98.0" text="Текущий ход:">
+            <Label fx:id="gameCourse" prefHeight="21.0" prefWidth="151.0" text="Текущий ход игрока:">
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin></Label>

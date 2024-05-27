@@ -57,11 +57,6 @@ public class Game {
             return Optional.of(oddCourses);
         }
 
-        //Игра закончена или не начата, хода нет.
-/*        if (courses == -1) {
-            return Optional.empty();
-        }*/
-
         //Для нечетных ходов (первый игрок)
         if (courses % 2 != 0) {
             return Optional.of(oddCourses);

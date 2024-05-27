@@ -1,4 +1,5 @@
 package my.project.TicTacToe.GUI.controllers;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,7 +39,7 @@ public class GameController implements Initializable {
     private Button revenge;
 
     private final Node[][] arrGridPane = new Node[3][3]; //Массив элементов GridPane. Создан для взаимодействия с
-                                                            //каждым элементом GridPane.
+    //каждым элементом GridPane.
     private boolean isGameAgainstComputer; //Режим игры. По умолчанию игра против игрока.
     private boolean isGameHard; //Сложно ПК для игры. По умолчанию простой.
 
@@ -142,8 +143,13 @@ public class GameController implements Initializable {
         if (getGameSymbol().isEmpty()) {
             return;
         }
+        Label label;
+        try {
+            label = (Label) event.getSource(); //Нажатие на объект Label
+        } catch (ClassCastException e) {
+            return;
+        }
 
-        Label label = (Label) event.getSource(); //Нажатие на объект Label
         if (checkNotEmptyCell(label)) {
             return;
         }
@@ -194,7 +200,7 @@ public class GameController implements Initializable {
         }
         int line = Integer.parseInt(String.valueOf(coordinates.charAt(0))); //Строка
         int column = Integer.parseInt(String.valueOf(coordinates.charAt(1))); //Колонка
-        Label label =  (Label) findLabelByCoordinates(line, column);
+        Label label = (Label) findLabelByCoordinates(line, column);
         if (label != null) {
             label.setText(getGameSymbol());
         }

@@ -1,9 +1,11 @@
 package my.project.TicTacToe.Gamers;
+
 import my.project.TicTacToe.Game.*;
+
 import java.util.Arrays;
 import java.util.Random;
 
-public class ComputerGamerHard extends Gamer{
+public class ComputerGamerHard extends Gamer {
     static String[] cornerCages = new String[]{"00", "02", "20", "22"}; //Координаты угловых ячеек
     int[] checkArr = new int[2]; //Проверочный массив 0
     Random rdn;
@@ -127,7 +129,6 @@ public class ComputerGamerHard extends Gamer{
     }
 
 
-
     //Алгоритм хода компьютера
     public int[] algorithms() {
         int[] arrOfIndexes = new int[2]; //Строка, столбец для добавления символа
@@ -145,13 +146,12 @@ public class ComputerGamerHard extends Gamer{
         int[] checkGapOnLines = preventVictoryOfEnemyOnLines(); //Проверка выигрышных комбинаций противника
         int[] checkGapOnColumns = preventVictoryOfEnemyOnColumns(); //Проверка выигрышных комбинаций противника
 
-        if(!Arrays.equals(checkGapOnLines, checkArr)) {
+        if (!Arrays.equals(checkGapOnLines, checkArr)) {
             return checkGapOnLines; //Если массив не пустой, ставить по его координатам
         }
         if (!Arrays.equals(checkGapOnColumns, checkArr)) {
             return checkGapOnColumns; //Если массив не пустой, ставить по его координатам
         }
-
 
 
         //Если все угла заняты

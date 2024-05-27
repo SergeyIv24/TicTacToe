@@ -22,7 +22,9 @@ public class TicTacToeApp extends Application {
         stage.setMinWidth(Constance.minWindowWeight);
         stage.setMinHeight(Constance.minWindowHeight);
         stage.setTitle(Constance.gameName);
-        stage.getIcons().add(findAndSetIcon().get());
+        if (findAndSetIcon().isPresent()) {
+            stage.getIcons().add(findAndSetIcon().get());
+        }
         stage.setScene(sceneMenu);
         stage.show();
     }

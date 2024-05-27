@@ -1,8 +1,6 @@
 my\project\TicTacToe\Gamers\ComputerGamerEasy.class
-my\project\TicTacToe\Game\Game.class
-my\project\TicTacToe\Gamers\FirstGamer.class
 my\project\TicTacToe\Gamers\ComputerGamerHard.class
-my\project\TicTacToe\Gamers\SeckondGamer.class
 my\project\TicTacToe\Main.class
 my\project\TicTacToe\Gamers\Gamer.class
+my\project\TicTacToe\Game\Game.class
 my\project\TicTacToe\GUI\TicTacToeApp.class

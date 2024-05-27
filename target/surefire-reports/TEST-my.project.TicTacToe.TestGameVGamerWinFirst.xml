@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="my.project.TicTacToe.TestGameVGamerWinFirst" time="0.18" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="my.project.TicTacToe.TestGameVGamerWinFirst" time="0.022" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="RU"/>
     <property name="sun.boot.library.path" value="C:\Users\Сергей\.jdks\corretto-21.0.2\bin"/>
-    <property name="sun.java.command" value="C:\Users\Сергей\AppData\Local\Temp\surefire1247735481480248162\surefirebooter-20240519172633648_3.jar C:\Users\Сергей\AppData\Local\Temp\surefire1247735481480248162 2024-05-19T17-26-33_350-jvmRun1 surefire-20240519172633648_1tmp surefire_0-20240519172633648_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Сергей\AppData\Local\Temp\surefire7609882547550340500\surefirebooter-20240527150757197_3.jar C:\Users\Сергей\AppData\Local\Temp\surefire7609882547550340500 2024-05-27T15-07-56_939-jvmRun1 surefire-20240527150757197_1tmp surefire_0-20240527150757197_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Учеба\Java 2023 - 2024\Задачи\TicTacToe\target\test-classes;C:\Учеба\Java 2023 - 2024\Задачи\TicTacToe\target\classes;C:\Users\Сергей\.m2\repository\org\openjfx\javafx-controls\21-ea+24\javafx-controls-21-ea+24.jar;C:\Users\Сергей\.m2\repository\org\openjfx\javafx-controls\21-ea+24\javafx-controls-21-ea+24-win.jar;C:\Users\Сергей\.m2\repository\org\openjfx\javafx-graphics\21-ea+24\javafx-graphics-21-ea+24.jar;C:\Users\Сергей\.m2\repository\org\openjfx\javafx-graphics\21-ea+24\javafx-graphics-21-ea+24-win.jar;C:\Users\Сергей\.m2\repository\org\openjfx\javafx-base\21-ea+24\javafx-base-21-ea+24.jar;C:\Users\Сергей\.m2\repository\org\openjfx\javafx-base\21-ea+24\javafx-base-21-ea+24-win.jar;C:\Users\Сергей\.m2\repository\org\openjfx\javafx-fxml\21-ea+24\javafx-fxml-21-ea+24.jar;C:\Users\Сергей\.m2\repository\org\openjfx\javafx-fxml\21-ea+24\javafx-fxml-21-ea+24-win.jar;C:\Users\Сергей\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.2\junit-jupiter-api-5.9.2.jar;C:\Users\Сергей\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Сергей\.m2\repository\org\junit\platform\junit-platform-commons\1.9.2\junit-platform-commons-1.9.2.jar;C:\Users\Сергей\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Сергей\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.2\junit-jupiter-engine-5.9.2.jar;C:\Users\Сергей\.m2\repository\org\junit\platform\junit-platform-engine\1.9.2\junit-platform-engine-1.9.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Сергей\AppData\Local\Temp\surefire1247735481480248162\surefirebooter-20240519172633648_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Сергей\AppData\Local\Temp\surefire7609882547550340500\surefirebooter-20240527150757197_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.2+13-LTS"/>
@@ -60,20 +60,8 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="shouldCreateFields" classname="my.project.TicTacToe.TestGameVGamerWinFirst" time="0.065">
-    <system-out><![CDATA[[[X, 0, &amp#0;], [0, X, &amp#0;], [&amp#0;, &amp#0;, X]]
-]]></system-out>
-  </testcase>
-  <testcase name="checkAllRightCourses" classname="my.project.TicTacToe.TestGameVGamerWinFirst" time="0.003">
-    <system-out><![CDATA[[[X, 0, &amp#0;], [0, X, &amp#0;], [&amp#0;, &amp#0;, X]]
-]]></system-out>
-  </testcase>
-  <testcase name="checkAllWrongCourses" classname="my.project.TicTacToe.TestGameVGamerWinFirst" time="0.002">
-    <system-out><![CDATA[[[X, 0, &amp#0;], [0, X, &amp#0;], [&amp#0;, &amp#0;, X]]
-]]></system-out>
-  </testcase>
-  <testcase name="checkWinner" classname="my.project.TicTacToe.TestGameVGamerWinFirst" time="0.002">
-    <system-out><![CDATA[[[X, 0, &amp#0;], [0, X, &amp#0;], [&amp#0;, &amp#0;, X]]
-]]></system-out>
-  </testcase>
+  <testcase name="shouldCreateFields" classname="my.project.TicTacToe.TestGameVGamerWinFirst" time="0.005"/>
+  <testcase name="checkAllRightCourses" classname="my.project.TicTacToe.TestGameVGamerWinFirst" time="0.001"/>
+  <testcase name="checkAllWrongCourses" classname="my.project.TicTacToe.TestGameVGamerWinFirst" time="0.001"/>
+  <testcase name="checkWinner" classname="my.project.TicTacToe.TestGameVGamerWinFirst" time="0.002"/>
 </testsuite>

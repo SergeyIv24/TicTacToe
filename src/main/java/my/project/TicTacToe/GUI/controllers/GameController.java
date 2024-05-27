@@ -19,7 +19,6 @@ import my.project.TicTacToe.Gamers.Gamer;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -100,8 +99,8 @@ public class GameController implements Initializable {
 
     @FXML
     protected void goRevenge() throws IOException {
-        Game.stopGame();
-        GameService.resetWinArrays();
+        Game.stopGame(); //Остановка игры
+        GameService.resetWinArrays(); //Сброс параметров
         FXMLLoader loaderNextScene = new FXMLLoader(this.getClass().getResource("/game.fxml"));
         Stage stage = (Stage) revenge.getScene().getWindow();
         Parent root = loaderNextScene.load();
@@ -116,6 +115,7 @@ public class GameController implements Initializable {
     @FXML
     protected void goMenu() throws IOException {
         NamesAndSymbolsController.resetSettings();
+        GameService.resetSettings();
         Game.stopGame();
         FXMLLoader fxmlLoader = new FXMLLoader(TicTacToeApp.class.getResource("/menu.fxml"));
         Stage stage = (Stage) menu.getScene().getWindow();
@@ -124,6 +124,7 @@ public class GameController implements Initializable {
         stage.setScene(scene);
     }
 
+    //Проверка ячейки на пустоту
     private boolean checkNotEmptyCell(Label label) {
         return !label.getText().isEmpty();
     }
@@ -147,8 +148,9 @@ public class GameController implements Initializable {
         if (getGameSymbol().isEmpty()) {
             return;
         }
+
         Label label;
-        try {
+        try { //Отлов исключения при многократной отправке события
             label = (Label) event.getSource(); //Нажатие на объект Label
         } catch (ClassCastException e) {
             return;
@@ -168,7 +170,6 @@ public class GameController implements Initializable {
         if (isGameAgainstComputer) {
             computerCourses();
         }
-        System.out.println(Arrays.deepToString(GameService.getGameBoard()));
     }
 
     private void realGamerCourses(Label label) {
@@ -180,7 +181,13 @@ public class GameController implements Initializable {
         int line = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(0))); //Строка
         int column = Integer.parseInt(String.valueOf(nodeCoordinates.charAt(1))); //Колонка
         Optional<Gamer> winner = Game.game(line, column); //Ход
-        defineWinner(winner); //После хода, определение победителя
+        //После хода, определение победителя
+        if (winner.isPresent()) {
+            sendModal(winner.get().getName());
+        } else {
+            defineDraw();
+        }
+
         Game.increaseCourse();
         switchNameAndSymbol(getCurrentGamerName(), getGameSymbol()); //Смена текущего игрока и символа
     }
@@ -192,7 +199,14 @@ public class GameController implements Initializable {
 
         Optional<Gamer> winner = Game.game(0, 0);
         setComputerCourseOnBoard();
-        defineWinner(winner);
+
+        if (winner.isPresent()) {
+            sendModal(winner.get().getName());
+        } else {
+            defineDraw();
+        }
+
+
         Game.increaseCourse();
         switchNameAndSymbol(getCurrentGamerName(), getGameSymbol()); //Смена текущего игрока и символа
     }
@@ -211,16 +225,17 @@ public class GameController implements Initializable {
         }
     }
 
-    private void defineWinner(Optional<Gamer> winner) {
-        if (winner.isPresent()) {
-            ModalWindowWinner windowWinner = new ModalWindowWinner();
-            windowWinner.winnerModalWindow(winner.get().getName());
-            Game.stopGame();
-        }
+    //Запуск модального окна результатов
+    private void sendModal(String name) {
+        ModalWindowWinner windowWinner = new ModalWindowWinner();
+        windowWinner.winnerModalWindow(name);
+        Game.stopGame();
+    }
+
+    //Проверка наличия ничьи
+    private void defineDraw() {
         if (Game.getCourses() == Constance.EXIT_NUMBER_FOR_DRAW) {
-            ModalWindowWinner windowWinner = new ModalWindowWinner();
-            windowWinner.winnerModalWindow("Ничья!");
-            Game.stopGame();
+            sendModal(Constance.drawMessage);
         }
     }
 

@@ -27,14 +27,14 @@ public class GameService {
 
     //Создание игрока 1
     public static Gamer createFirstGamer(String name) {
-        FirstGamer firstGamer = new FirstGamer(name, setSecondRandomSymbol());
+        Gamer firstGamer = new Gamer(name, setSecondRandomSymbol());
         arrayOfGamers[0] = firstGamer;
         return firstGamer;
     }
 
     //Создание второго игрока
     public static Gamer createSecondGamer(String name) {
-        SeckondGamer seckondGamer = new SeckondGamer(name, setSecondRandomSymbol());
+        Gamer seckondGamer = new Gamer(name, setSecondRandomSymbol());
         arrayOfGamers[1] = seckondGamer;
         return seckondGamer;
     }

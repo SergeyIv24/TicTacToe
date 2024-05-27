@@ -15,7 +15,7 @@ public class ComputerGamerHard extends Gamer {
         this.rdn = rdn;
     }
 
-    //Перевод определенной координаты угловых ячеек из строки в массив чисел
+    //Перевод координаты угловых ячеек из строки в массив чисел
     public static int[] parseCoordinates(String[] cornerCages, int indexOfCornerCages) {
         int[] coordinates = new int[2]; //Массив для хранения числовых значений координат
         char[] arrOfCoordinate;

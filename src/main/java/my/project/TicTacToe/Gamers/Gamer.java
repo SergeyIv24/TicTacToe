@@ -1,15 +1,23 @@
 package my.project.TicTacToe.Gamers;
 import my.project.TicTacToe.Game.*;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class Gamer {
     protected String name;
     protected char gameSymbol;
+    protected boolean computer = false;
 
     public Gamer(String name, char gameSymbol) {
         this.name = name;
         this.gameSymbol = gameSymbol;
+    }
+
+    public void setComputer(boolean isItComputer) {
+        computer = isItComputer;
+    }
+
+    public boolean getComputer() {
+        return computer;
     }
 
     public char getGameSymbol() {
@@ -20,77 +28,14 @@ public class Gamer {
         return name;
     }
 
-    //Выбор колонки для хода
-    @Deprecated //todo перенести
-    public int selectColumn() {
-        System.out.println("Чтобы сделать ход, укажите ячейку на игровом поле.");
-        int indColumn;
-        Scanner scanner;
-        while (true) { //Бесконечный цикл для проверки типа данных ввода
-            System.out.println("Укажите колонку: ");
-            scanner = new Scanner(System.in);
-            if (scanner.hasNextInt()) {
-                indColumn = scanner.nextInt();
-                break;
-            }
-        }
-        //Соответствие отображаемых колонок доски с индексами элементов
-        //Рекурсия, если колонки не существует
-        indColumn = switch (indColumn) {
-            case 1 -> 2;
-            case 2 -> 4;
-            case 3 -> 6;
-            default -> {
-                System.out.println("Такой колонки нет. Доступные колонки: 1, 2, 3");
-                yield selectColumn();
-            }
-        };
-
-        return indColumn;
-    }
-
-
-    //Выбор линии для хода
-    @Deprecated //todo перенести
-    public int selectLine() {
-        System.out.println("Укажите строку: ");
-        Scanner scanner = new Scanner(System.in);
-        int indLine;
-        String line = scanner.next();
-        char[] lineToChArr = line.toCharArray();
-        char columnCh = lineToChArr[0];
-        columnCh = Character.toUpperCase(columnCh);
-        //Соответствие отображаемых колонок доски с индексами элементов
-        //Рекурсия, если строки не существует
-        indLine = switch (columnCh) {
-            case 'A' -> 2;
-            case 'B' -> 4;
-            case 'C' -> 6;
-            default -> {
-                System.out.println("Такой строки нет. Доступные строки: A, B, C");
-                yield selectLine();
-            }
-        };
-        return indLine;
-    }
-
-/*    public boolean addSymbol(int column, int line) {
-        if (Game.getGameBoard()[line][column] == ' ') {
-            Game.setGameBoard(line, column, gameSymbol);
-            return true;
-        } else {
-            System.out.println("Позиция занята");
-            return false;
-        }
-    }*/
-
-    public boolean addSymbol(int line, int column) {
+    //Добавление игрового символа на поле
+    public String addSymbol(int line, int column) {
         if ((GameService.getGameBoard()[line][column] == '\u0000')
                 || (GameService.getGameBoard()[line][column] == ' ')) {
             GameService.setGameBoard(line, column, gameSymbol);
-            return true;
+            return "" + line + column;
         } else {
-            return false;
+            return "";
         }
     }
 

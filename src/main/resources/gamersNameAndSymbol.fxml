@@ -1,16 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.project.TicTacToe.GUI.controllers.NamesAndSymbolsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="450.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.project.TicTacToe.GUI.controllers.NamesAndSymbolsController">
    <children>
-      <Label text="Введите имя игрока 1:" />
-      <TextField fx:id="firstGamerName" onAction="#defineGameSymbolsForFirst" />
-      <Label fx:id="firstGamerSymbol" text="Игровой символ:" />
-      <Label text="Введите имя игрока 2:" />
-      <TextField fx:id="secondGamerName" onAction="#defineGameSymbolsForSecond" />
-      <Label fx:id="secondGamerSymbol" text="Игровой символ:" />
-      <Button fx:id="start" mnemonicParsing="false" onAction="#startGame" text="Начать" />
+      <Label fx:id="title" alignment="CENTER" prefHeight="17.0" prefWidth="607.0" text="Имена и игровые символы">
+         <VBox.margin>
+            <Insets bottom="10.0" top="15.0" />
+         </VBox.margin></Label>
+      <Label text="Введите имя игрока 1:">
+         <VBox.margin>
+            <Insets bottom="5.0" left="30.0" right="30.0" top="10.0" />
+         </VBox.margin></Label>
+      <TextField fx:id="firstGamerName" onAction="#defineGameSymbolsForFirst" prefHeight="35.0" prefWidth="390.0" promptText="Сергей">
+         <VBox.margin>
+            <Insets left="30.0" right="30.0" />
+         </VBox.margin></TextField>
+      <Label fx:id="firstGamerSymbol" text="Игровой символ:">
+         <VBox.margin>
+            <Insets left="30.0" right="30.0" top="5.0" />
+         </VBox.margin></Label>
+      <Label text="Введите имя игрока 2:">
+         <VBox.margin>
+            <Insets left="30.0" right="30.0" top="10.0" />
+         </VBox.margin></Label>
+      <TextField fx:id="secondGamerName" onAction="#defineGameSymbolsForSecond" prefHeight="35.0" prefWidth="390.0" promptText="Анастасия">
+         <VBox.margin>
+            <Insets left="30.0" right="30.0" />
+         </VBox.margin></TextField>
+      <Label fx:id="secondGamerSymbol" text="Игровой символ:">
+         <VBox.margin>
+            <Insets left="30.0" right="30.0" top="5.0" />
+         </VBox.margin></Label>
+      <HBox prefHeight="74.0" prefWidth="420.0">
+         <children>
+            <Button fx:id="back" mnemonicParsing="false" onAction="#goBack" text="Назад">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="start" mnemonicParsing="false" onAction="#startGame" text="Начать">
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets left="30.0" top="15.0" />
+         </VBox.margin>
+      </HBox>
    </children>
 </VBox>

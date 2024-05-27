@@ -6,13 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
+import my.project.TicTacToe.GUI.Constance;
+
 import java.io.IOException;
 
 public class MenuController {
-
-
 
     @FXML
     private Button gamerVsGamer;
@@ -21,22 +20,11 @@ public class MenuController {
     private MenuButton gamerVsComputer;
 
     @FXML
-    private MenuItem computerEasy;
-
-    @FXML
-    private MenuItem computerHard;
-
-    private static boolean isGameAgainstComputer = false;
-
-    private static boolean isGameHard = false;
-
-
-    @FXML
     protected void goNameAndSymbol() throws IOException {
         FXMLLoader loaderNextScene = new FXMLLoader(this.getClass().getResource("/gamersNameAndSymbol.fxml"));
         Stage stage = (Stage) gamerVsGamer.getScene().getWindow();
         Parent root = loaderNextScene.load();
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, Constance.windowWeight, Constance.windowHeight);
         stage.setScene(scene);
     }
 
@@ -45,7 +33,7 @@ public class MenuController {
         FXMLLoader loaderNextScene = new FXMLLoader(this.getClass().getResource("/gamersNameAndSymbol.fxml"));
         Stage stage = (Stage) gamerVsComputer.getScene().getWindow();
         Parent root = loaderNextScene.load();
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, Constance.windowWeight, Constance.windowHeight);
         NamesAndSymbolsController controller = loaderNextScene.getController();
         controller.setIsGameAgainstComputer(true);
         controller.setIsGameHard(false);
@@ -57,10 +45,15 @@ public class MenuController {
         FXMLLoader loaderNextScene = new FXMLLoader(this.getClass().getResource("/gamersNameAndSymbol.fxml"));
         Stage stage = (Stage) gamerVsComputer.getScene().getWindow();
         Parent root = loaderNextScene.load();
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, Constance.windowWeight, Constance.windowHeight);
         NamesAndSymbolsController controller = loaderNextScene.getController();
         controller.setIsGameAgainstComputer(true);
         controller.setIsGameHard(true);
         stage.setScene(scene);
+    }
+
+    @FXML
+    protected void goExit() {
+        System.exit(0);
     }
 }

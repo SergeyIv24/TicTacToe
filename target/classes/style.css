@@ -1,0 +1,49 @@
+.root {
+    -fx-background-color:"#f2f2f0";
+}
+
+.label {
+    -fx-font-size:15px;
+}
+
+/*Заголовки окон*/
+#title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.button, .menu-button {
+    -fx-background-color: "#ffffff";
+    -fx-font-size:14pt;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, gray, 4px, 0, 0, 0);
+}
+
+.menu-button .label{
+    -fx-font-size:14pt;
+}
+
+
+.button:hover, .menu-button:hover{
+    -fx-background-color: "#e8eaed";
+}
+
+.menu-item:focused{
+    -fx-background-color: darkgray;
+}
+
+/*Поля ввода текста*/
+#fieldForExpression, #field, #fieldForConverting{
+    -fx-background-color:"#f2f2f0";
+    -fx-border-color: "#d2d6d3";
+    -fx-font-size: 20px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 3px;
+}
+
+.cell {
+    -fx-font-size: 30px;
+}
+
+
+

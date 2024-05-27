@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.project.TicTacToe.GUI.controllers.MenuController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="450.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.project.TicTacToe.GUI.controllers.MenuController">
    <children>
-      <Label text="Выберите игроой режим" />
-      <Button fx:id="gamerVsGamer" mnemonicParsing="false" onAction="#goNameAndSymbol" text="Игра против игрока" />
-      <MenuButton fx:id="gamerVsComputer" mnemonicParsing="false" text="Игра против компьютера">
+      <Label fx:id="title" alignment="CENTER" contentDisplay="TOP" prefHeight="25.0" prefWidth="450.0" stylesheets="@style.css" text="Меню">
+         <VBox.margin>
+            <Insets bottom="10.0" top="15.0" />
+         </VBox.margin></Label>
+      <Label contentDisplay="CENTER" prefHeight="25.0" prefWidth="230.0" text="Выберите игроой режим:">
+         <VBox.margin>
+            <Insets left="85.0" right="85.0" top="10.0" />
+         </VBox.margin></Label>
+      <Button fx:id="gamerVsGamer" mnemonicParsing="false" onAction="#goNameAndSymbol" prefHeight="40.0" prefWidth="280.0" text="Игра против игрока">
+         <VBox.margin>
+            <Insets left="85.0" right="85.0" top="10.0" />
+         </VBox.margin></Button>
+      <MenuButton fx:id="gamerVsComputer" mnemonicParsing="false" prefHeight="40.0" prefWidth="280.0" text="Игра против компьютера">
         <items>
           <MenuItem fx:id="computerEasy" mnemonicParsing="false" onAction="#goNameAndSymbolCompEasy" text="Легко" />
-          <MenuItem fx:id="computerHard" mnemonicParsing="false" text="Сложно" onAction="#goNameAndSymbolCompHard" />
+          <MenuItem fx:id="computerHard" mnemonicParsing="false" onAction="#goNameAndSymbolCompHard" text="Сложно" />
         </items>
+         <VBox.margin>
+            <Insets left="85.0" right="85.0" top="10.0" />
+         </VBox.margin>
       </MenuButton>
+      <Button fx:id="exit" mnemonicParsing="false" onAction="#goExit" prefHeight="40.0" prefWidth="280.0" text="Выход">
+         <VBox.margin>
+            <Insets left="85.0" right="85.0" top="10.0" />
+         </VBox.margin></Button>
    </children>
 </VBox>

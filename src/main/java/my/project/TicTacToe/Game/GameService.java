@@ -1,9 +1,6 @@
 package my.project.TicTacToe.Game;
 
-import my.project.TicTacToe.Gamers.ComputerGamerEasy;
-import my.project.TicTacToe.Gamers.FirstGamer;
-import my.project.TicTacToe.Gamers.Gamer;
-import my.project.TicTacToe.Gamers.SeckondGamer;
+import my.project.TicTacToe.Gamers.*;
 
 import java.util.Optional;
 import java.util.Random;
@@ -11,10 +8,10 @@ import java.util.Random;
 public class GameService {
     protected static Gamer[] arrayOfGamers = new Gamer[2]; //Массив игроков для рандома
     protected static char[] gameSymbol = new char[]{'X', '0'}; //Массив для рандома игрового символа
-    protected static final char[] winX = new char[3]; //Массив для определения победителя X
-    protected static final char[] win0 = new char[3]; //Массив для определения победителя 0
+    protected static char[] winX = new char[3]; //Массив для определения победителя X
+    protected static char[] win0 = new char[3]; //Массив для определения победителя 0
     protected static Random rdn = new Random();
-    private static final char[][] gameBoard = prepareGameBoard();
+    private static char[][] gameBoard;
 
     public static void setGameBoard(int line, int column, char symbol) {
         gameBoard[line][column] = symbol;
@@ -24,40 +21,64 @@ public class GameService {
         return gameBoard;
     }
 
+    public static void resetSettings() {
+        arrayOfGamers = new Gamer[2];
+        Game.stopGame();
+    }
+
+    public static void resetWinArrays() {
+        winX = new char[3];
+        win0 = new char[3];
+    }
+
     //Создание игрока 1
     public static Gamer createFirstGamer(String name) {
-        char firstGamerSymbol = defineRandomGameSymbol();
-        FirstGamer firstGamer = new FirstGamer(name, firstGamerSymbol);
+        Gamer firstGamer = new Gamer(name, setSecondRandomSymbol());
         arrayOfGamers[0] = firstGamer;
         return firstGamer;
     }
 
+    //Создание второго игрока
     public static Gamer createSecondGamer(String name) {
-        char secondGamerSymbol = defineRandomGameSymbol();
-        if ((arrayOfGamers[0] != null) && (secondGamerSymbol == arrayOfGamers[0].getGameSymbol())
-                && (secondGamerSymbol == gameSymbol[0])) {
-            secondGamerSymbol = '0';
-        } else if ((arrayOfGamers[0] != null) && (secondGamerSymbol == arrayOfGamers[0].getGameSymbol())
-                && (secondGamerSymbol == gameSymbol[1])) {
-            secondGamerSymbol = 'X';
-        }
-        SeckondGamer seckondGamer = new SeckondGamer(name, secondGamerSymbol);
+        Gamer seckondGamer = new Gamer(name, setSecondRandomSymbol());
         arrayOfGamers[1] = seckondGamer;
         return seckondGamer;
     }
 
-    public static Gamer createComputerGamer(boolean level, String name) {
-        char computerEasySymbol = defineRandomGameSymbol();
-        if ((arrayOfGamers[0] != null) && (computerEasySymbol == arrayOfGamers[0].getGameSymbol())
-                && (computerEasySymbol == gameSymbol[0])) {
-            computerEasySymbol = '0';
-        } else if ((arrayOfGamers[0] != null) && (computerEasySymbol == arrayOfGamers[0].getGameSymbol())
-                && (computerEasySymbol == gameSymbol[1])) {
-            computerEasySymbol = 'X';
+    private static char setSecondRandomSymbol() {
+        if ((arrayOfGamers[0] == null) && (arrayOfGamers[1] == null)) {
+            return defineRandomGameSymbol();
         }
-        ComputerGamerEasy computerGamerEasy = new ComputerGamerEasy(name, computerEasySymbol, new Random());
-        arrayOfGamers[1] = computerGamerEasy;
-        return computerGamerEasy;
+        int createdGamerIdx = 0;
+        for (int i = 0; i < arrayOfGamers.length; i++) {
+            if (arrayOfGamers[i] != null) {
+                createdGamerIdx = i;
+                break;
+            }
+        }
+
+        if ((arrayOfGamers[createdGamerIdx] != null)
+                && (arrayOfGamers[createdGamerIdx].getGameSymbol() == gameSymbol[0])) {
+            return gameSymbol[1];
+        }
+
+        if ((arrayOfGamers[createdGamerIdx] != null)
+                && (arrayOfGamers[createdGamerIdx].getGameSymbol() == gameSymbol[1])) {
+            return gameSymbol[0];
+        }
+        return gameSymbol[1];
+    }
+
+    public static Gamer createComputerGamer(boolean isGameHard, String name) {
+        Gamer computerGamer;
+        if (isGameHard) {
+            computerGamer = new ComputerGamerHard(name, setSecondRandomSymbol(), new Random());
+        } else {
+            computerGamer = new ComputerGamerEasy(name, setSecondRandomSymbol(), new Random());
+        }
+        computerGamer.setComputer(true);
+        arrayOfGamers[1] = computerGamer;
+        return computerGamer;
     }
 
     //Определение кто каким символом играет
@@ -77,8 +98,12 @@ public class GameService {
     }
 
     //Массив игровая доска
-    public static char[][] prepareGameBoard() {
-        return new char[3][3];
+    protected static void prepareGameBoard() {
+        gameBoard = new char[3][3];
+    }
+
+    protected static void clearGameBoard() {
+        gameBoard = null;
     }
 
     //Проверка наличия победителя по диагоналям
@@ -174,6 +199,10 @@ public class GameService {
 
     //Проверка ничьи
     public static boolean defineDraw() {
+        if (containsEmpty()) { //Если массив не заполнен
+            return false; //Нет ничьи
+        }
+
         byte countEmptyCellar = 0; //Счетчик количества пустых ячеек
         for (int i = 0; i < gameBoard.length; i = i + 1) {
             for (int j = 0; j < gameBoard[i].length; j = j + 1) {
@@ -182,23 +211,17 @@ public class GameService {
                 }
             }
         }
-        if (countEmptyCellar == 0) { //Если количество пустых ячеек 0
-            return true; //ничья
-        }
-        return false; //Нет ничьи
+        //Если количество пустых ячеек 0
+        return countEmptyCellar == 0; //ничья
     }
 
-
-    //Определение есть ли победитель
-    public static boolean isThereWinner() {
-        char[] checkOne = checkWinIfSymInCentralPosition(); //Поиск победителя по диагоналям
-        if (checkOne != null) {
-            return true;
-        }
-        char[] winnerLine = checkWinnerOnLines(); //Поиск победителя на строках
-        char[] winnerColumns = checkWinnerOnColumns(); //Поиск победителя на колонках
-        if ((winnerLine != null) || (winnerColumns != null)) {
-            return true;
+    private static boolean containsEmpty() {
+        for (char[] line : gameBoard) {
+            for (char symbol : line) {
+                if (symbol == '\u0000') {
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -236,9 +259,5 @@ public class GameService {
             return Optional.of(defineWinnerGamer(winnerColumns));
         }
         return Optional.empty();
-
     }
-
-
-
 }

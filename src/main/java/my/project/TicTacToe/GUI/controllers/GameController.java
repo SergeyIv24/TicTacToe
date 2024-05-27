@@ -14,10 +14,12 @@ import javafx.stage.Stage;
 import my.project.TicTacToe.GUI.TicTacToeApp;
 import my.project.TicTacToe.Game.Constance;
 import my.project.TicTacToe.Game.Game;
+import my.project.TicTacToe.Game.GameService;
 import my.project.TicTacToe.Gamers.Gamer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -98,6 +100,8 @@ public class GameController implements Initializable {
 
     @FXML
     protected void goRevenge() throws IOException {
+        Game.stopGame();
+        GameService.resetWinArrays();
         FXMLLoader loaderNextScene = new FXMLLoader(this.getClass().getResource("/game.fxml"));
         Stage stage = (Stage) revenge.getScene().getWindow();
         Parent root = loaderNextScene.load();
@@ -137,7 +141,7 @@ public class GameController implements Initializable {
 
     @FXML
     protected void gamerCourse(MouseEvent event) {
-        if (!Game.checkAbilityToContinue()) { //Если игра закончена или не начата.
+        if (Game.checkAbilityToContinue()) { //Если игра закончена или не начата.
             return;
         }
         if (getGameSymbol().isEmpty()) {
@@ -156,7 +160,7 @@ public class GameController implements Initializable {
 
         realGamerCourses(label); //Ход игрока
 
-        if (!Game.checkAbilityToContinue()) { //Если игра закончена или не начата.
+        if (Game.checkAbilityToContinue()) { //Если игра закончена или не начата.
             return;
         }
 
@@ -164,6 +168,7 @@ public class GameController implements Initializable {
         if (isGameAgainstComputer) {
             computerCourses();
         }
+        System.out.println(Arrays.deepToString(GameService.getGameBoard()));
     }
 
     private void realGamerCourses(Label label) {

@@ -41,8 +41,8 @@ public class NamesAndSymbolsController implements Initializable {
 
     protected static boolean isGameAgainstComputer;
     protected static boolean isGameHard;
-    protected static Gamer firstGamer;
-    protected static Gamer secondGamer;
+    private static Gamer firstGamer;
+    private static Gamer secondGamer;
 
     public void setIsGameAgainstComputer(boolean againstComputer) {
         isGameAgainstComputer = againstComputer;

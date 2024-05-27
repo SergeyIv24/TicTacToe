@@ -8,8 +8,8 @@ import java.util.Random;
 public class GameService {
     protected static Gamer[] arrayOfGamers = new Gamer[2]; //Массив игроков для рандома
     protected static char[] gameSymbol = new char[]{'X', '0'}; //Массив для рандома игрового символа
-    protected static final char[] winX = new char[3]; //Массив для определения победителя X
-    protected static final char[] win0 = new char[3]; //Массив для определения победителя 0
+    protected static char[] winX = new char[3]; //Массив для определения победителя X
+    protected static char[] win0 = new char[3]; //Массив для определения победителя 0
     protected static Random rdn = new Random();
     private static char[][] gameBoard;
 
@@ -23,6 +23,12 @@ public class GameService {
 
     public static void resetSettings() {
         arrayOfGamers = new Gamer[2];
+        Game.stopGame();
+    }
+
+    public static void resetWinArrays() {
+        winX = new char[3];
+        win0 = new char[3];
     }
 
     //Создание игрока 1
@@ -216,21 +222,6 @@ public class GameService {
                     return true;
                 }
             }
-        }
-        return false;
-    }
-
-
-    //Определение есть ли победитель
-    public static boolean isThereWinner() {
-        char[] checkOne = checkWinIfSymInCentralPosition(); //Поиск победителя по диагоналям
-        if (checkOne != null) {
-            return true;
-        }
-        char[] winnerLine = checkWinnerOnLines(); //Поиск победителя на строках
-        char[] winnerColumns = checkWinnerOnColumns(); //Поиск победителя на колонках
-        if ((winnerLine != null) || (winnerColumns != null)) {
-            return true;
         }
         return false;
     }

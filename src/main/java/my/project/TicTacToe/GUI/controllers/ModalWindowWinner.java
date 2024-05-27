@@ -1,4 +1,5 @@
 package my.project.TicTacToe.GUI.controllers;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,7 +14,7 @@ import my.project.TicTacToe.GUI.TicTacToeApp;
 import java.io.InputStream;
 import java.util.Optional;
 
-public class ModalWindowWinner  {
+public class ModalWindowWinner {
 
     public void winnerModalWindow(String text) {
         Stage modalWindow = new Stage();
@@ -37,7 +38,9 @@ public class ModalWindowWinner  {
         setWinnerText(text, textResult, result);
 
         parentVbox.getStylesheets().add("style.css");
-        modalWindow.getIcons().add(findAndSetIcon().get());
+        if (findAndSetIcon().isPresent()) {
+            modalWindow.getIcons().add(findAndSetIcon().get());
+        }
         modalWindow.setScene(scene);
         modalWindow.showAndWait();
     }

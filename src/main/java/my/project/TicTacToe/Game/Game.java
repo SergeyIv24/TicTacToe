@@ -1,6 +1,7 @@
 package my.project.TicTacToe.Game;
 
 import my.project.TicTacToe.Gamers.Gamer;
+
 import java.util.Optional;
 
 public class Game {
@@ -65,7 +66,6 @@ public class Game {
         }
     }
 
-
     public static Optional<Gamer> game(int line, int column) {
         //Определение чей ход.
         if (whoseCourse().isPresent()) {
@@ -73,7 +73,6 @@ public class Game {
         }
         Optional<Gamer> winner = GameService.findWinner(); //Определение победителя
         if (winner.isPresent()) { //Определение есть ли победитель
-            courses = -1;
             return winner;
         }
         if (GameService.defineDraw()) { //Если есть ничья
@@ -84,7 +83,7 @@ public class Game {
     }
 
     public static boolean checkAbilityToContinue() {
-        return courses != 0;
+        return courses == 0; //true - игра закончена, false - не закончена
     }
 
 }
